@@ -1,5 +1,13 @@
-import { Badge } from "./components";
+import { Badge, Button } from "./components";
+import Card from "./components/Card";
 
 export default function Home() {
-  return <button className="btn btn-primary">Button</button>;
+  return (
+    <>
+    <div className="p-5">
+      <Card/>
+    </div>
+    </>
+    
+  )
 }

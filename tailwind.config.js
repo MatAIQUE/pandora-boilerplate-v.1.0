@@ -25,7 +25,7 @@ module.exports = {
           bgDark: "#111622",
           bgLight: "#111622F5 96%",
           accent: "#37cdbe",
-          neutral: "#3d4451",
+          neutral: "#111622",
           "base-100": "#ffffff",
         },
       },
