@@ -15,4 +15,23 @@ module.exports = {
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        kmc: {
+          primary: "#FF7200",
+          secondary: "#ABB1BA",
+          danger: "#C5280C",
+          bgDark: "#111622",
+          bgLight: "#111622F5 96%",
+          accent: "#37cdbe",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+      "light",
+      "dark",
+      "cupcake",
+    ],
+  },
 };
