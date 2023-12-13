@@ -5,10 +5,10 @@ import kmcLogo from "../assets/images/kmc-logo.png";
 const Card = () => {
   return (
     <>
-      <div className="card w-1/2 bg-neutral text-neutral-content">
+      <div className="card w-1/2 bg-neutral text-neutral-content drop-shadow-lg">
         <div className="card-body text-left">
           <h2 className="card-title">
-            <Image src={kmcLogo} alt="asd" width={100} height={100} />
+            <Image src={kmcLogo} alt="KMC Logo" width={100} height={100} />
           </h2>
           <div className="items-center text-center py-20">
             <p>We are using cookies for no reason.</p>
@@ -18,14 +18,18 @@ const Card = () => {
             <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
               <div className="w-full">
                 <Button
-                  label="yes"
-                  bgColor="primary"
-                  color="white"
-                  weight="500"
-                />
+                  label="Label"
+                  bgColor="outline"
+                  color="gray-600"
+                  weight="500"/>
               </div>
               <div className="w-full">
-                <Button label="no" bgColor="secondary" color="black" />
+                <Button
+                    label="Label"
+                    bgColor="primary"
+                    color="white"
+                    weight="500"
+                    />
               </div>
             </div>
           </div>
