@@ -1,7 +1,5 @@
-import { Badge } from './components'
+import { Badge } from "./components";
 
 export default function Home() {
-  return (
-    <Badge />
-  )
+  return <button className="btn btn-primary">Button</button>;
 }
