@@ -1,25 +1,26 @@
 import React from "react";
 
-// interface Props {
-//   primary: string;
-//   primaryBorder: string;
-//   primaryHover: string;
-// }
-
-// const Button = ({ primary, primaryBorder, primaryHover }: Props) => {
-//   return (
-//     <button
-//       className={`${primary} hover:${primaryHover} text-white font-bold py-2 px-4 border ${primaryBorder} rounded`}
-//     >
-//       Button
-//     </button>
-//   );
-// };
-
-const Button = () => {
-  return (
-    <button className="btn btn-primary rounded-sm w-full text-white font-medium">Continue</button>
-  ); 
+interface Props {
+  bgColor: string;
+  label: string;
+  color: string;
+  weight: string;
 }
+
+const Button = ({ bgColor, label, color, weight }: Props) => {
+  return (
+    <button
+      className={`btn btn-${bgColor} rounded-sm w-full text-${color} font-${weight}`}
+    >
+      {label}
+    </button>
+  );
+};
+
+// const Button = () => {
+//   return (
+//     <button className="btn btn-primary rounded-sm w-full text-white font-medium">Continue</button>
+//   );
+// }
 
 export default Button;
