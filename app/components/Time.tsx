@@ -33,10 +33,10 @@ const Time = () => {
   return (
     <>
       <div className="text-white font-medium mb-3 flex items-top justify-center">
-        <span className="text-7xl">
+        <span className="text-6xl mr-2 bg-accent py-1 px-5 rounded-box">
           {hours}:{minutes}
         </span>
-        <span className="text-1xl ml-4 flex flex-col">
+        <span className="text-1xl flex flex-col">
           <span>{ampm}</span>
         </span>
       </div>

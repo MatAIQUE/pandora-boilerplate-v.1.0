@@ -24,7 +24,7 @@ module.exports = {
           danger: "#C5280C",
           bgDark: "#111622",
           bgLight: "#111622F5",
-          accent: "#37cdbe",
+          accent: "#141b2c",
           neutral: "#111622",
           "base-100": "#1a1f2b",
         },
