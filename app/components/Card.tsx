@@ -14,7 +14,6 @@ const Card = ({ title, subtitle }: Props) => {
       <div className="card-body text-left">
         <Logo />
         <div className="py-10">
-          <CardTitle title={title} />
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
               <Time />

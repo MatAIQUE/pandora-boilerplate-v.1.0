@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import CardTitle from "./CardTitle";
 
 const Time = () => {
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [ampm, setAmPm] = useState("");
+  const [greeting, setGreeting] = useState("");
 
   const updateTime = () => {
     const currentTime = new Date();
@@ -12,28 +14,41 @@ const Time = () => {
     const currentMinutes = currentTime.getMinutes().toString().padStart(2, "0");
     const currentAmPm = currentHours >= 12 ? "PM" : "AM";
 
+    setAmPm(currentAmPm);
+    setMinutes(currentMinutes);
+
+    // Set greeting based on the time of the day
+    if (currentHours >= 0 && currentHours < 12) {
+      setGreeting("Good Morning!");
+    } else if (currentHours >= 12 && currentHours < 18) {
+      setGreeting("Good Afternoon!");
+    } else {
+      setGreeting("Good Evening!");
+    }
+
     // Convert hours to 12-hour format
     currentHours = currentHours % 12 || 12;
 
     setHours(currentHours.toString().padStart(2, "0"));
-    setMinutes(currentMinutes);
-    setAmPm(currentAmPm);
   };
 
   useEffect(() => {
-    updateTime(); // Call it once to set the initial time
+    updateTime();
 
-    // Update time every minute (60000 milliseconds)
     const intervalId = setInterval(updateTime, 60000);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
-  }, []); // Empty dependency array means this effect runs only once on mount
+  }, []);
 
   return (
     <>
-      <div className="text-white font-medium mb-3 flex items-top justify-center">
-        <span className="text-6xl mr-2 bg-accent py-1 px-5 rounded-box">
+      <div className="text-white font-medium mb-5 flex justify-start">
+        <span className="text-3xl mb-5">{greeting}</span>
+      </div>
+
+      <div className="text-white font-medium  flex items-top justify-center">
+        <span className="text-7xl mr-2 mt-5 bg-accent py-2 px-5 rounded-box">
           {hours}:{minutes}
         </span>
         <span className="text-1xl flex flex-col">
