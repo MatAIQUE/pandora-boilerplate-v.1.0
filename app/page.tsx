@@ -1,5 +1,6 @@
 import { Badge, Button } from "./components";
 import Card from "./components/Card";
+import Carousel from "./components/Carousel";
 
 export default function Home() {
   return (
@@ -11,11 +12,13 @@ export default function Home() {
         {/* End of Page Controller */}
 
         {/* Ads Container */}
-        <div className="flex flex-auto justify-center items-start">2</div>
+        <div className="flex flex-col my-10 justify-center items-start mx-10">
+          <Carousel/>
+        </div>
         {/* End of Ads Container */}
 
         {/* Page Content */}
-        <div className="basis-2/4 flex flex-auto justify-center items-start">
+        <div className="basis-2/4 mt-10 flex flex-auto justify-center items-start">
           <Card title="Good Morning!" subtitle="" />
         </div>
         {/* End of Page Content */}
