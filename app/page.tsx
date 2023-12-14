@@ -2,6 +2,7 @@ import { Badge, Button } from "./components";
 import Card from "./components/Card";
 import Carousel from "./components/Carousel";
 import { FaHome, FaAngleLeft } from "react-icons/fa";
+import Menu from "./components/Menu";
 
 export default function Home() {
   return (
@@ -10,14 +11,7 @@ export default function Home() {
         {/* Page Controller */}
         <div className="my-4 absolute w-full">
           {/* Add .hidden when controllers should be hidden */}
-          <div className="px-5 flex justify-between">
-            <button className="btn btn-accent">
-              <FaAngleLeft color="white" size={30} />
-            </button>
-            <button className="btn btn-accent">
-              <FaHome color="white" size={30} />
-            </button>
-          </div>
+          <Menu />
         </div>
         {/* End of Page Controller */}
 
