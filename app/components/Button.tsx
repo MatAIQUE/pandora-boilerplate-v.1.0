@@ -5,12 +5,13 @@ interface Props {
   label: string;
   color: string;
   weight: string;
+  outline: string;
 }
 
-const Button = ({ bgColor, label, color, weight }: Props) => {
+const Button = ({ bgColor, label, color, weight, outline }: Props) => {
   return (
     <button
-      className={`btn btn-${bgColor} rounded-sm w-full text-${color} font-${weight}`}
+      className={`btn btn-${bgColor} ${outline} rounded-sm w-full text-${color} font-${weight}`}
     >
       {label}
     </button>
