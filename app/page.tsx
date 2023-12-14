@@ -6,19 +6,23 @@ import { FaHome, FaAngleLeft } from "react-icons/fa";
 export default function Home() {
   return (
     <>
-      <div className="h-screen flex flex-col w-full text-center">
+      <div className="h-screen relative flex flex-col w-full text-center">
         {/* Page Controller */}
-        {/* Add .hidden when controllers should be hidden */}
-        <div className="py-2">
-          <div className="py-4 p-5 flex justify-between">
-            <FaAngleLeft color="white" size={30} />
-            <FaHome color="white" size={30} />
+        <div className="my-4 absolute w-full">
+          {/* Add .hidden when controllers should be hidden */}
+          <div className="px-5 flex justify-between">
+            <button className="btn btn-accent">
+              <FaAngleLeft color="white" size={30} />
+            </button>
+            <button className="btn btn-accent">
+              <FaHome color="white" size={30} />
+            </button>
           </div>
         </div>
         {/* End of Page Controller */}
 
         {/* Ads Container */}
-        <div className="flex flex-col my-10 justify-center items-start mx-10">
+        <div className="flex flex-col mt-20 my-10 justify-center items-start mx-10">
           <Carousel />
         </div>
         {/* End of Ads Container */}
