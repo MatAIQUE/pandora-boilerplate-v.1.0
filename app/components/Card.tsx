@@ -1,5 +1,6 @@
 import CardControls from "./CardControls";
 import CardTitle from "./CardTitle";
+import Input from "./Input";
 import Logo from "./Logo";
 import Time from "./Time";
 
@@ -16,7 +17,8 @@ const Card = ({ title, subtitle }: Props) => {
         <div className="py-10">
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
-              <Time />
+              {/* <Time /> */}
+              <Input/>
             </div>
           </div>
         </div>
