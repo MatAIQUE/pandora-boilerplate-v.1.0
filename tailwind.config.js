@@ -21,6 +21,7 @@ module.exports = {
         kmc: {
           primary: "#FF7200",
           secondary: "#DDE0E4",
+          success: "#16A679",
           danger: "#C5280C",
           bgDark: "#111622",
           bgLight: "#111622F5",
