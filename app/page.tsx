@@ -13,13 +13,13 @@ export default function Home() {
       {/* End of Page Controller */}
 
       {/* Ads Container */}
-      <div className="flex flex-col mt-20 my-10 justify-center items-start mx-10">
+      <div className="flex flex-col mt-20 justify-center items-start mx-10">
         <Carousel />
       </div>
       {/* End of Ads Container */}
 
       {/* Page Content */}
-      <div className="basis-2/4 mt-10 flex flex-auto justify-center items-start">
+      <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <Card title="Good Morning!" subtitle="" />
       </div>
       {/* End of Page Content */}
