@@ -47,8 +47,8 @@ const Time = () => {
         <span className="text-3xl mb-5">{greeting}</span>
       </div>
 
-      <div className="text-white font-medium  flex items-top justify-center">
-        <span className="text-7xl mr-2 mt-5 bg-accent py-2 px-5 rounded-box">
+      <div className="text-white font-medium mt-5 py-2 flex items-top justify-center">
+        <span className="text-7xl mr-2 bg-accent px-5 rounded-box">
           {hours}:{minutes}
         </span>
         <span className="text-1xl flex flex-col">
