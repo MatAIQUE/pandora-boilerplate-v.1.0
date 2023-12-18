@@ -1,8 +1,6 @@
-import CardControls from "./CardControls";
-import CardTitle from "./CardTitle";
-import Input from "./Input";
-import Logo from "./Logo";
-import Time from "./Time";
+import CardControls from "@/app/components/CardControls";
+import Logo from "@/app/components/Logo";
+import Time from "@/app/components/Time";
 
 interface Props {
   title: string;
@@ -17,8 +15,7 @@ const Card = ({ title, subtitle }: Props) => {
         <div className="py-10">
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
-              {/* <Time /> */}
-              {/* <Input/> */}
+              <Time />
             </div>
           </div>
         </div>
