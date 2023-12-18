@@ -1,0 +1,28 @@
+import CardControls from "@/app/components/CardControls";
+import Input from "@/app/components/Input";
+import Logo from "@/app/components/Logo";
+
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+const Card = ({ title, subtitle }: Props) => {
+  return (
+    <div className="card w-1/2 bg-neutral text-neutral-content drop-shadow-lg p-5">
+      <div className="card-body text-left">
+        <Logo />
+        <div className="py-10">
+          <div className="py-10 h-full w-full">
+            <div className="w-full text-center items-center">
+              <Input />
+            </div>
+          </div>
+        </div>
+        <CardControls />
+      </div>
+    </div>
+  );
+};
+
+export default Card;
