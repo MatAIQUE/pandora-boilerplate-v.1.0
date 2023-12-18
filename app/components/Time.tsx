@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import CardTitle from "./CardTitle";
 
 const Time = () => {
   const [hours, setHours] = useState("");
