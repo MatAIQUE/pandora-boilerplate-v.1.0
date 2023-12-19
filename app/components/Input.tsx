@@ -15,7 +15,7 @@ const Input = ({ placeholder }: Props) => {
         <input
           type="text"
           placeholder={placeholder}
-          className="input input-bordered text-xl input-secondary w-full text-center bg-white text-black text-start"
+          className="input input-bordered text-xl input-secondary w-full bg-white text-black text-start"
         />
       </div>
     </>
