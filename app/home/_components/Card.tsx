@@ -1,4 +1,5 @@
 import { Button } from "@/app/components";
+import DoorAlert from "@/app/components/DoorAlert";
 import Logo from "@/app/components/Logo";
 import Time from "@/app/components/Time";
 
@@ -17,7 +18,8 @@ const Card = ({ title, subtitle, onNavigate, onNavigateBack }: Props) => {
         <div className="py-10">
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
-              <Time />
+              {/* <Time /> */}
+              <DoorAlert/>
             </div>
           </div>
         </div>
