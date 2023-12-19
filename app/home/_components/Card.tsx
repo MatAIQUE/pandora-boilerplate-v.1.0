@@ -1,5 +1,4 @@
 import { Button } from "@/app/components";
-import CardControls from "@/app/components/CardControls";
 import Logo from "@/app/components/Logo";
 import Time from "@/app/components/Time";
 

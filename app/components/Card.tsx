@@ -1,9 +1,5 @@
-import CardControls from "./CardControls";
-import CardTitle from "./CardTitle";
 import DoorAlert from "./DoorAlert";
-import Input from "./Input";
 import Logo from "./Logo";
-import Time from "./Time";
 
 interface Props {
   title: string;
@@ -20,11 +16,10 @@ const Card = ({ title, subtitle }: Props) => {
             <div className="w-full text-center items-center">
               {/* <Time /> */}
               {/* {/* <Input/> */}
-              <DoorAlert/>
+              <DoorAlert />
             </div>
           </div>
         </div>
-        <CardControls />
       </div>
     </div>
   );

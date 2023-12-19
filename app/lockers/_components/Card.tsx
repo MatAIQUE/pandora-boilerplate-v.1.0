@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/app/components";
-import CardControls from "@/app/components/CardControls";
 import Input from "@/app/components/Input";
 import InputErr from "@/app/components/InputErr";
 import Label from "@/app/components/Label";
