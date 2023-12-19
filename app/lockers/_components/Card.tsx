@@ -26,7 +26,7 @@ const Card = ({ title, subtitle }: Props) => {
         <div className="py-10">
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
-              <LabelTitle />
+              <LabelTitle label="" />
               <Label label="Booking Number*" />
               <Input placeholder="Enter booking number" />
               <Label label="Contact Number*" />
