@@ -7,10 +7,15 @@ interface Props {
   title: string;
   subtitle: string;
   onNavigate?: () => void;
-  onNavigateBack?: () => void;
+  onNavigateToOpenLocker?: () => void;
 }
 
-const Card = ({ title, subtitle, onNavigate, onNavigateBack }: Props) => {
+const Card = ({
+  title,
+  subtitle,
+  onNavigate,
+  onNavigateToOpenLocker,
+}: Props) => {
   return (
     <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
       <div className="card-body text-left">
@@ -18,8 +23,7 @@ const Card = ({ title, subtitle, onNavigate, onNavigateBack }: Props) => {
         <div className="py-10">
           <div className="py-10 h-full w-full">
             <div className="w-full text-center items-center">
-              {/* <Time /> */}
-              <DoorAlert/>
+              <Time />
             </div>
           </div>
         </div>
@@ -42,6 +46,7 @@ const Card = ({ title, subtitle, onNavigate, onNavigateBack }: Props) => {
                 color="white"
                 weight="500"
                 outline=""
+                onClick={onNavigateToOpenLocker}
               />
             </div>
           </div>

@@ -12,12 +12,21 @@ const HomePage = () => {
     router.push("/lockers/new");
   };
 
+  const onNavigateToOpenLocker = () => {
+    router.push("/lockers/open");
+  };
+
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
       <Carousel />
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
-        <Card onNavigate={onNavigate} title="Good Morning!" subtitle="" />
+        <Card
+          onNavigate={onNavigate}
+          onNavigateToOpenLocker={onNavigateToOpenLocker}
+          title="Good Morning!"
+          subtitle=""
+        />
       </div>
     </div>
   );
