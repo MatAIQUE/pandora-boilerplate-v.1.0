@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 
 interface Props {
-  onNavigate: () => void;
+  onNavigate?: () => void;
 }
 
 const CardControls = ({ onNavigate }: Props) => {
