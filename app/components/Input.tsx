@@ -7,7 +7,7 @@ const Input = ({ placeholder }: Props) => {
     <>
       {/* door input */}
       {/* <div className="">
-        <input type="text" placeholder="0 1" className="input input-bordered text-2xl input-neutral w-20 text-center bg-white text-black"/>
+        <input type="text" placeholder="0 1" className="input input-bordered text-2xl input-secondary w-20 text-center bg-white text-black"/>
     </div> */}
       {/* end of door input */}
 
@@ -15,7 +15,7 @@ const Input = ({ placeholder }: Props) => {
         <input
           type="text"
           placeholder={placeholder}
-          className="input input-bordered text-2xl input-neutral w-full text-center bg-white text-black"
+          className="input input-bordered text-xl input-secondary w-full bg-white text-black text-start"
         />
       </div>
     </>
