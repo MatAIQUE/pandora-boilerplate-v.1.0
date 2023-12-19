@@ -12,7 +12,7 @@ interface Props {
 const Button = ({ bgColor, label, color, weight, outline, onClick }: Props) => {
   return (
     <button
-      className={`btn btn-${bgColor} ${outline} rounded-sm w-full text-${color} font-${weight}`}
+      className={`btn ${bgColor} ${outline} rounded-sm w-full text-${color} font-${weight}`}
       onClick={onClick}
     >
       {label}
