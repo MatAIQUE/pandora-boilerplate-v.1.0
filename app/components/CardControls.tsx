@@ -1,7 +1,11 @@
 import React from "react";
 import Button from "./Button";
 
-const CardControls = () => {
+interface Props {
+  onNavigate: () => void;
+}
+
+const CardControls = ({ onNavigate }: Props) => {
   return (
     <>
       <div className="card-actions justify-center mt-3">
@@ -13,6 +17,7 @@ const CardControls = () => {
               color="gray-800"
               weight="500"
               outline="btn-outline"
+              onClick={onNavigate}
             />
           </div>
           <div className="w-full">
