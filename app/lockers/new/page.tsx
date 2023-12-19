@@ -6,7 +6,7 @@ const GetLockers = () => {
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
-        <Card title="Good Morning!" subtitle="" />
+        <Card title="Enter your membership details" subtitle="" />
       </div>
     </div>
   );
