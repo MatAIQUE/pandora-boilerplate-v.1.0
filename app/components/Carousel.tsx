@@ -6,7 +6,7 @@ const Carousel = () => {
   return (
     <>
       <div className="flex flex-col mt-20 justify-center items-start mx-10">
-        <div className="carousel rounded-box w-full">
+        <div className="carousel rounded-box w-full pointer-events-none">
           {/* 2048 x 800 */}
           <div id="item1" className="carousel-item">
             <Image
