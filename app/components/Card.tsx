@@ -8,7 +8,7 @@ interface Props {
 
 const Card = ({ title, subtitle }: Props) => {
   return (
-    <div className="card w-1/2 bg-neutral text-neutral-content drop-shadow-lg p-5">
+    <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
       <div className="card-body text-left">
         <Logo />
         <div className="py-10">
