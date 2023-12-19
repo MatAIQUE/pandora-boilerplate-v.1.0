@@ -6,7 +6,7 @@ interface Props {
   color: string;
   weight: string;
   outline: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ bgColor, label, color, weight, outline, onClick }: Props) => {
@@ -19,11 +19,5 @@ const Button = ({ bgColor, label, color, weight, outline, onClick }: Props) => {
     </button>
   );
 };
-
-// const Button = () => {
-//   return (
-//     <button className="btn btn-primary rounded-sm w-full text-white font-medium">Continue</button>
-//   );
-// }
 
 export default Button;
