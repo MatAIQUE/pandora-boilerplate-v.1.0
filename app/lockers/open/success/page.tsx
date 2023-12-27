@@ -47,7 +47,7 @@ const SuccessPaymentPage = () => {
 
                   <div
                     className="radial-progress"
-                    style={{ "--value": count, "--size": "2rem" }}
+                    style={{ "--value": count, "--size": "2rem" } as any}
                     role="progressbar"
                   ></div>
 
