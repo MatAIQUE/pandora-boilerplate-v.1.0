@@ -4,6 +4,9 @@ import Label from "@/app/components/Label";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import Image from "next/image"
+import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png"
+import qrIcon from "../../../assets/images/QR.svg"
 
 const PaymentPage = () => {
   const router = useRouter();
@@ -26,22 +29,30 @@ const PaymentPage = () => {
                 <div className="w-full text-center items-center">
                   <Label label="How do you want to pay" />
                   <div className="mb-5 mt-5">
-                    <Button
+                    {/* <Button
                       label="Add to Booking Invoice"
                       bgColor="btn-outline"
                       color="gray-800"
                       weight="500"
                       outline="btn-outline"
-                    />
+                    /> */}
+                    <button className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly">
+                      <label>Add to Booking Invoice</label>
+                      <span><Image src={kmcLogoRound} alt="kmc logo round" height={30} width={30}/></span>
+                    </button>
                   </div>
                   <div className="mb-5 mt-5">
-                    <Button
+                    {/* <Button
                       label="Pay with Maya/Gcash"
                       bgColor="btn-outline"
                       color="gray-800"
                       weight="500"
                       outline="btn-outline"
-                    />
+                    /> */}
+                    <button className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly">
+                      <label>Pay with Maya/GCash</label>
+                      <span><Image src={qrIcon} alt="kmc logo round" height={30} width={30}/></span>
+                    </button>
                   </div>
                 </div>
               </div>

@@ -24,7 +24,6 @@ module.exports = {
           success: "#16A679",
           warning: "#F24122",
           accent: "#1a1f2b",
-          info: "",
           error: "F24122",
           secondary: "#111622",
           "base-100": "#1a1f2b",
