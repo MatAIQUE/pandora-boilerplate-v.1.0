@@ -1,12 +1,13 @@
 import React from "react";
 
-const LabelDesc = () => {
+interface Props {
+  label: string;
+}
+
+const LabelDesc = ({ label }: Props) => {
   return (
-    <div className="font-medium mb-5 flex justify-start">
-      <span className="text-left">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nam
-        veritatis culpa harum debitis cumque hic odio, maxime
-      </span>
+    <div className="font-medium mb-2 flex justify-start">
+      <span className="text-left">{label}</span>
     </div>
   );
 };

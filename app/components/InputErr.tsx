@@ -2,9 +2,9 @@ import React from "react";
 
 const InputErr = () => {
   return (
-    <div className="text-danger font-medium mt-5 flex justify-start">
-      <button className="btn btn-ghost">
-        <span className="text-primary text-lg">Label here</span>
+    <div className="text-danger font-medium flex justify-start">
+      <button className="btn btn-ghost pl-0">
+        <span className="text-primary text-lg">Resend Code</span>
       </button>
     </div>
   );
