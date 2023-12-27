@@ -29,8 +29,14 @@ const VerifyOTP = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
                   <LabelTitle label="We've sent you an OTP" />
-                  <LabelDesc label="Enter the 6-digit OTP sent to your number" />
-                  <LabelDesc label="+63 *** *** **27" />
+                  <LabelDesc
+                    label="Enter the 6-digit OTP sent to your number"
+                    position="justify-start"
+                  />
+                  <LabelDesc
+                    label="+63 *** *** **27"
+                    position="justify-start"
+                  />
                   <div className="w-full text-center items-center mt-10">
                     <DoorInputOTP />
                     <div className="text-danger font-medium flex justify-start">
