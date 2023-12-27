@@ -1,23 +1,19 @@
 "use client";
 import { Button } from "@/app/components";
-import LabelTitle from "@/app/components/LabelTitle";
+import Label from "@/app/components/Label";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
-import { FaMinus } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
 
-const LockerQTY = () => {
+const PaymentPage = () => {
   const router = useRouter();
-
   const onNavigate = () => {
-    router.push("/lockers/new/payment");
+    router.push("/lockers/new/success");
   };
 
   const onNavigateBack = () => {
     router.back();
   };
-
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
@@ -28,20 +24,26 @@ const LockerQTY = () => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="Locker quantity" />
-                  <div className="flex items-start gap-5">
-                    <button className="btn btn-circle btn-outline  btn-sm">
-                      <FaMinus />
-                    </button>
-                    <div className="font-medium text-2xl">2</div>
-                    <button className="btn btn-circle btn-primary btn-sm">
-                      <FaPlus />
-                    </button>
-                  </div>
+                  <Label label="How do you want to pay" />
+
+                  <Button
+                    label="Add to Booking Invoice"
+                    bgColor="btn-outline"
+                    color="gray-800"
+                    weight="500"
+                    outline="btn-outline"
+                  />
+
+                  <Button
+                    label="Pay with Maya/Gcash"
+                    bgColor="btn-outline"
+                    color="gray-800"
+                    weight="500"
+                    outline="btn-outline"
+                  />
                 </div>
               </div>
             </div>
-
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
@@ -73,4 +75,4 @@ const LockerQTY = () => {
   );
 };
 
-export default LockerQTY;
+export default PaymentPage;
