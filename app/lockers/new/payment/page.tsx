@@ -25,26 +25,28 @@ const PaymentPage = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
                   <Label label="How do you want to pay" />
-
-                  <Button
-                    label="Add to Booking Invoice"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
-                  />
-
-                  <Button
-                    label="Pay with Maya/Gcash"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
-                  />
+                  <div className="mb-5 mt-5">
+                    <Button
+                      label="Add to Booking Invoice"
+                      bgColor="btn-outline"
+                      color="gray-800"
+                      weight="500"
+                      outline="btn-outline"
+                    />
+                  </div>
+                  <div className="mb-5 mt-5">
+                    <Button
+                      label="Pay with Maya/Gcash"
+                      bgColor="btn-outline"
+                      color="gray-800"
+                      weight="500"
+                      outline="btn-outline"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="card-actions justify-center mt-3">
+            <div className="card-actions justify-center">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
                   <Button
