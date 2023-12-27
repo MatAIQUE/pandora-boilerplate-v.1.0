@@ -4,9 +4,27 @@ import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 const SuccessPaymentPage = () => {
+  const [count, setCount] = useState(100);
+  const [timer, setTimer] = useState(5);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      if (count > 0 && timer > 0) {
+        setCount(count - 20);
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdownInterval);
+        router.push("/");
+      }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+  }, [count, timer]);
+
   const router = useRouter();
 
   const onNavigate = () => {
@@ -43,9 +61,15 @@ const SuccessPaymentPage = () => {
                   />
                   <LabelDesc label="next invoice" position="justify-start" />
 
-                  <div className="w-full text-center justify-center items-center mt-20">
+                  <div
+                    className="radial-progress"
+                    style={{ "--value": count, "--size": "2rem" } as any}
+                    role="progressbar"
+                  ></div>
+
+                  <div className="w-full text-center justify-center items-center">
                     <LabelDesc
-                      label="Returning to homepage in 5"
+                      label={`Returning to homepage in ${timer}`}
                       position="justify-center"
                     />
                   </div>
