@@ -18,7 +18,6 @@ const HomePage = () => {
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      <Menu />
       <Carousel />
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <Card
