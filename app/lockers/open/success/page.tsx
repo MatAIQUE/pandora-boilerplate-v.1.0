@@ -4,9 +4,26 @@ import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
 const SuccessPaymentPage = () => {
+  const [count, setCount] = useState(100);
+  const [timer, setTimer] = useState(5);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      if (count > 0 && timer > 0) {
+        setCount(count - 20);
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdownInterval);
+        router.push("/");
+      }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+  }, [count, timer]);
   const router = useRouter();
 
   const onNavigate = () => {
@@ -22,15 +39,21 @@ const SuccessPaymentPage = () => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
+                <div className="w-full text-center items-center mb-10">
                   <div className="flex gap-4">
                     <FaCheckCircle color="green" size={35} />
                     <LabelTitle label="Locker Opened!" />
                   </div>
 
-                  <div className="w-full text-center justify-center items-center mt-10">
+                  <div
+                    className="radial-progress"
+                    style={{ "--value": count, "--size": "2rem" }}
+                    role="progressbar"
+                  ></div>
+
+                  <div className="w-full text-center justify-center items-center">
                     <LabelDesc
-                      label="Returning to homepage in 5"
+                      label={`Returning to homepage in ${timer}`}
                       position="justify-center"
                     />
                   </div>
