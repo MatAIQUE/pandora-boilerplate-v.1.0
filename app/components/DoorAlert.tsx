@@ -17,7 +17,7 @@ const DoorAlert = () => {
                 <div className="justify-center text-center flex h-1/2 items-end pt-40 w-full">
                     <div className="w-full">
                         <div className="w-full justify-center text-center flex pb-5">
-                            <Image className="loading" src={Spinner} alt="" height={30} width={30}/>
+                            <Image className="animate-spin" src={Spinner} alt="" height={30} width={30}/>
                         </div>
                         <p className="text-white">Returning to homepage in 5</p>
                     </div>
