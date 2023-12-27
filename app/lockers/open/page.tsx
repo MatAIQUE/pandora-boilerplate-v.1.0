@@ -1,13 +1,21 @@
-import Menu from "@/app/components/Menu";
-import Card from "../_components/Card";
-import Logo from "@/app/components/Logo";
-import LabelTitle from "@/app/components/LabelTitle";
-import Label from "@/app/components/Label";
-import Input from "@/app/components/Input";
+"use client";
 import { Button } from "@/app/components";
 import DoorInput from "@/app/components/DoorInput";
+import LabelTitle from "@/app/components/LabelTitle";
+import Logo from "@/app/components/Logo";
+import Menu from "@/app/components/Menu";
+import { useRouter } from "next/navigation";
 
 const OpenLockers = () => {
+  const router = useRouter();
+
+  const onNavigate = () => {
+    router.push("/lockers/open/verify-pin");
+  };
+
+  const onNavigateBack = () => {
+    router.back();
+  };
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
@@ -18,7 +26,9 @@ const OpenLockers = () => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="Locker Number" />
+                  <div className="mb-10">
+                    <LabelTitle label="Locker Number" />
+                  </div>
                   <DoorInput />
                 </div>
               </div>
@@ -32,6 +42,7 @@ const OpenLockers = () => {
                     color="gray-800"
                     weight="500"
                     outline="btn-outline"
+                    onClick={onNavigateBack}
                   />
                 </div>
                 <div className="w-full">
@@ -41,6 +52,7 @@ const OpenLockers = () => {
                     color="white"
                     weight="500"
                     outline=""
+                    onClick={onNavigate}
                   />
                 </div>
               </div>

@@ -7,11 +7,11 @@ import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
 
-const VerifyOTP = () => {
+const VerifyPIN = () => {
   const router = useRouter();
 
   const onNavigate = () => {
-    router.push("/lockers/new/locker-qty");
+    router.push("/lockers/open/success");
   };
 
   const onNavigateBack = () => {
@@ -28,15 +28,15 @@ const VerifyOTP = () => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="We've sent you an OTP" />
-                  <LabelDesc label="Enter the 6-digit OTP sent to your number" />
-                  <LabelDesc label="+63 *** *** **27" />
+                  <LabelTitle label="Enter your Locker PIN code" />
+                  <LabelDesc label="Enter the 6-digit credential code sent to your" />
+                  <LabelDesc label="mobile number." />
                   <div className="w-full text-center items-center mt-10">
                     <DoorInputOTP />
                     <div className="text-danger font-medium flex justify-start">
                       <button className="btn btn-ghost pl-0">
                         <span className="text-primary text-lg">
-                          Resend Code
+                          Forgot PIN Code?
                         </span>
                       </button>
                     </div>
@@ -75,4 +75,4 @@ const VerifyOTP = () => {
   );
 };
 
-export default VerifyOTP;
+export default VerifyPIN;
