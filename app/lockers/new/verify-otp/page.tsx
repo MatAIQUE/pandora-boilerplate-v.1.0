@@ -1,3 +1,4 @@
+"use client";
 import Menu from "@/app/components/Menu";
 import React from "react";
 import Card from "../../_components/Card";
@@ -8,8 +9,19 @@ import { Button } from "@/app/components";
 import LabelDesc from "@/app/components/LabelDesc";
 import DoorAlert from "@/app/components/DoorAlert";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
+import { useRouter } from "next/navigation";
 
 const verifyOTP = () => {
+  const router = useRouter();
+
+  const onNavigate = () => {
+    router.push("/lockers/new/locker-qty");
+  };
+
+  const onNavigateBack = () => {
+    router.back();
+  };
+
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
@@ -38,6 +50,7 @@ const verifyOTP = () => {
                     color="gray-800"
                     weight="500"
                     outline="btn-outline"
+                    onClick={onNavigateBack}
                   />
                 </div>
                 <div className="w-full">
@@ -47,6 +60,7 @@ const verifyOTP = () => {
                     color="white"
                     weight="500"
                     outline=""
+                    onClick={onNavigate}
                   />
                 </div>
               </div>

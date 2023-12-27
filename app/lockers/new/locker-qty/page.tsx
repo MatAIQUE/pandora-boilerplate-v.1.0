@@ -1,5 +1,6 @@
+"use client";
 import Menu from "@/app/components/Menu";
-import React from "react";
+import React, { use } from "react";
 import Card from "../../_components/Card";
 import Logo from "@/app/components/Logo";
 import LabelTitle from "@/app/components/LabelTitle";
@@ -10,8 +11,14 @@ import DoorAlert from "@/app/components/DoorAlert";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const lockerQTY = () => {
+  const router = useRouter();
+  const onNavigateBack = () => {
+    router.back();
+  };
+
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
@@ -45,6 +52,7 @@ const lockerQTY = () => {
                     color="gray-800"
                     weight="500"
                     outline="btn-outline"
+                    onClick={onNavigateBack}
                   />
                 </div>
                 <div className="w-full">
