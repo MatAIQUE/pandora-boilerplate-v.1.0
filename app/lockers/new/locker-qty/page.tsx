@@ -9,6 +9,11 @@ import { FaPlus } from "react-icons/fa6";
 
 const LockerQTY = () => {
   const router = useRouter();
+
+  const onNavigate = () => {
+    router.push("/lockers/new/payment");
+  };
+
   const onNavigateBack = () => {
     router.back();
   };
@@ -98,6 +103,7 @@ const LockerQTY = () => {
                     color="white"
                     weight="500"
                     outline=""
+                    onClick={onNavigate}
                   />
                 </div>
               </div>
