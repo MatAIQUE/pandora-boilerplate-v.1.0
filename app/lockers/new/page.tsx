@@ -1,12 +1,11 @@
 "use client";
-import Menu from "@/app/components/Menu";
-import Card from "../_components/Card";
-import { useRouter } from "next/navigation";
-import Logo from "@/app/components/Logo";
-import LabelTitle from "@/app/components/LabelTitle";
-import Label from "@/app/components/Label";
-import Input from "@/app/components/Input";
 import { Button } from "@/app/components";
+import Input from "@/app/components/Input";
+import Label from "@/app/components/Label";
+import LabelTitle from "@/app/components/LabelTitle";
+import Logo from "@/app/components/Logo";
+import Menu from "@/app/components/Menu";
+import { useRouter } from "next/navigation";
 
 const GetLockers = () => {
   const router = useRouter();

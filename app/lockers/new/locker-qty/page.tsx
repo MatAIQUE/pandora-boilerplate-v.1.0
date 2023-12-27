@@ -1,17 +1,11 @@
 "use client";
-import Menu from "@/app/components/Menu";
-import React, { use } from "react";
-import Card from "../../_components/Card";
-import Logo from "@/app/components/Logo";
-import LabelTitle from "@/app/components/LabelTitle";
-import DoorInput from "@/app/components/DoorInput";
 import { Button } from "@/app/components";
-import LabelDesc from "@/app/components/LabelDesc";
-import DoorAlert from "@/app/components/DoorAlert";
-import DoorInputOTP from "@/app/components/DoorInputOTP";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa";
+import LabelTitle from "@/app/components/LabelTitle";
+import Logo from "@/app/components/Logo";
+import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 
 const lockerQTY = () => {
   const router = useRouter();

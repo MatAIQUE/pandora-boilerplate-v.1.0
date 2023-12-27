@@ -1,14 +1,10 @@
 "use client";
-import Menu from "@/app/components/Menu";
-import React from "react";
-import Card from "../../_components/Card";
-import Logo from "@/app/components/Logo";
-import LabelTitle from "@/app/components/LabelTitle";
-import DoorInput from "@/app/components/DoorInput";
 import { Button } from "@/app/components";
-import LabelDesc from "@/app/components/LabelDesc";
-import DoorAlert from "@/app/components/DoorAlert";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
+import LabelDesc from "@/app/components/LabelDesc";
+import LabelTitle from "@/app/components/LabelTitle";
+import Logo from "@/app/components/Logo";
+import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
 
 const verifyOTP = () => {
