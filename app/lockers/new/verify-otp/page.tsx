@@ -7,7 +7,7 @@ import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
 
-const verifyOTP = () => {
+const VerifyOTP = () => {
   const router = useRouter();
 
   const onNavigate = () => {
@@ -68,4 +68,4 @@ const verifyOTP = () => {
   );
 };
 
-export default verifyOTP;
+export default VerifyOTP;

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
-const lockerQTY = () => {
+const LockerQTY = () => {
   const router = useRouter();
   const onNavigateBack = () => {
     router.back();
@@ -67,4 +67,4 @@ const lockerQTY = () => {
   );
 };
 
-export default lockerQTY;
+export default LockerQTY;
