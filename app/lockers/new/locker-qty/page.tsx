@@ -4,11 +4,16 @@ import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
 const LockerQTY = () => {
+  const [quantity, setQuantity] = useState(1);
   const router = useRouter();
+
+  const availableDoorsCount = 10;
+  const price = 700;
 
   const onNavigate = () => {
     router.push("/lockers/new/payment");
@@ -16,6 +21,16 @@ const LockerQTY = () => {
 
   const onNavigateBack = () => {
     router.back();
+  };
+
+  const addCart = () => {
+    if (quantity < availableDoorsCount) setQuantity((prev) => prev + 1);
+  };
+
+  const subtractCart = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
   };
 
   return (
@@ -26,22 +41,6 @@ const LockerQTY = () => {
           <div className="card-body text-left">
             <Logo />
 
-            {/* <div className="py-10">
-              <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
-                  <LabelTitle label="Locker quantity" />
-                  <div className="flex items-start gap-5">
-                    <button className="btn btn-circle btn-outline  btn-sm">
-                      <FaMinus />
-                    </button>
-                    <div className="font-medium text-2xl">2</div>
-                    <button className="btn btn-circle btn-primary btn-sm">
-                      <FaPlus />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="py-10">
               <LabelTitle label="Locker quantity" />
             </div>
@@ -51,11 +50,27 @@ const LockerQTY = () => {
                 <div className="h-full w-full">
                   <div className="w-full text-center items-center">
                     <div className="flex items-start gap-5">
-                      <button className="btn btn-circle btn-outline  btn-sm">
+                      <button
+                        onClick={subtractCart}
+                        className={
+                          quantity > 1
+                            ? `btn btn-circle btn-primary btn-sm`
+                            : `btn btn-circle btn-outline btn-sm`
+                        }
+                      >
                         <FaMinus />
                       </button>
-                      <div className="font-medium text-2xl">2</div>
-                      <button className="btn btn-circle btn-primary btn-sm">
+                      <div className="font-medium text-3xl">{quantity}</div>
+                      <button
+                        onClick={addCart}
+                        className={
+                          quantity >= availableDoorsCount
+                            ? `btn btn-circle btn-outline btn-sm`
+                            : `btn btn-circle btn-primary btn-sm`
+                        }
+
+                        // disabled={quantity >= availableDoorsCount}
+                      >
                         <FaPlus />
                       </button>
                     </div>
@@ -66,7 +81,10 @@ const LockerQTY = () => {
                 <div className="h-full w-full">
                   <div className="w-full text-right">
                     <div className="flex items-end justify-end text-end">
-                      <div className="font-bold text-4xl">P 1,400</div>
+                      <div className="font-bold text-4xl">
+                        P {(Number(quantity) * Number(price)).toLocaleString()}
+                      </div>
+
                       <span>
                         <p className="ms-2">/mo</p>
                       </span>
