@@ -22,7 +22,7 @@ const SuccessPaymentPage = () => {
         clearInterval(countdownInterval);
         router.push("/");
       }
-    }, 10000);
+    }, 1000);
 
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
   }, [count, timer]);
