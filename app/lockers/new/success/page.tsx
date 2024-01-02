@@ -22,7 +22,7 @@ const SuccessPaymentPage = () => {
         clearInterval(countdownInterval);
         router.push("/");
       }
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
   }, [count, timer]);
@@ -48,7 +48,7 @@ const SuccessPaymentPage = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
                   <div className="flex gap-4 mb-10">
-                    <FaCheckCircle color="green" size={35} />
+                    <FaCheckCircle className="text-warning" size={35} />
                     <LabelTitle label="Locker Booked" />
                   </div>
                   <LabelTitle label="Locker 22 and 23" />
