@@ -53,15 +53,9 @@ const SuccessPaymentPage = () => {
                   </div>
                   <LabelTitle label="Locker 22 and 23" />
                   <LabelDesc
-                    label="Locker 22 and 23 has been successfully booked"
+                    label="Locker 22 and 23 has been successfully booked to your account! The billing will reflect in your next invoice"
                     position="justify-start"
                   />
-
-                  <LabelDesc
-                    label="to your account! The billing will reflect in your"
-                    position="justify-start"
-                  />
-                  <LabelDesc label="next invoice" position="justify-start" />
 
                   {/* <div
                     className="radial-progress"
