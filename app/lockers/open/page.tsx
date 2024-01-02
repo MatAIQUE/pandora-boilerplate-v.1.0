@@ -60,6 +60,41 @@ const OpenLockers = () => {
           </div>
         </div>
       </div>
+      <div className="mb-20">
+        <div className="flex justify-center gap-1 my-1 w-full">
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">q</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">w</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">e</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">r</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">t</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">y</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">u</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">i</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">o</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">p</kbd>
+        </div> 
+        <div className="flex justify-center gap-1 my-1 w-full">
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">a</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">s</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">d</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">f</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">g</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">h</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">j</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">k</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">l</kbd>
+        </div> 
+        <div className="flex justify-center gap-1 my-1 w-full">
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">z</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">x</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">c</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">v</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">b</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">n</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">m</kbd>
+          <kbd className="kbd m-4 bg-neutral text-white scale-150 btn-lg">/</kbd>
+        </div>
+      </div>
     </div>
   );
 };
