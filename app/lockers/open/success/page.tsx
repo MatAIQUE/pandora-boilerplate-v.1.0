@@ -43,7 +43,7 @@ const SuccessPaymentPage = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center mb-10">
                   <div className="flex gap-4">
-                    <FaCheckCircle className="text-success" size={35} />
+                    <FaCheckCircle className="text-warning" size={35} />
                     <LabelTitle label="Locker Opened!" />
                   </div>
 
