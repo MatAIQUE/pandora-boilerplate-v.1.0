@@ -1,6 +1,10 @@
 import React from "react";
 
-const DoorInputOTP = ({ pinCode }: { pinCode: string }) => {
+interface Props {
+  pinCode?: string;
+}
+
+const DoorInputOTP = ({ pinCode }: Props) => {
   return (
     <div className="">
       <input
