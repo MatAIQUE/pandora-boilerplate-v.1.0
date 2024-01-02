@@ -11,7 +11,7 @@ const Carousel = ({ images }: Props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 1000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, []);
