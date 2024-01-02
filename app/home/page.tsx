@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import Carousel from "../components/Carousel";
 import Card from "./_components/Card";
+import ad from "../assets/ads/display-1.png"
 
 const HomePage = () => {
   const router = useRouter();
@@ -18,16 +19,24 @@ const HomePage = () => {
   const images = [
     {
       id: "1",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445473/cld-sample-3.jpg",
+      url: ad,
     },
     {
       id: "2",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445472/cld-sample.jpg",
+      url: ad,
     },
     {
       id: "3",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445474/cld-sample-5.jpg",
+      url: ad,
     },
+    // {
+    //   id: "2",
+    //   url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445472/cld-sample.jpg",
+    // },
+    // {
+    //   id: "3",
+    //   url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445474/cld-sample-5.jpg",
+    // },
   ];
 
   return (
