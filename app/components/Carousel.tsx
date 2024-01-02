@@ -21,12 +21,7 @@ const Carousel = ({ images }: Props) => {
       <div className="flex flex-col mt-20 justify-center items-start mx-10 pointer-events-none">
         <div className="carousel rounded-box w-full pointer-events-none">
           {images.map((image, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${
-                currentIndex === index ? "" : "hidden"
-              }`}
-            >
+            <div key={index} className="carousel-item">
               <Image
                 src={image.url}
                 alt={`Image ${index + 1}`}
