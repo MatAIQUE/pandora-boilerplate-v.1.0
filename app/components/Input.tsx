@@ -7,6 +7,7 @@ const Input = ({ placeholder }: Props) => {
     <>
       <div className="mb-5">
         <input
+        // please add function to set maxlength depending on usage or create another input component for contact number
         maxLength={4}
           type="text"
           placeholder={placeholder}
