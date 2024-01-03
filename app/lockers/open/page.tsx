@@ -1,13 +1,17 @@
 "use client";
 import { Button } from "@/app/components";
 import DoorInput from "@/app/components/DoorInput";
+import Keypad from "@/app/components/Keypad";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const OpenLockers = () => {
   const router = useRouter();
+
+  const [pinCode, setPinCode] = useState("");
 
   const onNavigate = () => {
     router.push("/lockers/open/verify-pin");
@@ -16,6 +20,17 @@ const OpenLockers = () => {
   const onNavigateBack = () => {
     router.back();
   };
+
+  const handleKeyClick = (value: string) => {
+    if (pinCode.length < 2) {
+      setPinCode((prevPin) => prevPin + value);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    setPinCode((prevPin) => prevPin.slice(0, -1));
+  };
+
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
@@ -29,7 +44,11 @@ const OpenLockers = () => {
                   <div className="mb-10">
                     <LabelTitle label="Locker Number" />
                   </div>
-                  <DoorInput />
+                  <DoorInput pinCode={pinCode} />
+                  <Keypad
+                    handleDeleteClick={handleDeleteClick}
+                    handleKeyClick={handleKeyClick}
+                  />
                 </div>
               </div>
             </div>
