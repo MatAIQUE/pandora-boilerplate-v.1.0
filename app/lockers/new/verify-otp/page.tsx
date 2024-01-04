@@ -1,21 +1,33 @@
 "use client";
 import { Button } from "@/app/components";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
+import Keypad from "@/app/components/Keypad";
 import LabelDesc from "@/app/components/LabelDesc";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const VerifyOTP = () => {
   const router = useRouter();
-
+  const [pinCode, setPinCode] = useState("");
   const onNavigate = () => {
     router.push("/lockers/new/locker-qty");
   };
 
   const onNavigateBack = () => {
     router.back();
+  };
+
+  const handleKeyClick = (value: string) => {
+    if (pinCode.length < 6) {
+      setPinCode((prevPin) => prevPin + value);
+    }
+  };
+
+  const handleDeleteClick = () => {
+    setPinCode((prevPin) => prevPin.slice(0, -1));
   };
 
   return (
@@ -37,15 +49,17 @@ const VerifyOTP = () => {
                     label="+63 *** *** **27"
                     position="justify-start"
                   />
+                  <div className="text-danger font-medium flex justify-start">
+                    <button className="btn btn-ghost pl-0">
+                      <span className="text-primary text-lg">Resend Code</span>
+                    </button>
+                  </div>
                   <div className="w-full text-center items-center mt-10">
-                    <DoorInputOTP />
-                    <div className="text-danger font-medium flex justify-start">
-                      <button className="btn btn-ghost pl-0">
-                        <span className="text-primary text-lg">
-                          Resend Code
-                        </span>
-                      </button>
-                    </div>
+                    <DoorInputOTP pinCode={pinCode} />
+                    <Keypad
+                      handleDeleteClick={handleDeleteClick}
+                      handleKeyClick={handleKeyClick}
+                    />
                   </div>
                 </div>
               </div>

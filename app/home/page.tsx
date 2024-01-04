@@ -18,15 +18,15 @@ const HomePage = () => {
   const images = [
     {
       id: "1",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445473/cld-sample-3.jpg",
+      url: "https://res.cloudinary.com/dym23akc6/image/upload/c_crop,w_2048,h_800/v1674445473/cld-sample-3.jpg",
     },
     {
       id: "2",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445472/cld-sample.jpg",
+      url: "https://res.cloudinary.com/dym23akc6/image/upload/c_crop,w_2048,h_800/v1674445472/cld-sample.jpg",
     },
     {
       id: "3",
-      url: "https://res.cloudinary.com/dym23akc6/image/upload/v1674445474/cld-sample-5.jpg",
+      url: "https://res.cloudinary.com/dym23akc6/image/upload/c_crop,w_2048,h_800/v1674445474/cld-sample-5.jpg",
     },
   ];
 
