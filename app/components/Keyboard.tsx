@@ -3,49 +3,49 @@ return (
 <>
     <div className="mb-20">
         <div className="flex justify-center gap-1 my-1 w-full mb-4">
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">1</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">2</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">3</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">4</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">5</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">6</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">7</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">8</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">9</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">0</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">1</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">2</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">3</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">4</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">5</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">6</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">7</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">8</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">9</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral">0</kbd>
         </div>
         <div className="flex justify-center gap-1 my-1 w-full">
-          <kbd className="kbd-lg scale-150 m-4 btn">q</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">w</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">e</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">r</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">t</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">y</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">u</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">i</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">o</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">p</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">q</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">w</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">e</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">r</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">t</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">y</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">u</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">i</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">o</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">p</kbd>
         </div> 
         <div className="flex justify-center gap-1 my-1 w-full">
-          <kbd className="kbd-lg scale-150 m-4 btn">a</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">s</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">d</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">f</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">g</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">h</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">j</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">k</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">l</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">a</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">s</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">d</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">f</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">g</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">h</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">j</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">k</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">l</kbd>
         </div> 
         <div className="flex justify-center gap-1 my-1 w-full">
-          <kbd className="kbd-lg scale-150 m-4 btn">z</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">x</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">c</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">v</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">b</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">n</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">m</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">/</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">z</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">x</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">c</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">v</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">b</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">n</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">m</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn bg-white text-neutral btn-disabled">/</kbd>
         </div>
       </div>
       </>
