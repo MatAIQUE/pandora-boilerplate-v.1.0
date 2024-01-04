@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 const Keyboard = () => {
 return (
     <>
-    <div className="mb-20 w-full justify-center">
+    <div className="mb-20 w-full justify-center bottom-0 fixed ">
         <div className="flex justify-end me-36 gap-1 my-1 mb-4">
             <kbd className="kbd-lg scale-150 m-4 btn border-white bg-transparent"><FaArrowLeft/>BckSpc</kbd>
         </div>
