@@ -8,6 +8,7 @@ import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Keyboard from "@/app/components/Keyboard";
 
 const VerifyOTP = () => {
   const router = useRouter();
@@ -56,10 +57,10 @@ const VerifyOTP = () => {
                   </div>
                   <div className="w-full text-center items-center mt-10">
                     <DoorInputOTP pinCode={pinCode} />
-                    <Keypad
+                    {/* <Keypad
                       handleDeleteClick={handleDeleteClick}
                       handleKeyClick={handleKeyClick}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -91,6 +92,7 @@ const VerifyOTP = () => {
           </div>
         </div>
       </div>
+      <Keyboard/>
     </div>
   );
 };

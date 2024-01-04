@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/app/components";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
+import Keyboard from "@/app/components/Keyboard";
 import Keypad from "@/app/components/Keypad";
 import LabelDesc from "@/app/components/LabelDesc";
 import LabelTitle from "@/app/components/LabelTitle";
@@ -57,10 +58,10 @@ const VerifyPIN = () => {
                       </button>
                     </div>
 
-                    <Keypad
+                    {/* <Keypad
                       handleDeleteClick={handleDeleteClick}
                       handleKeyClick={handleKeyClick}
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -92,6 +93,7 @@ const VerifyPIN = () => {
           </div>
         </div>
       </div>
+      <Keyboard/>
     </div>
   );
 };
