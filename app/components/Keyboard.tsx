@@ -3,16 +3,16 @@ return (
 <>
     <div className="mb-20">
         <div className="flex justify-center gap-1 my-1 w-full mb-4">
-          <kbd className="kbd-lg scale-150 m-4 btn">1</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">2</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">3</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">4</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">5</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">6</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">7</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">8</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">9</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn">0</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">1</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">2</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">3</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">4</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">5</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">6</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">7</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">8</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">9</kbd>
+          <kbd className="kbd-lg scale-150 m-4 btn btn-disabled">0</kbd>
         </div>
         <div className="flex justify-center gap-1 my-1 w-full">
           <kbd className="kbd-lg scale-150 m-4 btn">q</kbd>
