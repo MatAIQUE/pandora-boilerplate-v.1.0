@@ -19,7 +19,7 @@ const Carousel = ({ images }: Props) => {
   return (
     <>
       <div className="flex flex-col mt-20 justify-center items-start mx-10 pointer-events-none">
-        <div className="carousel rounded-box w-full pointer-events-none">
+        <div className="carousel rounded-box justify-center pointer-events-none">
           {images.map((image, index) => (
             <div
               key={index}
