@@ -1,12 +1,16 @@
-## Pandora Boilerplate Template
+## KMC-PANEL v1.0
 
-Unlock the power of seamless development with the Pandora Boilerplate Template – a cutting-edge foundation for your projects. Crafted with precision and designed for versatility, this template streamlines your workflow, allowing you to focus on building exceptional applications without the hassle of starting from scratch.
+KMC enhances its service offerings by providing traditional lockers as supplementary features, specifically catering to Coworking (CO) and Serviced Office (SO) clients. For Coworking clients, locker reservations are conveniently made through KMC's booking platform called Hub, while Serviced Office clients can coordinate locker bookings with the assistance of on-site Customer Success (CS) representatives.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+In a commitment to deliver an elevated experience to its clients, KMC has partnered with Laundrafebox QUBE to introduce the digital smart locker service, "Keep." This comprehensive package includes a tailored locker user interface and software, powered by Pandora, along with a dedicated dashboard, report generation capabilities, user management tools, and other customizable features. The integration of QUBE locker technology with Hub's infrastructure is designed to seamlessly merge both systems, providing KMC clients with a more streamlined, convenient, and secure storage solution.
+
+The target clients for the smart locker are the Coworking (CO), Serviced Office (SO), and Virtual Office (VO) clients in One Ayala Tower (OAT).
+
+## Objectives
 
 ## Getting Started
 
-First, run the development server:
+First, clone the source code and run the development server:
 
 ```bash
 npm run dev
