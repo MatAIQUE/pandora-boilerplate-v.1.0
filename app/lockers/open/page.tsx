@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/app/components";
 import DoorInput from "@/app/components/DoorInput";
+import Keyboard from "@/app/components/Keyboard";
 import Keypad from "@/app/components/Keypad";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
@@ -45,10 +46,10 @@ const OpenLockers = () => {
                     <LabelTitle label="Locker Number" />
                   </div>
                   <DoorInput pinCode={pinCode} />
-                  <Keypad
+                  {/* <Keypad
                     handleDeleteClick={handleDeleteClick}
                     handleKeyClick={handleKeyClick}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -80,6 +81,7 @@ const OpenLockers = () => {
           </div>
         </div>
       </div>
+      <Keyboard/>
     </div>
   );
 };
