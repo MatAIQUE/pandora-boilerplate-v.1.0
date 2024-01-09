@@ -25,7 +25,7 @@ module.exports = {
           warning: "#16A679",
           accent: "#1a1f2b",
           error: "F24122",
-          secondary: "#111622",
+          info: "FFFFFF",
           "base-100": "#1a1f2b",
         },
       },
