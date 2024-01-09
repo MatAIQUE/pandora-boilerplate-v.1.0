@@ -11,7 +11,7 @@ import qrIcon from "../../../assets/images/QR.svg"
 const PaymentPage = () => {
   const router = useRouter();
   const onNavigate = () => {
-    router.push("/lockers/new/success");
+    router.push("/lockers/new/qr-page");
   };
 
   const onNavigateBack = () => {

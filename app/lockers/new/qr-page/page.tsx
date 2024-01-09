@@ -4,8 +4,14 @@ import Logo from "@/app/components/Logo"
 import Menu from "@/app/components/Menu"
 import QRPHLogo from "../../../assets/images/qrph.png"
 import Image from "next/image"
+import { useRouter } from "next/navigation";
 
 const QRPage = () => {
+    const router = useRouter();
+
+    const onNavigateBack = () => {
+        router.back();
+      };
     return (
         <div className="h-screen relative flex flex-col w-full text-center">
             {/* <Menu/> */}
@@ -46,7 +52,8 @@ const QRPage = () => {
                 </div>
             </div>
             <div className="absolute h-1/2 pt-60 w-full bottom-0">
-                <p className=" btn bg-transparent border-transparent btn-lg text-error text-2xl font-semibold">Cancel Payment</p>
+                <p className=" btn bg-transparent border-transparent btn-lg text-error text-2xl font-semibold"
+                onClick={onNavigateBack}>Cancel Payment</p>
             </div>
         </div>
     )
