@@ -41,7 +41,7 @@ const DoorAlert = () => {
                             <p className="text-xl text-white">Incorrect PIN</p>
                         </div>
                         <div className="w-full justify-center text-left flex pb-5">
-                            <p className="text-white">Sorry we’ve locked your Locker for 5 Minutes. If you forgot you’re PIN Code you can reset it below or talk to our Admin on Site</p>
+                            <p className="text-white">Sorry we&apos;ve locked your Locker for 5 Minutes. If you forgot you&apos;re PIN Code you can reset it below or talk to our Admin on Site</p>
                         </div>
                         <p className="text-primary mt-10">Forgot PIN Code?</p>
                     </div>
