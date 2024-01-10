@@ -81,7 +81,7 @@ const OpenLockers = () => {
           </div>
         </div>
       </div>
-      <Keyboard/>
+      <Keyboard />
     </div>
   );
 };

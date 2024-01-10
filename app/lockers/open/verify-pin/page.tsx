@@ -7,15 +7,53 @@ import LabelDesc from "@/app/components/LabelDesc";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const VerifyPIN = () => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
+  const [error, setError] = useState(null);
 
-  const onNavigate = () => {
-    router.push("/lockers/open/success");
+  const onNavigate = async () => {
+    try {
+      await axios
+        .post(
+          "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
+          {
+            pin: pinCode,
+            doorNumber: "1028",
+          },
+          {
+            headers: {
+              "x-api-key": "xxxapikey",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          router.push("/lockers/open/success");
+        });
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data;
+
+        // console.error("Errors:", responseData.errors);
+
+        // Check if the message is "Incorrect PIN code"
+        if (responseData.message === "Incorrect PIN code") {
+          setError(responseData.errors);
+          // Add your logic for handling incorrect PIN code
+        }
+
+        if (responseData.message === "Account locked out") {
+          router.push("lockers/open/alert");
+        }
+      } else {
+        console.error("An unknown error occurred.");
+      }
+    }
   };
 
   const onNavigateBack = () => {
@@ -50,6 +88,15 @@ const VerifyPIN = () => {
                   <LabelDesc label="mobile number." position="justify-start" />
                   <div className="w-full text-center items-center mt-10">
                     <DoorInputOTP pinCode={pinCode} />
+
+                    {error && (
+                      <div className={`font-medium mb-2 flex justify-start`}>
+                        <span className={`text-left text-primary`}>
+                          Incorrect PIN code ({error})
+                        </span>
+                      </div>
+                    )}
+
                     <div className="text-danger font-medium flex justify-start">
                       <button className="btn btn-ghost pl-0">
                         <span className="text-primary text-lg">
@@ -58,10 +105,10 @@ const VerifyPIN = () => {
                       </button>
                     </div>
 
-                    {/* <Keypad
+                    <Keypad
                       handleDeleteClick={handleDeleteClick}
                       handleKeyClick={handleKeyClick}
-                    /> */}
+                    />
                   </div>
                 </div>
               </div>
@@ -93,7 +140,6 @@ const VerifyPIN = () => {
           </div>
         </div>
       </div>
-      <Keyboard/>
     </div>
   );
 };
