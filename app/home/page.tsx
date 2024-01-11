@@ -2,27 +2,12 @@
 import { useRouter } from "next/navigation";
 import Carousel from "../components/Carousel";
 import Card from "./_components/Card";
-import { Button } from "../components";
-import axios from "axios";
-import { useEffect } from "react";
 
 const HomePage = () => {
   const router = useRouter();
 
-  // const onNavigate = () => {
-  //   router.push("/lockers/new");
-  // };
-
-  const onNavigate = async () => {
-    try {
-      await axios
-        .get(`http://localhost:9090/api/lockercontroller/door/1/open`)
-        .then((res) => {
-          console.log("open door");
-        });
-    } catch (error) {
-      console.error(error);
-    }
+  const onNavigate = () => {
+    router.push("/lockers/new");
   };
 
   const onNavigateToOpenLocker = () => {
@@ -55,16 +40,6 @@ const HomePage = () => {
           title=""
           subtitle=""
         />
-        <div className="w-full">
-          <Button
-            label="Open Locker"
-            bgColor="btn-primary"
-            color="white"
-            weight="500"
-            outline=""
-            onClick={() => onNavigate()}
-          />
-        </div>
       </div>
     </div>
   );
