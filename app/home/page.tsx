@@ -29,10 +29,6 @@ const HomePage = () => {
     router.push("/lockers/open");
   };
 
-  useEffect(() => {
-    onNavigate();
-  }, []);
-
   // MOCK DATA ONLY
   const images = [
     {
