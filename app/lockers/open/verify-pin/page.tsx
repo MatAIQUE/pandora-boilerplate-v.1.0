@@ -27,40 +27,42 @@ const VerifyPIN = ({ searchParams }: Props) => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
-      await axios
-        .post(
-          "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
-          {
-            pin: pinCode,
-            doorNumber: doorNumber,
+      const response = await axios.post(
+        "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
+        {
+          pin: pinCode,
+          doorNumber: doorNumber,
+        },
+        {
+          headers: {
+            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
+            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
-              "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
-              "Content-Type": "application/json",
-            },
-          }
-        )
-
-        .then(() => {
-          router.push("/lockers/open/success");
-          axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
-        });
+        }
+      );
+      if (response.status === 200) {
+        router.push("/lockers/open/success");
+        axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
+      }
       setIsLoading(false);
     } catch (error) {
       setIsLoading(true);
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data;
 
-        const err = responseData.errors[0];
+        const numAttempt = responseData.errors[0];
+        const timeLeft = responseData.errors[1];
 
-        console.log(err);
+        // console.log("Attempt Time left", attemptTimeLeft);
 
-        if (err === "0") {
-          router.push("lockers/open/alert");
+        if (numAttempt === "0") {
+          // Only include timeLeft parameter if it's a valid number
+          const queryParams =
+            timeLeft !== undefined ? `?timeLeft=${timeLeft}` : "";
+          router.push(`/lockers/open/alert${queryParams}`);
         } else {
-          setError(err);
+          setError(numAttempt);
         }
       } else {
         console.error("An unknown error occurred.");

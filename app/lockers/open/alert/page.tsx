@@ -2,35 +2,43 @@
 import { Button } from "@/app/components";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FaBellSlash } from "react-icons/fa";
 
-const AlertPage = () => {
-  const [count, setCount] = useState(100);
-  const [timer, setTimer] = useState(5);
+interface Props {
+  searchParams: { timeLeft?: number };
+}
 
-  useEffect(() => {
-    const countdownInterval = setInterval(() => {
-      if (count > 0 && timer > 0) {
-        setCount(count - 20);
-        setTimer(timer - 1);
-      } else {
-        clearInterval(countdownInterval);
-        router.push("/");
-      }
-    }, 2000);
+const AlertPage = ({ searchParams }: Props) => {
+  const initialTimeLeft =
+    searchParams.timeLeft !== undefined ? searchParams.timeLeft : 299;
+  const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
-    return () => clearInterval(countdownInterval); // Cleanup on component unmount
-  }, [count, timer]);
   const router = useRouter();
+
   const onNavigate = () => {
     router.push("/");
   };
+
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${minutes} minutes ${remainingSeconds} seconds`;
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Decrease timeLeft by 1 every second
+      setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    }, 1000);
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      {/* <Menu /> */}
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">
@@ -49,9 +57,9 @@ const AlertPage = () => {
                       </div>
                       <div className="w-full justify-center text-left flex pb-5">
                         <p className="text-white">
-                          Sorry we&apos;ve locked your Locker for 5 Minutes. If you
-                          forgot you&apos;re PIN Code you can reset it below or talk
-                          to our Admin on Site
+                          Sorry we&apos;ve locked your Locker for{" "}
+                          {formatTime(timeLeft)}. If you forgot your PIN Code,
+                          you can reset it below or talk to our Admin on Site.
                         </p>
                       </div>
                       <p className="text-primary mt-10">Forgot PIN Code?</p>
