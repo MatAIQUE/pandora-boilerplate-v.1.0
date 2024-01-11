@@ -32,7 +32,7 @@ const VerifyPIN = ({
           "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
           {
             pin: pinCode,
-            doorNumber: searchParams.doorNumber,
+            doorNumber: "11",
           },
           {
             headers: {
