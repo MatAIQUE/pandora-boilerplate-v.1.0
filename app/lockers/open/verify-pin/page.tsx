@@ -53,16 +53,14 @@ const VerifyPIN = ({ searchParams }: Props) => {
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data;
 
-        console.error("Errors:", error);
+        const err = responseData.errors[0];
 
-        // Check if the message is "Incorrect PIN code"
-        if (responseData.message === "Incorrect PIN code") {
-          setError(responseData.errors);
-          // Add your logic for handling incorrect PIN code
-        }
+        console.log(err);
 
-        if (responseData.message === "Account locked out") {
+        if (err === "0") {
           router.push("lockers/open/alert");
+        } else {
+          setError(err);
         }
       } else {
         console.error("An unknown error occurred.");
