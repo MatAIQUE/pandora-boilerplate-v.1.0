@@ -6,14 +6,11 @@ import Keypad from "@/app/components/Keypad";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const OpenLockers = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const door = searchParams.get("search");
-
   const [doorNumber, setDoorNumber] = useState("");
 
   const onNavigate = () => {

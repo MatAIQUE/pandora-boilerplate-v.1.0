@@ -12,17 +12,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Spinner from "../../../assets/images/spinner.svg";
 
-const VerifyPIN = ({
-  searchParams,
-}: {
-  searchParams: {
-    doorNumber: string;
-  };
-}) => {
+interface Props {
+  searchParams: { doorNumber: string };
+}
+
+const VerifyPIN = ({ searchParams }: Props) => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const doorNumber = searchParams.doorNumber;
 
   const onNavigate = async () => {
     try {
@@ -32,12 +32,12 @@ const VerifyPIN = ({
           "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
           {
             pin: pinCode,
-            doorNumber: "11",
+            doorNumber: doorNumber,
           },
           {
             headers: {
-              "x-api-secret": "xxxapisecret",
-              "x-api-key": "xxxapikey",
+              "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
+              "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
               "Content-Type": "application/json",
             },
           }
