@@ -83,6 +83,7 @@ const OpenLockers = () => {
                     weight="500"
                     outline=""
                     onClick={onNavigate}
+                    disabled={!doorNumber}
                   />
                 </div>
               </div>
