@@ -10,6 +10,8 @@ import Menu from "@/app/components/Menu";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Spinner from "../../../assets/images/spinner.svg"
+import Image from "next/image"
 
 const VerifyPIN = () => {
   const router = useRouter();
@@ -129,14 +131,19 @@ const VerifyPIN = () => {
                   />
                 </div>
                 <div className="w-full">
-                  <Button
+                  {/* <Button
                     label="Continue"
                     bgColor="btn-primary"
                     color="white"
                     weight="500"
                     outline=""
                     onClick={onNavigate}
-                  />
+                  /> */}
+                  <button className="btn btn-primary w-full">
+                    <span className="animate-spin text-white">
+                      <Image src={Spinner} height={30} width={30} alt="spinner loading"/>
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
