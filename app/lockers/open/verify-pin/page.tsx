@@ -12,24 +12,31 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Spinner from "../../../assets/images/spinner.svg";
 
-const VerifyPIN = () => {
+const VerifyPIN = ({
+  searchParams,
+}: {
+  searchParams: {
+    doorNumber: string;
+  };
+}) => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const onNavigate = async () => {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       await axios
         .post(
           "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
           {
             pin: pinCode,
-            doorNumber: "1028",
+            doorNumber: searchParams.doorNumber,
           },
           {
             headers: {
+              "x-api-secret": "xxxapisecret",
               "x-api-key": "xxxapikey",
               "Content-Type": "application/json",
             },
@@ -40,7 +47,9 @@ const VerifyPIN = () => {
           router.push("/lockers/open/success");
           axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
         });
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(true);
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data;
 
@@ -58,8 +67,8 @@ const VerifyPIN = () => {
       } else {
         console.error("An unknown error occurred.");
       }
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const onNavigateBack = () => {

@@ -15,7 +15,8 @@ const OpenLockers = () => {
   const [doorNumber, setDoorNumber] = useState("");
 
   const onNavigate = () => {
-    router.push("/lockers/open/verify-pin");
+    const url = `/lockers/open/verify-pin?doorNumber=${doorNumber}`;
+    router.push(url);
   };
 
   const onNavigateBack = () => {
