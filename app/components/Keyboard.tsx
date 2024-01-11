@@ -2,8 +2,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 
 interface Props {
-  handleKeyClick?: (key: string) => void;
-  handleDeleteClick?: () => void;
+  handleKeyClick: (key: string) => void;
+  handleDeleteClick: () => void;
 }
 
 const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
