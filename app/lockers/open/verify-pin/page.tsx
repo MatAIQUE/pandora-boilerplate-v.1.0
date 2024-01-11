@@ -93,7 +93,7 @@ const VerifyPIN = () => {
                     <DoorInputOTP pinCode={pinCode} />
 
                     {error && (
-                      <div className={`font-medium mb-2 flex justify-start`}>
+                      <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
                           Incorrect PIN code ({error})
                         </span>
