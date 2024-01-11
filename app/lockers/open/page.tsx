@@ -12,7 +12,7 @@ import { useState } from "react";
 const OpenLockers = () => {
   const router = useRouter();
 
-  const [pinCode, setPinCode] = useState("");
+  const [doorNumber, setDoorNumber] = useState("");
 
   const onNavigate = () => {
     router.push("/lockers/open/verify-pin");
@@ -23,13 +23,13 @@ const OpenLockers = () => {
   };
 
   const handleKeyClick = (value: string) => {
-    if (pinCode.length < 2) {
-      setPinCode((prevPin) => prevPin + value);
+    if (doorNumber.length < 2) {
+      setDoorNumber((prevPin) => prevPin + value);
     }
   };
 
   const handleDeleteClick = () => {
-    setPinCode((prevPin) => prevPin.slice(0, -1));
+    setDoorNumber((prevPin) => prevPin.slice(0, -1));
   };
 
   return (
@@ -45,7 +45,16 @@ const OpenLockers = () => {
                   <div className="mb-10">
                     <LabelTitle label="Locker Number" />
                   </div>
-                  <DoorInput pinCode={pinCode} />
+                  <div className="">
+                    <input
+                      maxLength={2}
+                      type="text"
+                      placeholder="0 1"
+                      className="input input-bordered text-2xl input-secondary w-20 text-center bg-white text-black"
+                      value={doorNumber}
+                      readOnly
+                    />
+                  </div>
                   {/* <Keypad
                     handleDeleteClick={handleDeleteClick}
                     handleKeyClick={handleKeyClick}
@@ -81,7 +90,10 @@ const OpenLockers = () => {
           </div>
         </div>
       </div>
-      <Keyboard />
+      <Keyboard
+        handleKeyClick={handleKeyClick}
+        handleDeleteClick={handleDeleteClick}
+      />
     </div>
   );
 };
