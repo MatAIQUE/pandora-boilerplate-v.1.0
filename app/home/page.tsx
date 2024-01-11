@@ -4,6 +4,7 @@ import Carousel from "../components/Carousel";
 import Card from "./_components/Card";
 import { Button } from "../components";
 import axios from "axios";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const HomePage = () => {
   const onNavigate = async () => {
     try {
       await axios
-        .get("http://localhost:9090/api/lockercontroller/door/1/open")
+        .get(`http://localhost:9090/api/lockercontroller/door/1/open`)
         .then((res) => {
           console.log("open door");
         });
@@ -27,6 +28,10 @@ const HomePage = () => {
   const onNavigateToOpenLocker = () => {
     router.push("/lockers/open");
   };
+
+  useEffect(() => {
+    onNavigate();
+  }, []);
 
   // MOCK DATA ONLY
   const images = [
