@@ -33,7 +33,7 @@ const VerifyPIN = () => {
           }
         )
         .then(() => {
-          axios.get("https://localhost:9090/api/lockercontroller/door/1/open");
+          axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
         })
         .then((res) => {
           router.push("/lockers/open/success");
