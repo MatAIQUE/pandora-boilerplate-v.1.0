@@ -10,15 +10,17 @@ import Menu from "@/app/components/Menu";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Spinner from "../../../assets/images/spinner.svg"
-import Image from "next/image"
+import Spinner from "../../../assets/images/spinner.svg";
+import Image from "next/image";
 
 const VerifyPIN = () => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onNavigate = async () => {
+    setIsLoading(true);
     try {
       await axios
         .post(
@@ -59,6 +61,7 @@ const VerifyPIN = () => {
         console.error("An unknown error occurred.");
       }
     }
+    setIsLoading(false);
   };
 
   const onNavigateBack = () => {
@@ -139,10 +142,22 @@ const VerifyPIN = () => {
                     outline=""
                     onClick={onNavigate}
                   /> */}
-                  <button className="btn btn-primary w-full">
-                    <span className="animate-spin text-white">
-                      <Image src={Spinner} height={30} width={30} alt="spinner loading"/>
-                    </span>
+
+                  <button
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    onClick={onNavigate}
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
                   </button>
                 </div>
               </div>
