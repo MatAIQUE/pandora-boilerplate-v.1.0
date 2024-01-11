@@ -9,7 +9,7 @@ const DoorInputOTP = ({ pinCode }: Props) => {
     <div className="">
       <input
         maxLength={6}
-        type="text"
+        type="password"
         placeholder="0 0 0 0 0 0"
         className="input input-bordered text-2xl input-secondary w-full text-center bg-white text-black"
         value={pinCode}
