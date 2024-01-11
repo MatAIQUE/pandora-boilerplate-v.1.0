@@ -15,7 +15,7 @@ const HomePage = () => {
   const onNavigate = async () => {
     try {
       await axios
-        .get("https://localhost:9090/api/lockercontroller/door/1/open")
+        .get("http://localhost:9090/api/lockercontroller/door/1/open")
         .then((res) => {
           console.log("open door");
         });
