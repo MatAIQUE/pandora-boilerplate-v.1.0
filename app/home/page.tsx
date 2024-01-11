@@ -66,7 +66,7 @@ const HomePage = () => {
             color="white"
             weight="500"
             outline=""
-            onClick={onNavigate}
+            onClick={() => onNavigate()}
           />
         </div>
       </div>
