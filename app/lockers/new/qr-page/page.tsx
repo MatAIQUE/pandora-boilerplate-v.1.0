@@ -15,6 +15,16 @@ const QRPage = () => {
     return (
         <div className="h-screen relative flex flex-col w-full text-center">
             {/* <Menu/> */}
+            
+            {/* Timer */}
+            {/* <div className="mt-60 w-full items-center absolute justify-center flex flex-col">
+                <div className="alert animate-pulse w-1/2 flex justify-between px-10">
+                    <p className="text-xl">Are you still there?</p>
+                    <button className="btn btn-neutral end-0">Yes</button>
+                </div>
+                <div className="justify-center mt-10 w-full">Returning home in 10</div>
+            </div> */}
+
             <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
                 <div className="card w-1/2 bg-white text-black drop-shadow-lg p-5">
                     <div className="card-body justify-start flex text-left">
