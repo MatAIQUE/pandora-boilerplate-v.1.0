@@ -32,6 +32,9 @@ const VerifyPIN = () => {
             },
           }
         )
+        .then(() => {
+          axios.get("https://localhost:9090/api/lockercontroller/door/1/open");
+        })
         .then((res) => {
           router.push("/lockers/open/success");
         });
@@ -39,7 +42,7 @@ const VerifyPIN = () => {
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data;
 
-        // console.error("Errors:", responseData.errors);
+        console.error("Errors:", error);
 
         // Check if the message is "Incorrect PIN code"
         if (responseData.message === "Incorrect PIN code") {
