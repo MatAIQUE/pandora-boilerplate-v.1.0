@@ -92,7 +92,10 @@ const VerifyOTP = () => {
           </div>
         </div>
       </div>
-      <Keyboard/>
+      <Keyboard
+        handleDeleteClick={handleDeleteClick}
+        handleKeyClick={handleKeyClick}
+      />
     </div>
   );
 };
