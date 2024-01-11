@@ -35,11 +35,10 @@ const VerifyPIN = () => {
             },
           }
         )
+
         .then(() => {
-          axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
-        })
-        .then((res) => {
           router.push("/lockers/open/success");
+          axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
         });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -133,15 +132,6 @@ const VerifyPIN = () => {
                   />
                 </div>
                 <div className="w-full">
-                  {/* <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
-                    onClick={onNavigate}
-                  /> */}
-
                   <button
                     className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={onNavigate}
