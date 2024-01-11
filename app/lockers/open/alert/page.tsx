@@ -5,6 +5,7 @@ import Logo from "@/app/components/Logo";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaBellSlash } from "react-icons/fa";
+import Menu from "@/app/components/Menu";
 
 interface Props {
   searchParams: { timeLeft?: number };
@@ -39,10 +40,12 @@ const AlertPage = ({ searchParams }: Props) => {
   }, []);
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
+      <Menu />
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">
             <Logo />
+
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center mb-10">
