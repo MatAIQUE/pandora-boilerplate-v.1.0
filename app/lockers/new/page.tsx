@@ -1,7 +1,6 @@
 "use client";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 import { Button } from "@/app/components";
 import Keyboard from "@/app/components/Keyboard";
 import Label from "@/app/components/Label";
@@ -17,6 +16,7 @@ const GetLockers = () => {
   );
   const [bookingNum, setBookingNum] = useState("KMC-");
   const [contactNum, setContactNum] = useState("+63");
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const onNavigate = () => {
     console.log(bookingNum, contactNum);
@@ -27,15 +27,23 @@ const GetLockers = () => {
     router.back();
   };
 
+  useEffect(() => {
+    setIsContinueDisabled(
+      !(bookingNum.length === 8 && contactNum.length === 13)
+    );
+  }, [bookingNum, contactNum]);
+
   const handleKeyClick = (value: string) => {
     const maxLength = focusedInput === "booking" ? 8 : 13;
 
     if (focusedInput === "booking" && bookingNum.length < maxLength) {
       setBookingNum((prev) => `${prev}${value}`);
-    } else if (focusedInput === "contact") {
-      if (/^\d+$/.test(value) && contactNum.length < 13) {
-        setContactNum((prevPin) => `${prevPin}${value}`);
-      }
+    } else if (
+      focusedInput === "contact" &&
+      /^\d+$/.test(value) &&
+      contactNum.length < 13
+    ) {
+      setContactNum((prevPin) => `${prevPin}${value}`);
     }
   };
 
@@ -80,7 +88,7 @@ const GetLockers = () => {
 
                   <Label label="Contact Number*" />
                   <input
-                    maxLength={11}
+                    maxLength={12}
                     type="text"
                     placeholder=""
                     className="input input-bordered text-xl input-secondary w-full bg-white text-black text-start mb-2"
@@ -110,6 +118,7 @@ const GetLockers = () => {
                     weight="500"
                     outline=""
                     onClick={onNavigate}
+                    disabled={isContinueDisabled}
                   />
                 </div>
               </div>
