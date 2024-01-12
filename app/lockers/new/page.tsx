@@ -84,6 +84,7 @@ const GetLockers = () => {
                     className="input input-bordered text-xl input-secondary w-full bg-white text-black text-start mb-2"
                     value={bookingNum}
                     onFocus={() => setFocusedInput("booking")}
+                    readOnly
                   />
 
                   <Label label="Contact Number*" />
@@ -94,6 +95,7 @@ const GetLockers = () => {
                     className="input input-bordered text-xl input-secondary w-full bg-white text-black text-start mb-2"
                     value={contactNum}
                     onFocus={() => setFocusedInput("contact")}
+                    readOnly
                   />
                 </div>
               </div>
