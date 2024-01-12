@@ -18,10 +18,6 @@ const AlertPage = ({ searchParams }: Props) => {
 
   const router = useRouter();
 
-  const onNavigate = () => {
-    router.push("/");
-  };
-
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -32,12 +28,21 @@ const AlertPage = ({ searchParams }: Props) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Decrease timeLeft by 1 every second
+
       setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+
+      if (timeLeft === 0) {
+        router.push("/");
+      }
     }, 1000);
 
     // Cleanup the interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    if (timeLeft === 0) router.push("/");
+  }, [timeLeft]);
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <Menu />
