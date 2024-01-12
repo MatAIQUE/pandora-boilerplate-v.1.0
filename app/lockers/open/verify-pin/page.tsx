@@ -27,33 +27,25 @@ const VerifyPIN = ({ searchParams }: Props) => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
-      const response = await axios
-        .post(
-          "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
-          {
-            pin: pinCode,
-            doorNumber: doorNumber,
+      const response = await axios.post(
+        "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
+        {
+          pin: pinCode,
+          doorNumber: doorNumber,
+        },
+        {
+          headers: {
+            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
+            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
-              "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then(() => {
-          router.push("/lockers/open/success");
-        })
-        .then(() => {
-          axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
-          // if (response.status === 200) {
-          //   // router.push("/lockers/open/success");
-          //   axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
-          // }
-        });
-
+        }
+      );
       setIsLoading(false);
+      if (response.status === 200) {
+        router.push("/lockers/open/success");
+        axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
+      }
     } catch (error) {
       setIsLoading(true);
       if (axios.isAxiosError(error) && error.response) {
