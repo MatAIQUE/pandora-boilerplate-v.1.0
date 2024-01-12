@@ -81,9 +81,11 @@ const GetLockers = () => {
                     maxLength={4}
                     type="text"
                     placeholder=""
-                    className={`input input-bordered text-xl input-${
-                      focusedInput === "booking" ? "primary" : "secondary"
-                    } w-full bg-white text-black text-start mb-2`}
+                    className={`input text-xl w-full bg-white text-black text-start mb-2
+                    
+                    ${ focusedInput === "booking" ? "input-bordered input-primary" : "input-bordered input-neutral" }
+                    
+                    `}
                     value={bookingNum}
                     onFocus={() => setFocusedInput("booking")}
                     readOnly
@@ -94,9 +96,11 @@ const GetLockers = () => {
                     maxLength={12}
                     type="text"
                     placeholder=""
-                    className={`input input-bordered text-xl input-${
-                      focusedInput === "contact" ? "primary" : "secondary"
-                    } w-full bg-white text-black text-start mb-2`}
+                    className={`input text-xl w-full bg-white text-black text-start mb-2
+                    
+                    ${ focusedInput === "contact" ? "input-bordered input-primary" : "input-bordered input-neutral" }
+                    
+                    `}
                     value={contactNum}
                     onFocus={() => setFocusedInput("contact")}
                     readOnly
