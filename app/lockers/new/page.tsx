@@ -7,6 +7,9 @@ import Label from "@/app/components/Label";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
+import axios from "axios";
+import Image from "next/image";
+import Spinner from "../../assets/images/spinner.svg";
 
 const GetLockers = () => {
   const router = useRouter();
@@ -17,9 +20,36 @@ const GetLockers = () => {
   const [bookingNum, setBookingNum] = useState("KMC-");
   const [contactNum, setContactNum] = useState("+63");
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const onNavigate = () => {
-    router.push("/lockers/new/verify-otp");
+  const onNavigate = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        "https://pandora-v3.onrender.com/otp/kmc",
+        {
+          bookingNumber: "KMC-0000-XXXX",
+          mobileNumber: contactNum,
+          lockerId: "3009",
+        },
+        {
+          headers: {
+            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
+            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setIsLoading(false);
+      if (response.status === 201) {
+        router.push("/lockers/new/verify-otp");
+      }
+    } catch (error) {
+      setIsLoading(true);
+      console.error(error);
+      setIsLoading(false);
+    }
   };
 
   const onNavigateBack = () => {
@@ -128,15 +158,23 @@ const GetLockers = () => {
                   />
                 </div>
                 <div className="w-full">
-                  <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
+                  <button
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={onNavigate}
                     disabled={isContinueDisabled}
-                  />
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
