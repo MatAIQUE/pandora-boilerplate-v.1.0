@@ -73,36 +73,166 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
           </kbd>
         </div>
         <div className="flex justify-center gap-2 my-2">
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">Q</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">W</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">E</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">R</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">T</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">Y</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">U</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">I</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">O</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">P</kbd>
+          <kbd
+            onClick={() => handleKeyClick("Q")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            Q
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("W")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            W
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("E")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            E
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("R")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            R
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("T")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            T
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("Y")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            Y
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("U")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            U
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("I")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            I
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("O")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            O
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("P")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            P
+          </kbd>
         </div>
         <div className="flex justify-center gap-2 my-2">
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">A</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">S</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">D</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">F</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">G</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">H</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">J</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">K</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">L</kbd>
+          <kbd
+            onClick={() => handleKeyClick("A")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            A
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("S")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            S
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("D")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            D
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("F")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            F
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("G")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            G
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("H")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            H
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("J")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            J
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("K")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            K
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("L")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            L
+          </kbd>
         </div>
         <div className="flex justify-center gap-2 my-1">
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">Z</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">X</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">C</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">V</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">B</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">N</kbd>
-          <kbd className="kbd-lg scale-150 m-4 btn btn-info ">M</kbd>
+          <kbd
+            onClick={() => handleKeyClick("Z")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            Z
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("X")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            X
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("C")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            C
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("V")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            V
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("B")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            B
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("N")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            N
+          </kbd>
+          <kbd
+            onClick={() => handleKeyClick("M")}
+            className="kbd-lg scale-150 m-4 btn btn-info "
+          >
+            M
+          </kbd>
           <kbd
             onClick={() => handleDeleteClick()}
             className="kbd-lg scale-150 m-4 btn btn-outline btn-error"
