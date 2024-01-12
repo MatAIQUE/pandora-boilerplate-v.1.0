@@ -19,7 +19,6 @@ const GetLockers = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const onNavigate = () => {
-    console.log(bookingNum, contactNum);
     router.push("/lockers/new/verify-otp");
   };
 
@@ -83,7 +82,11 @@ const GetLockers = () => {
                     placeholder=""
                     className={`input text-xl w-full bg-white text-black text-start mb-2
                     
-                    ${ focusedInput === "booking" ? "input-bordered input-primary" : "input-bordered input-neutral" }
+                    ${
+                      focusedInput === "booking"
+                        ? "input-bordered input-primary"
+                        : "input-bordered input-neutral"
+                    }
                     
                     `}
                     value={bookingNum}
@@ -98,7 +101,11 @@ const GetLockers = () => {
                     placeholder=""
                     className={`input text-xl w-full bg-white text-black text-start mb-2
                     
-                    ${ focusedInput === "contact" ? "input-bordered input-primary" : "input-bordered input-neutral" }
+                    ${
+                      focusedInput === "contact"
+                        ? "input-bordered input-primary"
+                        : "input-bordered input-neutral"
+                    }
                     
                     `}
                     value={contactNum}
