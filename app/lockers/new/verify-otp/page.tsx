@@ -110,7 +110,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
-                          Verification code didn't match
+                          Verification code didn&apos;t match
                         </span>
                       </div>
                     )}
