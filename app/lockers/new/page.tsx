@@ -11,6 +11,10 @@ import axios from "axios";
 import Image from "next/image";
 import Spinner from "../../assets/images/spinner.svg";
 
+interface Props {
+  searchParams: { doorNumber: string };
+}
+
 const GetLockers = () => {
   const router = useRouter();
 
@@ -23,6 +27,9 @@ const GetLockers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  // Separate variable for display without prefix
+  const mobileNumber = contactNum.replace("+63", "0");
+
   const onNavigate = async () => {
     try {
       setIsLoading(true);
@@ -30,7 +37,7 @@ const GetLockers = () => {
         "https://pandora-v3.onrender.com/otp/kmc",
         {
           bookingNumber: "KMC-0000-XXXX",
-          mobileNumber: contactNum,
+          mobileNumber: mobileNumber,
           lockerId: "3009",
         },
         {
@@ -41,9 +48,12 @@ const GetLockers = () => {
           },
         }
       );
+
       setIsLoading(false);
       if (response.status === 201) {
-        router.push("/lockers/new/verify-otp");
+        const secretKey = response.data.data.secret;
+        const url = `/lockers/new/verify-otp?bookingNum=${bookingNum}&lockerId=3009&secretKey=${secretKey}&mobileNumber=${mobileNumber}`;
+        router.push(url);
       }
     } catch (error) {
       setIsLoading(true);

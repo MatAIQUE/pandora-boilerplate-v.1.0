@@ -7,14 +7,60 @@ import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Keyboard from "@/app/components/Keyboard";
+import axios from "axios";
+import Image from "next/image";
+import Spinner from "../../../assets/images/spinner.svg";
 
-const VerifyOTP = () => {
+interface Props {
+  searchParams: { bookingNum: string; mobileNumber: string; secretKey: string };
+}
+
+const VerifyOTP = ({ searchParams }: Props) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [pinCode, setPinCode] = useState("");
-  const onNavigate = () => {
-    router.push("/lockers/new/locker-qty");
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+
+  const bookingNum = searchParams.bookingNum;
+  const mobileNumber = searchParams.mobileNumber;
+  const secretKey = searchParams.secretKey;
+
+  const onNavigate = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.patch(
+        `https://pandora-v3.onrender.com/verify/kmc/${secretKey}`,
+        {
+          bookingNumber: "KMC-0000-XXXX",
+          otp: pinCode,
+          mobileNumber: mobileNumber,
+        },
+        {
+          headers: {
+            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
+            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setIsLoading(false);
+      if (response.status === 200) {
+        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=3009`;
+        router.push(url);
+      }
+    } catch (error) {
+      setIsLoading(true);
+      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data.message;
+        setError(responseData);
+        setIsLoading(false);
+      }
+    }
   };
 
   const onNavigateBack = () => {
@@ -26,6 +72,10 @@ const VerifyOTP = () => {
       setPinCode((prevPin) => prevPin + value);
     }
   };
+
+  useEffect(() => {
+    setIsContinueDisabled(pinCode.length < 6);
+  }, [pinCode]);
 
   const handleDeleteClick = () => {
     setPinCode((prevPin) => prevPin.slice(0, -1));
@@ -57,6 +107,13 @@ const VerifyOTP = () => {
                   </div>
                   <div className="w-full text-center items-center mt-10">
                     <DoorInputOTP pinCode={pinCode} />
+                    {error && (
+                      <div className={`font-medium my-2 flex justify-start`}>
+                        <span className={`text-left text-primary`}>
+                          Verification code didn't match
+                        </span>
+                      </div>
+                    )}
                     {/* <Keypad
                       handleDeleteClick={handleDeleteClick}
                       handleKeyClick={handleKeyClick}
@@ -78,14 +135,23 @@ const VerifyOTP = () => {
                   />
                 </div>
                 <div className="w-full">
-                  <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
+                  <button
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={onNavigate}
-                  />
+                    disabled={isContinueDisabled}
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
