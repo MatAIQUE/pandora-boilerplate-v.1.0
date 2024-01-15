@@ -91,7 +91,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="We've sent you an OTP" />
+                  <LabelTitle label="We&apos;ve sent you an OTP" />
                   <LabelDesc
                     label="Enter the 6-digit OTP sent to your number"
                     position="justify-start"
