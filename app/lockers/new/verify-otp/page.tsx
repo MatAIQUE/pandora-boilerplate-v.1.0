@@ -34,7 +34,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
       const response = await axios.patch(
         (process.env.NEXT_PUBLIC_VERIFY_OTP as string) + `${secretKey}`,
         {
-          bookingNumber: "KMC-0000-XXXX",
+          bookingNumber: bookingNum,
           otp: pinCode,
           mobileNumber: mobileNumber,
         },
@@ -49,7 +49,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=3009`;
+        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=3009&mobileNumber=${mobileNumber}`;
         router.push(url);
       }
     } catch (error) {

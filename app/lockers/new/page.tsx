@@ -37,7 +37,7 @@ const GetLockers = () => {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_OTP as string,
         {
-          bookingNumber: "KMC-0000-XXXX",
+          bookingNumber: bookingNum,
           mobileNumber: mobileNumber,
           lockerId: "3009",
         },
