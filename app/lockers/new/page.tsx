@@ -1,14 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import { Button } from "@/app/components";
 import Keyboard from "@/app/components/Keyboard";
 import Label from "@/app/components/Label";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import axios from "axios";
-import Image from "next/image";
 import Spinner from "../../assets/images/spinner.svg";
 
 interface Props {
@@ -34,16 +35,16 @@ const GetLockers = () => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "https://pandora-v3.onrender.com/otp/kmc",
+        process.env.NEXT_PUBLIC_OTP as string,
         {
-          bookingNumber: "KMC-0000-XXXX",
+          bookingNumber: bookingNum,
           mobileNumber: mobileNumber,
           lockerId: "3009",
         },
         {
           headers: {
-            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
-            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
             "Content-Type": "application/json",
           },
         }

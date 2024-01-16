@@ -1,17 +1,70 @@
 "use client";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 import { Button } from "@/app/components";
 import Label from "@/app/components/Label";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import { useRouter } from "next/navigation";
-import Image from "next/image"
-import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png"
-import qrIcon from "../../../assets/images/QR.svg"
+import qrIcon from "../../../assets/images/QR.svg";
+import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
 
-const PaymentPage = () => {
+interface Props {
+  searchParams: { bookingNum: string; doorCount: string; mobileNumber: string };
+}
+
+const PaymentPage = ({ searchParams }: Props) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const bookingNum = searchParams.bookingNum;
+  const doorCount = parseInt(searchParams.doorCount, 10);
+  const mobileNumber = searchParams.mobileNumber;
+
+  console.log("Door count : ", doorCount);
+
   const onNavigate = () => {
     router.push("/lockers/new/qr-page");
+  };
+
+  const addToBookingInv = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_ADD_TO_INVOICE as string,
+        {
+          doorCount: doorCount,
+          mobileNumber: mobileNumber,
+          bookingNumber: bookingNum,
+          paymentMethod: "add_to_invoice",
+          lockerId: "3009",
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setIsLoading(false);
+      if (response.status === 200) {
+        const url = `/lockers/new/success`;
+        router.push(url);
+      }
+    } catch (error) {
+      setIsLoading(true);
+      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data.message;
+        setError(responseData);
+        setIsLoading(false);
+      }
+    }
   };
 
   const onNavigateBack = () => {
@@ -36,9 +89,19 @@ const PaymentPage = () => {
                       weight="500"
                       outline="btn-outline"
                     /> */}
-                    <button className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly">
+                    <button
+                      onClick={addToBookingInv}
+                      className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
+                    >
                       <label>Add to Booking Invoice</label>
-                      <span><Image src={kmcLogoRound} alt="kmc logo round" height={30} width={30}/></span>
+                      <span>
+                        <Image
+                          src={kmcLogoRound}
+                          alt="kmc logo round"
+                          height={30}
+                          width={30}
+                        />
+                      </span>
                     </button>
                   </div>
                   <div className="mb-5 mt-5">
@@ -51,7 +114,14 @@ const PaymentPage = () => {
                     /> */}
                     <button className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly">
                       <label>Pay with Maya/GCash</label>
-                      <span><Image src={qrIcon} alt="kmc logo round" height={30} width={30}/></span>
+                      <span>
+                        <Image
+                          src={qrIcon}
+                          alt="kmc logo round"
+                          height={30}
+                          width={30}
+                        />
+                      </span>
                     </button>
                   </div>
                 </div>

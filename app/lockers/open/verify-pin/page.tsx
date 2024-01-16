@@ -1,4 +1,9 @@
 "use client";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
 import { Button } from "@/app/components";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
 import Keypad from "@/app/components/Keypad";
@@ -6,10 +11,6 @@ import LabelDesc from "@/app/components/LabelDesc";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import axios from "axios";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
@@ -28,15 +29,15 @@ const VerifyPIN = ({ searchParams }: Props) => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "https://pandora-v3.onrender.com/transactions/door/open/0003/kmc/3009",
+        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "3009",
         {
           pin: pinCode,
           doorNumber: doorNumber,
         },
         {
           headers: {
-            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
-            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
             "Content-Type": "application/json",
           },
         }
@@ -44,7 +45,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setIsLoading(false);
       if (response.status === 200) {
         router.push("/lockers/open/success");
-        axios.get("http://localhost:9090/api/lockercontroller/door/1/open");
+        axios.get(process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR + "1/open");
       }
     } catch (error) {
       setIsLoading(true);

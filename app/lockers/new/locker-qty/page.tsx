@@ -1,22 +1,65 @@
 "use client";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+
 import { Button } from "@/app/components";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FaMinus } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
+import Image from "next/image";
+import Spinner from "../../../assets/images/spinner.svg";
 
-const LockerQTY = () => {
-  const [quantity, setQuantity] = useState(1);
+interface Props {
+  searchParams: { bookingNum: string; mobileNumber: string };
+}
+const LockerQTY = ({ searchParams }: Props) => {
   const router = useRouter();
+  const [doorCount, setDoorCount] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const availableDoorsCount = 10;
   const price = 700;
 
-  const onNavigate = () => {
-    router.push("/lockers/new/payment");
+  const bookingNum = searchParams.bookingNum;
+  const mobileNumber = searchParams.mobileNumber;
+
+  const onNavigate = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
+        {
+          bookingNumber: bookingNum,
+          lockerId: "3009",
+          doorCount: doorCount,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setIsLoading(false);
+      if (response.status === 201) {
+        const url = `/lockers/new/payment?bookingNum=${bookingNum}&doorCount=${doorCount}&mobileNumber=${mobileNumber}`;
+        router.push(url);
+      }
+    } catch (error) {
+      setIsLoading(true);
+      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data.message;
+        setError(responseData);
+        setIsLoading(false);
+      }
+    }
   };
 
   const onNavigateBack = () => {
@@ -24,12 +67,12 @@ const LockerQTY = () => {
   };
 
   const addCart = () => {
-    if (quantity < availableDoorsCount) setQuantity((prev) => prev + 1);
+    if (doorCount < availableDoorsCount) setDoorCount((prev) => prev + 1);
   };
 
   const subtractCart = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
+    if (doorCount > 1) {
+      setDoorCount((prev) => prev - 1);
     }
   };
 
@@ -53,18 +96,18 @@ const LockerQTY = () => {
                       <button
                         onClick={subtractCart}
                         className={
-                          quantity > 1
+                          doorCount > 1
                             ? `btn btn-circle btn-primary btn-sm`
                             : `btn btn-circle btn-outline btn-sm`
                         }
                       >
                         <FaMinus />
                       </button>
-                      <div className="font-medium text-3xl">{quantity}</div>
+                      <div className="font-medium text-3xl">{doorCount}</div>
                       <button
                         onClick={addCart}
                         className={
-                          quantity >= availableDoorsCount
+                          doorCount >= availableDoorsCount
                             ? `btn btn-circle btn-outline btn-sm`
                             : `btn btn-circle btn-primary btn-sm`
                         }
@@ -82,9 +125,8 @@ const LockerQTY = () => {
                   <div className="w-full text-right">
                     <div className="flex items-end justify-end text-end">
                       <div className="font-bold text-4xl">
-                        P {(Number(quantity) * Number(price)).toLocaleString()}
+                        P {(Number(doorCount) * Number(price)).toLocaleString()}
                       </div>
-
                       <span>
                         <p className="ms-2">/mo</p>
                       </span>
@@ -116,14 +158,22 @@ const LockerQTY = () => {
                   />
                 </div>
                 <div className="w-full">
-                  <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
+                  <button
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={onNavigate}
-                  />
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
