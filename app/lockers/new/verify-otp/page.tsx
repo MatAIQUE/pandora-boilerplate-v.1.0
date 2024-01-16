@@ -1,16 +1,16 @@
 "use client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+
 import { Button } from "@/app/components";
 import DoorInputOTP from "@/app/components/DoorInputOTP";
-import Keypad from "@/app/components/Keypad";
+import Keyboard from "@/app/components/Keyboard";
 import LabelDesc from "@/app/components/LabelDesc";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
 import Menu from "@/app/components/Menu";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Keyboard from "@/app/components/Keyboard";
-import axios from "axios";
-import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
@@ -32,7 +32,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
     try {
       setIsLoading(true);
       const response = await axios.patch(
-        `https://pandora-v3.onrender.com/verify/kmc/${secretKey}`,
+        (process.env.NEXT_PUBLIC_VERIFY_OTP as string) + `${secretKey}`,
         {
           bookingNumber: "KMC-0000-XXXX",
           otp: pinCode,
@@ -40,8 +40,8 @@ const VerifyOTP = ({ searchParams }: Props) => {
         },
         {
           headers: {
-            "x-api-key": "pk-79ccd394-0be5-40ea-a527-8f27098db549",
-            "x-api-secret": "sk-fcb71bfd-7712-4969-a46b-6b78f8a47bd2",
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
             "Content-Type": "application/json",
           },
         }
@@ -91,7 +91,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="We&apos;ve sent you an OTP" />
+                  <LabelTitle label="We've sent you an OTP" />
                   <LabelDesc
                     label="Enter the 6-digit OTP sent to your number"
                     position="justify-start"
@@ -114,10 +114,6 @@ const VerifyOTP = ({ searchParams }: Props) => {
                         </span>
                       </div>
                     )}
-                    {/* <Keypad
-                      handleDeleteClick={handleDeleteClick}
-                      handleKeyClick={handleKeyClick}
-                    /> */}
                   </div>
                 </div>
               </div>

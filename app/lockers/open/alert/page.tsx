@@ -1,11 +1,10 @@
 "use client";
-import { Button } from "@/app/components";
 import LabelTitle from "@/app/components/LabelTitle";
 import Logo from "@/app/components/Logo";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { FaBellSlash } from "react-icons/fa";
 import Menu from "@/app/components/Menu";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaBellSlash } from "react-icons/fa";
 
 interface Props {
   searchParams: { timeLeft?: number };
