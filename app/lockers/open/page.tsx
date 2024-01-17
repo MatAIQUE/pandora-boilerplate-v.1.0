@@ -2,11 +2,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/app/components";
-import Keyboard from "@/app/components/Keyboard";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
+import { Button } from "@components";
+import Keyboard from "@components/Keyboard";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 
 const OpenLockers = () => {
   const router = useRouter();

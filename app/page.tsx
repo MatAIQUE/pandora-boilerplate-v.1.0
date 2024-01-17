@@ -1,5 +1,10 @@
+import RootLayout from "@layout";
 import HomePage from "./home/page";
 
 export default function Home() {
-  return <HomePage />;
+  return (
+    <RootLayout>
+      <HomePage />
+    </RootLayout>
+  );
 }
