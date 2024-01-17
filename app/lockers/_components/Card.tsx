@@ -1,11 +1,11 @@
 "use client";
-import { Button } from "@/app/components";
-import Input from "@/app/components/Input";
-import InputErr from "@/app/components/InputErr";
-import Label from "@/app/components/Label";
-import LabelDesc from "@/app/components/LabelDesc";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
+import { Button } from "@components";
+import Input from "@components/Input";
+import InputErr from "@components/InputErr";
+import Label from "@components/Label";
+import LabelDesc from "@components/LabelDesc";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
 import { useRouter } from "next/navigation";
 
 interface Props {

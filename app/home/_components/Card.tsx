@@ -1,7 +1,7 @@
-import { Button } from "@/app/components";
-import DoorAlert from "@/app/components/DoorAlert";
-import Logo from "@/app/components/Logo";
-import Time from "@/app/components/Time";
+import { Button } from "@components";
+import DoorAlert from "@components/DoorAlert";
+import Logo from "@components/Logo";
+import Time from "@components/Time";
 
 interface Props {
   title: string;

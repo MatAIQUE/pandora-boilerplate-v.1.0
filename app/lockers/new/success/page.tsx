@@ -1,13 +1,13 @@
 "use client";
-import LabelDesc from "@/app/components/LabelDesc";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
+import LabelDesc from "@components/LabelDesc";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import spinner from "../../../assets/images/spinner.svg"
-import Image from "next/image"
+import spinner from "../../../assets/images/spinner.svg";
+import Image from "next/image";
 
 const SuccessPaymentPage = () => {
   const [count, setCount] = useState(100);
@@ -64,7 +64,13 @@ const SuccessPaymentPage = () => {
                   ></div> */}
 
                   <div className="w-full justify-center flex pt-20">
-                    <Image className="animate-spin" src={spinner} alt={spinner} height={30} width={30}/>
+                    <Image
+                      className="animate-spin"
+                      src={spinner}
+                      alt={spinner}
+                      height={30}
+                      width={30}
+                    />
                   </div>
 
                   <div className="w-full text-center justify-center items-center">

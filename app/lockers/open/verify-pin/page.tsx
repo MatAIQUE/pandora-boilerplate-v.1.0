@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { Button } from "@/app/components";
-import DoorInputOTP from "@/app/components/DoorInputOTP";
-import Keypad from "@/app/components/Keypad";
-import LabelDesc from "@/app/components/LabelDesc";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
+import { Button } from "@components";
+import DoorInputOTP from "@components/DoorInputOTP";
+import Keypad from "@components/Keypad";
+import LabelDesc from "@components/LabelDesc";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
