@@ -5,9 +5,18 @@ import Menu from "@components/Menu";
 import QRPHLogo from "../../../assets/images/qrph.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import QRCode from "react-qr-code";
 
-const QRPage = () => {
+interface Props {
+  searchParams: { qrCodeBody: string };
+}
+
+const QRPage = ({ searchParams }) => {
   const router = useRouter();
+
+  const qrCodeBody = searchParams.qrCodeBody;
+
+  // console.log("Payment ID :", paymentId);
 
   const onNavigateBack = () => {
     router.back();
@@ -50,9 +59,17 @@ const QRPage = () => {
                     </p>
                   </div>
                   <div className="text-secondary text-lg my-10 justify-center flex">
-                    <div className="w-3/4 border p-20">
-                      QR
-                      {/* Import QR Here */}
+                    <div className="w-full border">
+                      <QRCode
+                        size={500}
+                        style={{
+                          height: "auto",
+                          maxWidth: "100%",
+                          width: "100%",
+                        }}
+                        value={qrCodeBody}
+                        viewBox={`0 0 256 256`}
+                      />
                     </div>
                   </div>
                   <div className="items-end text-black">

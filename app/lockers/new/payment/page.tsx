@@ -28,11 +28,7 @@ const PaymentPage = ({ searchParams }) => {
   const doorCount = parseInt(searchParams.doorCount, 10);
   const mobileNumber = searchParams.mobileNumber;
 
-  const onNavigate = () => {
-    router.push("/lockers/new/qr-page");
-  };
-
-  const addToBookingInv = async () => {
+  const paymentAction = async () => {
     try {
       setIsLoading(true);
       const response = await axios.post(
@@ -55,14 +51,26 @@ const PaymentPage = ({ searchParams }) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const {
-          data: {
-            data: { paymentId },
-          },
-        } = response;
-        setPaymentId(paymentId);
-        // const url = `/lockers/new/success`;
-        // router.push(url);
+        if (paymentMethod === "add_to_invoice") {
+          const url = `/lockers/new/success`;
+          router.push(url);
+        } else if (paymentMethod === "qr_wallet") {
+          const {
+            data: {
+              data: { paymentId },
+            },
+          } = response;
+
+          const qrCodeBody = response.data.data.qrCodeBody;
+          setPaymentId(paymentId);
+
+          if (paymentId) {
+            router.push(
+              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}`
+            );
+            // console.log("Response:", response.data.data.qrCodeBody);
+          }
+        }
       }
     } catch (error) {
       setIsLoading(true);
@@ -86,6 +94,8 @@ const PaymentPage = ({ searchParams }) => {
 
       const socket = sockets[targetRoute];
       if (paymentId) {
+        console.log("Payment ID:", paymentId);
+
         socket.addEventListener("open", (event) => {
           console.log("opened");
           // Send a message when connected
@@ -223,7 +233,7 @@ const PaymentPage = ({ searchParams }) => {
                     color="white"
                     weight="500"
                     outline=""
-                    onClick={addToBookingInv}
+                    onClick={paymentAction}
                   />
                 </div>
               </div>
