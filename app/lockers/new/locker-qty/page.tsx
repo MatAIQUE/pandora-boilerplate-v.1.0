@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
-import { Button } from "@/app/components";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
+import { Button } from "@components";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
 

@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 
-import LabelDesc from "@/app/components/LabelDesc";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
+import LabelDesc from "@components/LabelDesc";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
 import spinner from "../../../assets/images/spinner.svg";
 
 const SuccessPaymentPage = () => {

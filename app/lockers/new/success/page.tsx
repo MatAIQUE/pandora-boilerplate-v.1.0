@@ -1,15 +1,15 @@
 "use client";
-import LabelDesc from "@/app/components/LabelDesc";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
+import LabelDesc from "@components/LabelDesc";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import spinner from "../../../assets/images/spinner.svg"
-import Image from "next/image"
+import spinner from "../../../assets/images/spinner.svg";
+import Image from "next/image";
 
-const SuccessPaymentPage = () => {
+const SuccessPaymentPage = ({ searchParams }) => {
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
 
@@ -51,9 +51,9 @@ const SuccessPaymentPage = () => {
                     <FaCheckCircle className="text-warning" size={35} />
                     <LabelTitle label="Locker Booked" />
                   </div>
-                  <LabelTitle label="Locker 22 and 23" />
+                  <LabelTitle label={`Locker ${searchParams.doors}`} />
                   <LabelDesc
-                    label="Locker 22 and 23 has been successfully booked to your account! The billing will reflect in your next invoice"
+                    label={`Locker ${searchParams.doors} has been successfully booked to your account! The billing will reflect in your next invoice`}
                     position="justify-start"
                   />
 
@@ -64,7 +64,13 @@ const SuccessPaymentPage = () => {
                   ></div> */}
 
                   <div className="w-full justify-center flex pt-20">
-                    <Image className="animate-spin" src={spinner} alt={spinner} height={30} width={30}/>
+                    <Image
+                      className="animate-spin"
+                      src={spinner}
+                      alt={spinner}
+                      height={30}
+                      width={30}
+                    />
                   </div>
 
                   <div className="w-full text-center justify-center items-center">

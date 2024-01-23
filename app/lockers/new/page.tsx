@@ -1,15 +1,14 @@
 "use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@components";
+import Keyboard from "@components/Keyboard";
+import Label from "@components/Label";
+import LabelTitle from "@components/LabelTitle";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-import { Button } from "@/app/components";
-import Keyboard from "@/app/components/Keyboard";
-import Label from "@/app/components/Label";
-import LabelTitle from "@/app/components/LabelTitle";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
 import Spinner from "../../assets/images/spinner.svg";
 
 interface Props {

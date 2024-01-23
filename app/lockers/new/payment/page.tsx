@@ -1,36 +1,34 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "@components";
+import Label from "@components/Label";
+import Logo from "@components/Logo";
+import Menu from "@components/Menu";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
-import { Button } from "@/app/components";
-import Label from "@/app/components/Label";
-import Logo from "@/app/components/Logo";
-import Menu from "@/app/components/Menu";
-import qrIcon from "../../../assets/images/QR.svg";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
+import qrIcon from "../../../assets/images/QR.svg";
+import { useWebSocket } from "@context/websocket/Websocket";
 
 interface Props {
   searchParams: { bookingNum: string; doorCount: string; mobileNumber: string };
 }
 
-const PaymentPage = ({ searchParams }: Props) => {
+const PaymentPage = ({ searchParams }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [paymentId, setPaymentId] = useState(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const sockets = useWebSocket();
 
   const bookingNum = searchParams.bookingNum;
   const doorCount = parseInt(searchParams.doorCount, 10);
   const mobileNumber = searchParams.mobileNumber;
 
-  console.log("Door count : ", doorCount);
-
-  const onNavigate = () => {
-    router.push("/lockers/new/qr-page");
-  };
-
-  const addToBookingInv = async () => {
+  const paymentAction = async () => {
     try {
       setIsLoading(true);
       const response = await axios.post(
@@ -39,7 +37,7 @@ const PaymentPage = ({ searchParams }: Props) => {
           doorCount: doorCount,
           mobileNumber: mobileNumber,
           bookingNumber: bookingNum,
-          paymentMethod: "add_to_invoice",
+          paymentMethod: paymentMethod,
           lockerId: "3009",
         },
         {
@@ -53,8 +51,26 @@ const PaymentPage = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const url = `/lockers/new/success`;
-        router.push(url);
+        if (paymentMethod === "add_to_invoice") {
+          const url = `/lockers/new/success`;
+          router.push(url);
+        } else if (paymentMethod === "qr_wallet") {
+          const {
+            data: {
+              data: { paymentId },
+            },
+          } = response;
+
+          const qrCodeBody = response.data.data.qrCodeBody;
+          setPaymentId(paymentId);
+
+          if (paymentId) {
+            router.push(
+              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}`
+            );
+            // console.log("Response:", response.data.data.qrCodeBody);
+          }
+        }
       }
     } catch (error) {
       setIsLoading(true);
@@ -66,6 +82,18 @@ const PaymentPage = ({ searchParams }: Props) => {
       }
     }
   };
+
+  const handleSelectPaymentMethod = (paymentMethod) => {
+    // other shenanigans here ...
+    setPaymentMethod(paymentMethod);
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => {
+      setIsMounted(false);
+    };
+  }, [sockets, paymentId]);
 
   const onNavigateBack = () => {
     router.back();
@@ -90,7 +118,9 @@ const PaymentPage = ({ searchParams }: Props) => {
                       outline="btn-outline"
                     /> */}
                     <button
-                      onClick={addToBookingInv}
+                      onClick={() =>
+                        handleSelectPaymentMethod("add_to_invoice")
+                      }
                       className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
                     >
                       <label>Add to Booking Invoice</label>
@@ -112,7 +142,10 @@ const PaymentPage = ({ searchParams }: Props) => {
                       weight="500"
                       outline="btn-outline"
                     /> */}
-                    <button className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly">
+                    <button
+                      className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
+                      onClick={() => handleSelectPaymentMethod("qr_wallet")}
+                    >
                       <label>Pay with Maya/GCash</label>
                       <span>
                         <Image
@@ -146,7 +179,7 @@ const PaymentPage = ({ searchParams }: Props) => {
                     color="white"
                     weight="500"
                     outline=""
-                    onClick={onNavigate}
+                    onClick={paymentAction}
                   />
                 </div>
               </div>
