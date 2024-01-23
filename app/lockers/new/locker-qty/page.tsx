@@ -34,7 +34,7 @@ const LockerQTY = ({ searchParams }: Props) => {
         process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
         {
           bookingNumber: bookingNum,
-          lockerId: "locker000001",
+          lockerId: "4000",
           doorCount: doorCount,
         },
         {
