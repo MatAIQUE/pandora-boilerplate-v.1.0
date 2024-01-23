@@ -30,8 +30,6 @@ module.exports = {
         },
       },
       "light",
-      "dark",
-      "cupcake",
     ],
   },
 };
