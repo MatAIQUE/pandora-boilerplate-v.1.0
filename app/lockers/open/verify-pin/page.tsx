@@ -29,7 +29,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "locker000001",
+        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "4000",
         {
           pin: pinCode,
           doorNumber: doorNumber,

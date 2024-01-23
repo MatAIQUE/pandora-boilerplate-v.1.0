@@ -49,7 +49,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=locker000001&mobileNumber=${mobileNumber}`;
+        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=4000&mobileNumber=${mobileNumber}`;
         router.push(url);
       }
     } catch (error) {

@@ -38,7 +38,7 @@ const PaymentPage = ({ searchParams }) => {
           mobileNumber: mobileNumber,
           bookingNumber: bookingNum,
           paymentMethod: paymentMethod,
-          lockerId: "locker000001",
+          lockerId: "4000",
         },
         {
           headers: {
