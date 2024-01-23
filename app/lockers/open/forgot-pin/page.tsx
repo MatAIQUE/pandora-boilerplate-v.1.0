@@ -1,11 +1,10 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { Button } from "@components";
-import DoorInputOTP from "@components/DoorInputOTP";
 import Keypad from "@components/Keypad";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
@@ -17,21 +16,34 @@ interface Props {
   searchParams: { doorNumber: string };
 }
 
-const VerifyPIN = ({ searchParams }: Props) => {
+const ForgotPIN = ({ searchParams }: Props) => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [contactNum, setContactNum] = useState("+63");
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const doorNumber = searchParams.doorNumber;
+
+  useEffect(() => {
+    setIsContinueDisabled(!(contactNum.length === 13));
+  }, [contactNum]);
+
+  const onNavigateBack = () => {
+    router.back();
+  };
+
+  // Separate variable for display without prefix
+  const mobileNumber = contactNum.replace("+63", "0");
 
   const onNavigate = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "4000",
+      const response = await axios.patch(
+        process.env.NEXT_PUBLIC_FORGOT_PIN + "4000",
         {
-          pin: pinCode,
+          mobileNumber: mobileNumber,
           doorNumber: doorNumber,
         },
         {
@@ -44,48 +56,31 @@ const VerifyPIN = ({ searchParams }: Props) => {
       );
       setIsLoading(false);
       if (response.status === 200) {
-        router.push("/lockers/open/success");
-        axios.get(
-          process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR + `${doorNumber}/open`
-        );
+        const url = "/lockers/open/success-forgot-pin";
+        router.push(url);
+        // console.log("Successful the pin code sent to your" + mobileNumber);
       }
     } catch (error) {
       setIsLoading(true);
-      if (axios.isAxiosError(error) && error.response) {
-        const responseData = error.response.data;
-
-        const numAttempt = responseData.errors[0];
-        const timeLeft = responseData.errors[1];
-
-        // console.log("Attempt Time left", attemptTimeLeft);
-
-        if (numAttempt === "0") {
-          // Only include timeLeft parameter if it's a valid number
-          const queryParams =
-            timeLeft !== undefined ? `?timeLeft=${timeLeft}` : "";
-          router.push(`/lockers/open/alert${queryParams}`);
-        } else {
-          setError(numAttempt);
-        }
-      } else {
-        console.error("An unknown error occurred.");
-      }
+      console.error(error);
       setIsLoading(false);
     }
   };
 
-  const onNavigateBack = () => {
-    router.back();
-  };
-
   const handleKeyClick = (value: string) => {
-    if (pinCode.length < 6) {
-      setPinCode((prevPin) => prevPin + value);
+    const maxLength = 13;
+
+    if (contactNum.length < maxLength) {
+      setContactNum((prevPin) => `${prevPin}${value}`);
     }
   };
 
   const handleDeleteClick = () => {
-    setPinCode((prevPin) => prevPin.slice(0, -1));
+    const prefixLength = 3;
+
+    setContactNum((prevPin) =>
+      prevPin.length > prefixLength ? prevPin.slice(0, -1) : "+63"
+    );
   };
 
   return (
@@ -98,14 +93,24 @@ const VerifyPIN = ({ searchParams }: Props) => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
-                  <LabelTitle label="Enter your Locker PIN code" />
+                  <LabelTitle label="Enter your registered number" />
                   <LabelDesc
-                    label="Enter the 6-digit credential code sent to your"
+                    label="To verify enter your registered number"
                     position="justify-start"
                   />
-                  <LabelDesc label="mobile number." position="justify-start" />
+                  <LabelDesc
+                    label="And will send you a new credential code."
+                    position="justify-start"
+                  />
                   <div className="w-full text-center items-center mt-10">
-                    <DoorInputOTP pinCode={pinCode} />
+                    <input
+                      maxLength={12}
+                      type="text"
+                      placeholder=""
+                      className={`input text-xl w-full bg-white text-black text-start mb-2`}
+                      value={contactNum}
+                      readOnly
+                    />
 
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
@@ -114,21 +119,6 @@ const VerifyPIN = ({ searchParams }: Props) => {
                         </span>
                       </div>
                     )}
-
-                    <div className="text-danger font-medium flex justify-start">
-                      <button
-                        onClick={() =>
-                          router.push(
-                            `/lockers/open/forgot-pin?doorNumber=${doorNumber}`
-                          )
-                        }
-                        className="btn btn-ghost pl-0"
-                      >
-                        <span className="text-primary text-lg">
-                          Forgot PIN Code?
-                        </span>
-                      </button>
-                    </div>
 
                     <Keypad
                       handleDeleteClick={handleDeleteClick}
@@ -154,6 +144,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                   <button
                     className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={onNavigate}
+                    disabled={isContinueDisabled}
                   >
                     Continue
                     {isLoading && (
@@ -177,4 +168,4 @@ const VerifyPIN = ({ searchParams }: Props) => {
   );
 };
 
-export default VerifyPIN;
+export default ForgotPIN;
