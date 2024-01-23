@@ -38,7 +38,7 @@ const GetLockers = () => {
         {
           bookingNumber: bookingNum,
           mobileNumber: mobileNumber,
-          lockerId: "3009",
+          lockerId: "locker000001",
         },
         {
           headers: {
@@ -52,7 +52,7 @@ const GetLockers = () => {
       setIsLoading(false);
       if (response.status === 201) {
         const secretKey = response.data.data.secret;
-        const url = `/lockers/new/verify-otp?bookingNum=${bookingNum}&lockerId=3009&secretKey=${secretKey}&mobileNumber=${mobileNumber}`;
+        const url = `/lockers/new/verify-otp?bookingNum=${bookingNum}&lockerId=locker000001&secretKey=${secretKey}&mobileNumber=${mobileNumber}`;
         router.push(url);
       }
     } catch (error) {
