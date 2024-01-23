@@ -1,11 +1,10 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { Button } from "@components";
-import DoorInputOTP from "@components/DoorInputOTP";
 import Keypad from "@components/Keypad";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
@@ -56,10 +55,10 @@ const ForgotPIN = ({ searchParams }: Props) => {
         }
       );
       setIsLoading(false);
-      if (response.status === 201) {
-        // const url = `/lockers/new/verify-otp?mobileNumber=${mobileNumber}&lockerId=4000&secretKey=${secretKey}&mobileNumber=${mobileNumber}`;
-        // router.push(url);
-        console.log("Successful the pin code sent to your" + mobileNumber);
+      if (response.status === 200) {
+        const url = "/lockers/open/success-forgot-pin";
+        router.push(url);
+        // console.log("Successful the pin code sent to your" + mobileNumber);
       }
     } catch (error) {
       setIsLoading(true);
