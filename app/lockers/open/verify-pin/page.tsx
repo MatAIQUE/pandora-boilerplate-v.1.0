@@ -29,7 +29,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "3009",
+        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "locker000001",
         {
           pin: pinCode,
           doorNumber: doorNumber,
@@ -45,7 +45,9 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setIsLoading(false);
       if (response.status === 200) {
         router.push("/lockers/open/success");
-        axios.get(process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR + "1/open");
+        axios.get(
+          process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR + `${doorNumber}/open`
+        );
       }
     } catch (error) {
       setIsLoading(true);
