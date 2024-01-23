@@ -9,7 +9,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import spinner from "../../../assets/images/spinner.svg";
 import Image from "next/image";
 
-const SuccessPaymentPage = () => {
+const SuccessPaymentPage = ({ searchParams }) => {
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
 
@@ -51,9 +51,9 @@ const SuccessPaymentPage = () => {
                     <FaCheckCircle className="text-warning" size={35} />
                     <LabelTitle label="Locker Booked" />
                   </div>
-                  <LabelTitle label="Locker 22 and 23" />
+                  <LabelTitle label={`Locker ${searchParams.doors}`} />
                   <LabelDesc
-                    label="Locker 22 and 23 has been successfully booked to your account! The billing will reflect in your next invoice"
+                    label={`Locker ${searchParams.doors} has been successfully booked to your account! The billing will reflect in your next invoice`}
                     position="justify-start"
                   />
 

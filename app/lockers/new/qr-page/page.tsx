@@ -6,6 +6,8 @@ import QRPHLogo from "../../../assets/images/qrph.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
+import { useEffect, useState } from "react";
+import { useWebSocket } from "@context/websocket/Websocket";
 
 interface Props {
   searchParams: { qrCodeBody: string };
@@ -13,10 +15,79 @@ interface Props {
 
 const QRPage = ({ searchParams }) => {
   const router = useRouter();
-
   const qrCodeBody = searchParams.qrCodeBody;
+  const paymentId = searchParams.paymentId || null;
 
-  // console.log("Payment ID :", paymentId);
+  const sockets = useWebSocket();
+  const targetRoute = "payments";
+  const socket = sockets[targetRoute];
+
+  useEffect(() => {
+    const establishConnection = () => {
+      // console.log("Establishing WebSocket connection");
+      // console.log(socket);
+      // console.log("Payment ID:", paymentId);
+
+      socket.addEventListener("open", onOpen);
+      socket.addEventListener("error", onError);
+      socket.addEventListener("message", onMessage);
+      const messageToSend = {
+        endpoint: "payment",
+        paymentId: paymentId,
+      };
+      socket.send(JSON.stringify(messageToSend));
+    };
+
+    const onOpen = (event) => {
+      console.log("WebSocket opened:", event);
+    };
+
+    const onError = (event) => {
+      console.log("WebSocket error:", event);
+    };
+
+    const onMessage = (event) => {
+      // console.log(
+      //   `Received message on route ${event.currentTarget.url}:`,
+      //   event.data
+      // );
+      if (event.data) {
+        const data = JSON.parse(event.data);
+        switch (data.type) {
+          case "payment":
+            const arrayLength = data.doors.length;
+            // TODO: handle this on BE
+            const stringifiedDoors =
+              arrayLength === 1
+                ? data.doors[0]
+                : `${data.doors.slice(0, -1).join(", ")} and ${data.doors.slice(
+                    -1
+                  )}`;
+
+            router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
+          case "door-status":
+          // TODO: Handle door statu update
+        }
+      }
+    };
+
+    if (socket) {
+      if (socket.readyState === WebSocket.OPEN) {
+        establishConnection();
+      } else {
+        socket.addEventListener("open", establishConnection);
+      }
+    }
+
+    return () => {
+      // Cleanup: Remove event listeners on component unmount
+      if (socket) {
+        socket.removeEventListener("open", onOpen);
+        socket.removeEventListener("message", onMessage);
+        socket.removeEventListener("error", onError);
+      }
+    };
+  }, [socket, paymentId]);
 
   const onNavigateBack = () => {
     router.back();

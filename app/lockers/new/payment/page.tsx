@@ -89,55 +89,6 @@ const PaymentPage = ({ searchParams }) => {
   };
 
   useEffect(() => {
-    try {
-      const targetRoute = "payments";
-
-      const socket = sockets[targetRoute];
-      if (paymentId) {
-        console.log("Payment ID:", paymentId);
-
-        socket.addEventListener("open", (event) => {
-          console.log("opened");
-          // Send a message when connected
-          // const messageToSend = {
-          //   endpoint: "payment",
-          //   paymentId: paymentId,
-          // };
-
-          // socket.send(JSON.stringify(messageToSend));
-        });
-
-        socket.addEventListener("message", (event) => {
-          console.log(
-            `Received message on route ${event.currentTarget.url}:`,
-            event.data
-          );
-        });
-
-        socket.addEventListener("close", (event) => {
-          console.log("WebSocket closed:", event);
-        });
-
-        socket.addEventListener("error", (event) => {
-          console.error("WebSocket error:", event);
-        });
-      }
-
-      return () => {
-        // Cleanup: Remove event listeners on component unmount
-        if (socket) {
-          socket.removeEventListener("open", () => {});
-          socket.removeEventListener("message", () => {});
-          socket.removeEventListener("close", () => {});
-          socket.removeEventListener("error", () => {});
-        }
-      };
-    } catch (err) {
-      console.log(err);
-    }
-  }, [paymentId]);
-
-  useEffect(() => {
     setIsMounted(true);
     return () => {
       setIsMounted(false);
@@ -149,11 +100,6 @@ const PaymentPage = ({ searchParams }) => {
   };
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      {isMounted ? (
-        <p>The component is mounted!</p>
-      ) : (
-        <p>The component is not mounted.</p>
-      )}
       <Menu />
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
