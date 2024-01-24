@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { WebSocketProvider } from "@context/websocket/Websocket";
+import { BookingProvider } from "@context/BookingContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <WebSocketProvider>
-      <html lang="en" data-theme="kmc">
-        <body className={inter.className}>{children}</body>
-      </html>
+      <BookingProvider>
+        <html lang="en" data-theme="kmc">
+          <body className={inter.className}>{children}</body>
+        </html>
+      </BookingProvider>
     </WebSocketProvider>
   );
 }
