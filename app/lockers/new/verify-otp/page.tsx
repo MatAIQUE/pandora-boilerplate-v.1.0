@@ -23,10 +23,26 @@ const VerifyOTP = ({ searchParams }: Props) => {
   const [error, setError] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [isLoadingOTP, setIsLoadingOTP] = useState(false);
 
   const bookingNum = searchParams.bookingNum;
   const mobileNumber = searchParams.mobileNumber;
   const secretKey = searchParams.secretKey;
+
+  console.log("Timer", timer);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+  }, [timer]);
 
   const onNavigate = async () => {
     try {
@@ -73,6 +89,34 @@ const VerifyOTP = ({ searchParams }: Props) => {
     }
   };
 
+  const resendCode = async () => {
+    try {
+      setIsLoadingOTP(true);
+      setTimer(59);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_OTP as string,
+        {
+          bookingNumber: bookingNum,
+          mobileNumber: mobileNumber,
+          lockerId: "4000",
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setIsLoadingOTP(false);
+    } catch (error) {
+      setIsLoadingOTP(true);
+      console.error(error);
+      setIsLoadingOTP(false);
+    }
+  };
+
   useEffect(() => {
     setIsContinueDisabled(pinCode.length < 6);
   }, [pinCode]);
@@ -101,8 +145,14 @@ const VerifyOTP = ({ searchParams }: Props) => {
                     position="justify-start"
                   />
                   <div className="text-danger font-medium flex justify-start">
-                    <button className="btn btn-ghost pl-0">
-                      <span className="text-primary text-lg">Resend Code</span>
+                    <button
+                      onClick={() => resendCode()}
+                      className="btn btn-ghost pl-0"
+                      disabled={timer > 0 ? true : false}
+                    >
+                      <span className="text-primary text-lg">
+                        Resend Code {timer > 0 && <span>({timer})</span>}
+                      </span>
                     </button>
                   </div>
                   <div className="w-full text-center items-center mt-10">
