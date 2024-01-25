@@ -1,14 +1,11 @@
 "use client";
-import Label from "@components/Label";
-import Logo from "@components/Logo";
-import Menu from "@components/Menu";
-import QRPHLogo from "../../../assets/images/qrph.png";
+import { useBookingContext } from "@context/BookingContext";
+import { useWebSocket } from "@context/websocket/Websocket";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import QRCode from "react-qr-code";
-import { useEffect, useState } from "react";
-import { useWebSocket } from "@context/websocket/Websocket";
-import { useBookingContext } from "@context/BookingContext";
+import QRPHLogo from "../../../assets/images/qrph.png";
 
 interface Props {
   searchParams: { qrCodeBody: string };
@@ -28,6 +25,8 @@ const QRPage = ({ searchParams }) => {
     setPaymentId,
     secretKey,
     setSecretKey,
+    doorCount,
+    setDoorCount,
   } = useBookingContext();
 
   const sockets = useWebSocket();
@@ -36,10 +35,6 @@ const QRPage = ({ searchParams }) => {
 
   useEffect(() => {
     const establishConnection = () => {
-      // console.log("Establishing WebSocket connection");
-      // console.log(socket);
-      // console.log("Payment ID:", paymentId);
-
       socket.addEventListener("open", onOpen);
       socket.addEventListener("error", onError);
       socket.addEventListener("message", onMessage);
@@ -161,7 +156,7 @@ const QRPage = ({ searchParams }) => {
                   </div>
                   <div className="items-end text-black">
                     <div className="w-full text-4xl font-semibold mb-4">
-                      ₱{Number(price).toLocaleString()}
+                      ₱{(Number(doorCount) * Number(price)).toLocaleString()}
                       {/* Display amout here */}
                     </div>
                     <div className="w-full text-xl opacity-70">
