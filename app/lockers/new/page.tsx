@@ -10,6 +10,7 @@ import Menu from "@components/Menu";
 import axios from "axios";
 import Image from "next/image";
 import Spinner from "../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -21,14 +22,15 @@ const GetLockers = () => {
   const [focusedInput, setFocusedInput] = useState<"booking" | "contact">(
     "booking"
   );
-  const [bookingNum, setBookingNum] = useState("KMC-");
-  const [contactNum, setContactNum] = useState("+63");
+  const { bookingNumber, setBookingNumber, mobileNumber, setMobileNumber } =
+    useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { setSecretKey } = useBookingContext();
 
   // Separate variable for display without prefix
-  const mobileNumber = contactNum.replace("+63", "0");
+  const tranMobileNum = mobileNumber.replace("+63", "0");
 
   const onNavigate = async () => {
     try {
@@ -36,8 +38,8 @@ const GetLockers = () => {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_OTP as string,
         {
-          bookingNumber: bookingNum,
-          mobileNumber: mobileNumber,
+          bookingNumber: bookingNumber,
+          mobileNumber: tranMobileNum,
           lockerId: "4000",
         },
         {
@@ -51,8 +53,9 @@ const GetLockers = () => {
 
       setIsLoading(false);
       if (response.status === 201) {
-        const secretKey = response.data.data.secret;
-        const url = `/lockers/new/verify-otp?bookingNum=${bookingNum}&lockerId=4000&secretKey=${secretKey}&mobileNumber=${mobileNumber}`;
+        const getKey = response.data.data.secret;
+        setSecretKey(getKey);
+        const url = `/lockers/new/verify-otp?lockerId=4000`;
         router.push(url);
       }
     } catch (error) {
@@ -68,21 +71,21 @@ const GetLockers = () => {
 
   useEffect(() => {
     setIsContinueDisabled(
-      !(bookingNum.length === 8 && contactNum.length === 13)
+      !(bookingNumber.length === 8 && mobileNumber.length === 13)
     );
-  }, [bookingNum, contactNum]);
+  }, [bookingNumber, mobileNumber]);
 
   const handleKeyClick = (value: string) => {
     const maxLength = focusedInput === "booking" ? 8 : 13;
 
-    if (focusedInput === "booking" && bookingNum.length < maxLength) {
-      setBookingNum((prev) => `${prev}${value}`);
+    if (focusedInput === "booking" && bookingNumber.length < maxLength) {
+      setBookingNumber((prev) => `${prev}${value}`);
     } else if (
       focusedInput === "contact" &&
       /^\d+$/.test(value) &&
-      contactNum.length < 13
+      mobileNumber.length < 13
     ) {
-      setContactNum((prevPin) => `${prevPin}${value}`);
+      setMobileNumber((prevPin) => `${prevPin}${value}`);
     }
   };
 
@@ -90,14 +93,14 @@ const GetLockers = () => {
     const prefixLength = focusedInput === "booking" ? 4 : 3;
 
     if (focusedInput === "booking") {
-      setBookingNum((prevPin) => {
+      setBookingNumber((prevPin) => {
         const numericPart = prevPin.slice(prefixLength, -1);
         return numericPart.length > 0
           ? `KMC-${numericPart.slice(0, -1)}`
           : "KMC-";
       });
     } else if (focusedInput === "contact") {
-      setContactNum((prevPin) =>
+      setMobileNumber((prevPin) =>
         prevPin.length > prefixLength ? prevPin.slice(0, -1) : "+63"
       );
     }
@@ -129,7 +132,7 @@ const GetLockers = () => {
                     }
                     
                     `}
-                    value={bookingNum}
+                    value={bookingNumber}
                     onFocus={() => setFocusedInput("booking")}
                     readOnly
                   />
@@ -148,7 +151,7 @@ const GetLockers = () => {
                     }
                     
                     `}
-                    value={contactNum}
+                    value={mobileNumber}
                     onFocus={() => setFocusedInput("contact")}
                     readOnly
                   />

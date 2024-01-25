@@ -9,14 +9,16 @@ import {
 } from "react";
 
 interface BookingContextProps {
-  bookingId: string | null;
-  setBookingId: Dispatch<SetStateAction<string | null>>;
+  bookingNumber: string | null;
+  setBookingNumber: Dispatch<SetStateAction<string | null>>;
   mobileNumber: string | null;
   setMobileNumber: Dispatch<SetStateAction<string | null>>;
   secretKey: string | null;
   setSecretKey: Dispatch<SetStateAction<string | null>>;
   paymentId: string | null;
   setPaymentId: Dispatch<SetStateAction<string | null>>;
+  price: string | null;
+  setPrice: Dispatch<SetStateAction<string | null>>;
   availableDoors: number[];
   setAvailableDoors: Dispatch<SetStateAction<number[]>>;
   lockerId: string | null;
@@ -46,24 +48,27 @@ interface BookingProviderProps {
 export const BookingProvider = ({
   children,
 }: BookingProviderProps): JSX.Element => {
-  const [bookingId, setBookingId] = useState<string | null>(null);
-  const [mobileNumber, setMobileNumber] = useState<string | null>(null);
+  const [bookingNumber, setBookingNumber] = useState<string | null>("KMC-");
+  const [mobileNumber, setMobileNumber] = useState<string | null>("+63");
   const [secretKey, setSecretKey] = useState<string | null>(null);
   const [paymentId, setPaymentId] = useState<string | null>(null);
+  const [price, setPrice] = useState<string | null>("700");
   const [availableDoors, setAvailableDoors] = useState<number[]>([]);
   const [lockerId, setLockerId] = useState<string | null>(null);
   const [available, setAvailable] = useState<Record<string, any> | null>(null);
   const [reserve, setReserve] = useState<Record<string, any> | null>(null);
 
   const contextValue: BookingContextProps = {
-    bookingId,
-    setBookingId,
+    bookingNumber,
+    setBookingNumber,
     mobileNumber,
     setMobileNumber,
     secretKey,
     setSecretKey,
     paymentId,
     setPaymentId,
+    price,
+    setPrice,
     availableDoors,
     setAvailableDoors,
     lockerId,

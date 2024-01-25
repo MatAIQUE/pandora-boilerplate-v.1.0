@@ -11,6 +11,7 @@ import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -21,21 +22,21 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [contactNum, setContactNum] = useState("+63");
+  const { mobileNumber, setMobileNumber } = useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const doorNumber = searchParams.doorNumber;
 
   useEffect(() => {
-    setIsContinueDisabled(!(contactNum.length === 13));
-  }, [contactNum]);
+    setIsContinueDisabled(!(mobileNumber.length === 13));
+  }, [mobileNumber]);
 
   const onNavigateBack = () => {
     router.back();
   };
 
   // Separate variable for display without prefix
-  const mobileNumber = contactNum.replace("+63", "0");
+  const tranMobileNumber = mobileNumber.replace("+63", "0");
 
   const onNavigate = async () => {
     try {
@@ -43,7 +44,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
       const response = await axios.patch(
         process.env.NEXT_PUBLIC_FORGOT_PIN + "4000",
         {
-          mobileNumber: mobileNumber,
+          mobileNumber: tranMobileNumber,
           doorNumber: doorNumber,
         },
         {
@@ -70,15 +71,15 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const handleKeyClick = (value: string) => {
     const maxLength = 13;
 
-    if (contactNum.length < maxLength) {
-      setContactNum((prevPin) => `${prevPin}${value}`);
+    if (mobileNumber.length < maxLength) {
+      setMobileNumber((prevPin) => `${prevPin}${value}`);
     }
   };
 
   const handleDeleteClick = () => {
     const prefixLength = 3;
 
-    setContactNum((prevPin) =>
+    setMobileNumber((prevPin) =>
       prevPin.length > prefixLength ? prevPin.slice(0, -1) : "+63"
     );
   };
@@ -108,7 +109,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
                       type="text"
                       placeholder=""
                       className={`input text-xl w-full bg-white text-black text-start mb-2`}
-                      value={contactNum}
+                      value={mobileNumber}
                       readOnly
                     />
 

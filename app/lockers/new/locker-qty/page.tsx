@@ -11,21 +11,16 @@ import Logo from "@components/Logo";
 import Menu from "@components/Menu";
 import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
 
-interface Props {
-  searchParams: { bookingNum: string; mobileNumber: string };
-}
-const LockerQTY = ({ searchParams }: Props) => {
+const LockerQTY = () => {
   const router = useRouter();
   const [doorCount, setDoorCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { bookingNumber, mobileNumber, price } = useBookingContext();
 
   const availableDoorsCount = 10;
-  const price = 700;
-
-  const bookingNum = searchParams.bookingNum;
-  const mobileNumber = searchParams.mobileNumber;
 
   const onNavigate = async () => {
     try {
@@ -33,7 +28,7 @@ const LockerQTY = ({ searchParams }: Props) => {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
         {
-          bookingNumber: bookingNum,
+          bookingNumber: bookingNumber,
           lockerId: "4000",
           doorCount: doorCount,
         },
@@ -48,7 +43,7 @@ const LockerQTY = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 201) {
-        const url = `/lockers/new/payment?bookingNum=${bookingNum}&doorCount=${doorCount}&mobileNumber=${mobileNumber}`;
+        const url = `/lockers/new/payment?doorCount=${doorCount}`;
         router.push(url);
       }
     } catch (error) {
@@ -125,15 +120,17 @@ const LockerQTY = ({ searchParams }: Props) => {
                   <div className="w-full text-right">
                     <div className="flex items-end justify-end text-end">
                       <div className="font-bold text-4xl">
-                        P {(Number(doorCount) * Number(price)).toLocaleString()}
+                        ₱{(Number(doorCount) * Number(price)).toLocaleString()}
                       </div>
                       <span>
                         <p className="ms-2">/mo</p>
                       </span>
                     </div>
-                    <span>
-                      <p>P 700 each</p>
-                    </span>
+                    {doorCount > 1 && (
+                      <span>
+                        <p>P 700 each</p>
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

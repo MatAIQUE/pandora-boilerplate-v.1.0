@@ -12,12 +12,10 @@ import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
+import { formatPhoneNumber } from "@utils/maskMobileNumber";
 
-interface Props {
-  searchParams: { bookingNum: string; mobileNumber: string; secretKey: string };
-}
-
-const VerifyOTP = ({ searchParams }: Props) => {
+const VerifyOTP = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -25,12 +23,8 @@ const VerifyOTP = ({ searchParams }: Props) => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [timer, setTimer] = useState(0);
   const [isLoadingOTP, setIsLoadingOTP] = useState(false);
-
-  const bookingNum = searchParams.bookingNum;
-  const mobileNumber = searchParams.mobileNumber;
-  const secretKey = searchParams.secretKey;
-
-  console.log("Timer", timer);
+  const { bookingNumber, secretKey, setSecretKey, mobileNumber } =
+    useBookingContext();
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -50,7 +44,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
       const response = await axios.patch(
         (process.env.NEXT_PUBLIC_VERIFY_OTP as string) + `${secretKey}`,
         {
-          bookingNumber: bookingNum,
+          bookingNumber: bookingNumber,
           otp: pinCode,
           mobileNumber: mobileNumber,
         },
@@ -65,7 +59,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=4000&mobileNumber=${mobileNumber}`;
+        const url = `/lockers/new/locker-qty?&lockerId=4000}`;
         router.push(url);
       }
     } catch (error) {
@@ -92,11 +86,11 @@ const VerifyOTP = ({ searchParams }: Props) => {
   const resendCode = async () => {
     try {
       setIsLoadingOTP(true);
-      setTimer(59);
+
       const response = await axios.post(
         process.env.NEXT_PUBLIC_OTP as string,
         {
-          bookingNumber: bookingNum,
+          bookingNumber: bookingNumber,
           mobileNumber: mobileNumber,
           lockerId: "4000",
         },
@@ -109,6 +103,11 @@ const VerifyOTP = ({ searchParams }: Props) => {
         }
       );
 
+      if (response.status === 201) {
+        setTimer(59);
+        const getKey = response.data.data.secret;
+        setSecretKey(getKey);
+      }
       setIsLoadingOTP(false);
     } catch (error) {
       setIsLoadingOTP(true);
@@ -141,7 +140,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
                     position="justify-start"
                   />
                   <LabelDesc
-                    label="+63 *** *** **27"
+                    label={formatPhoneNumber(mobileNumber)}
                     position="justify-start"
                   />
                   <div className="text-danger font-medium flex justify-start">
