@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import QRCode from "react-qr-code";
 import { useEffect, useState } from "react";
 import { useWebSocket } from "@context/websocket/Websocket";
+import { useBookingContext } from "@context/BookingContext";
 
 interface Props {
   searchParams: { qrCodeBody: string };
@@ -16,7 +17,9 @@ interface Props {
 const QRPage = ({ searchParams }) => {
   const router = useRouter();
   const qrCodeBody = searchParams.qrCodeBody;
-  const paymentId = searchParams.paymentId || null;
+  const { price } = useBookingContext();
+
+  const { paymentId } = useBookingContext();
 
   const sockets = useWebSocket();
   const targetRoute = "payments";
@@ -145,7 +148,7 @@ const QRPage = ({ searchParams }) => {
                   </div>
                   <div className="items-end text-black">
                     <div className="w-full text-4xl font-semibold mb-4">
-                      P 1,400
+                      ₱{Number(price).toLocaleString()}
                       {/* Display amout here */}
                     </div>
                     <div className="w-full text-xl opacity-70">

@@ -10,9 +10,10 @@ import Image from "next/image";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
 import qrIcon from "../../../assets/images/QR.svg";
 import { useWebSocket } from "@context/websocket/Websocket";
+import { useBookingContext } from "@context/BookingContext";
 
 interface Props {
-  searchParams: { bookingNum: string; doorCount: string; mobileNumber: string };
+  searchParams: { doorCount: string };
 }
 
 const PaymentPage = ({ searchParams }) => {
@@ -20,13 +21,12 @@ const PaymentPage = ({ searchParams }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [paymentId, setPaymentId] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
   const sockets = useWebSocket();
+  const { bookingNumber, mobileNumber, paymentId, setPaymentId } =
+    useBookingContext();
 
-  const bookingNum = searchParams.bookingNum;
   const doorCount = parseInt(searchParams.doorCount, 10);
-  const mobileNumber = searchParams.mobileNumber;
 
   const paymentAction = async () => {
     try {
@@ -36,7 +36,7 @@ const PaymentPage = ({ searchParams }) => {
         {
           doorCount: doorCount,
           mobileNumber: mobileNumber,
-          bookingNumber: bookingNum,
+          bookingNumber: bookingNumber,
           paymentMethod: paymentMethod,
           lockerId: "4000",
         },

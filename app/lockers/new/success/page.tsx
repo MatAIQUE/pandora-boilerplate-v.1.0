@@ -2,14 +2,14 @@
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
-import Menu from "@components/Menu";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import spinner from "../../../assets/images/spinner.svg";
-import Image from "next/image";
 
 const SuccessPaymentPage = ({ searchParams }) => {
+  const router = useRouter();
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
 
@@ -26,16 +26,6 @@ const SuccessPaymentPage = ({ searchParams }) => {
 
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
   }, [count, timer]);
-
-  const router = useRouter();
-
-  const onNavigate = () => {
-    router.push("/lockers/new/locker-qty");
-  };
-
-  const onNavigateBack = () => {
-    router.back();
-  };
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
@@ -56,12 +46,6 @@ const SuccessPaymentPage = ({ searchParams }) => {
                     label={`Locker ${searchParams.doors} has been successfully booked to your account! The billing will reflect in your next invoice`}
                     position="justify-start"
                   />
-
-                  {/* <div
-                    className="radial-progress"
-                    style={{ "--value": count, "--size": "2rem" } as any}
-                    role="progressbar"
-                  ></div> */}
 
                   <div className="w-full justify-center flex pt-20">
                     <Image

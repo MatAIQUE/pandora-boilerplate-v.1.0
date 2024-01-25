@@ -12,21 +12,31 @@ import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
+import { formatPhoneNumber } from "@utils/maskMobileNumber";
 
-interface Props {
-  searchParams: { bookingNum: string; mobileNumber: string; secretKey: string };
-}
-
-const VerifyOTP = ({ searchParams }: Props) => {
+const VerifyOTP = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [isLoadingOTP, setIsLoadingOTP] = useState(false);
+  const { bookingNumber, secretKey, setSecretKey, mobileNumber } =
+    useBookingContext();
 
-  const bookingNum = searchParams.bookingNum;
-  const mobileNumber = searchParams.mobileNumber;
-  const secretKey = searchParams.secretKey;
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+
+    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+  }, [timer]);
 
   const onNavigate = async () => {
     try {
@@ -34,7 +44,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
       const response = await axios.patch(
         (process.env.NEXT_PUBLIC_VERIFY_OTP as string) + `${secretKey}`,
         {
-          bookingNumber: bookingNum,
+          bookingNumber: bookingNumber,
           otp: pinCode,
           mobileNumber: mobileNumber,
         },
@@ -49,7 +59,7 @@ const VerifyOTP = ({ searchParams }: Props) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        const url = `/lockers/new/locker-qty?bookingNum=${bookingNum}&lockerId=4000&mobileNumber=${mobileNumber}`;
+        const url = `/lockers/new/locker-qty?&lockerId=4000}`;
         router.push(url);
       }
     } catch (error) {
@@ -70,6 +80,39 @@ const VerifyOTP = ({ searchParams }: Props) => {
   const handleKeyClick = (value: string) => {
     if (pinCode.length < 6) {
       setPinCode((prevPin) => prevPin + value);
+    }
+  };
+
+  const resendCode = async () => {
+    try {
+      setIsLoadingOTP(true);
+
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_OTP as string,
+        {
+          bookingNumber: bookingNumber,
+          mobileNumber: mobileNumber,
+          lockerId: "4000",
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        setTimer(59);
+        const getKey = response.data.data.secret;
+        setSecretKey(getKey);
+      }
+      setIsLoadingOTP(false);
+    } catch (error) {
+      setIsLoadingOTP(true);
+      console.error(error);
+      setIsLoadingOTP(false);
     }
   };
 
@@ -97,12 +140,18 @@ const VerifyOTP = ({ searchParams }: Props) => {
                     position="justify-start"
                   />
                   <LabelDesc
-                    label="+63 *** *** **27"
+                    label={formatPhoneNumber(mobileNumber)}
                     position="justify-start"
                   />
                   <div className="text-danger font-medium flex justify-start">
-                    <button className="btn btn-ghost pl-0">
-                      <span className="text-primary text-lg">Resend Code</span>
+                    <button
+                      onClick={() => resendCode()}
+                      className="btn btn-ghost pl-0"
+                      disabled={timer > 0 ? true : false}
+                    >
+                      <span className="text-primary text-lg">
+                        Resend Code {timer > 0 && <span>({timer})</span>}
+                      </span>
                     </button>
                   </div>
                   <div className="w-full text-center items-center mt-10">
