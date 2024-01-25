@@ -51,10 +51,10 @@ const PaymentPage = ({ searchParams }) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        if (paymentMethod === "add_to_invoice") {
+        if (paymentMethod === "booking_invoice") {
           const url = `/lockers/new/success`;
           router.push(url);
-        } else if (paymentMethod === "qr_wallet") {
+        } else if (paymentMethod === "qr_payment") {
           const {
             data: {
               data: { paymentId },
@@ -119,7 +119,7 @@ const PaymentPage = ({ searchParams }) => {
                     /> */}
                     <button
                       onClick={() =>
-                        handleSelectPaymentMethod("add_to_invoice")
+                        handleSelectPaymentMethod("booking_invoice")
                       }
                       className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
                     >
@@ -144,7 +144,7 @@ const PaymentPage = ({ searchParams }) => {
                     /> */}
                     <button
                       className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
-                      onClick={() => handleSelectPaymentMethod("qr_wallet")}
+                      onClick={() => handleSelectPaymentMethod("qr_payment")}
                     >
                       <label>Pay with Maya/GCash</label>
                       <span>
