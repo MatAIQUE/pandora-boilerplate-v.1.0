@@ -23,8 +23,16 @@ const PaymentPage = ({ searchParams }) => {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
   const sockets = useWebSocket();
-  const { bookingNumber, mobileNumber, paymentId, setPaymentId } =
-    useBookingContext();
+  const {
+    bookingNumber,
+    setBookingNumber,
+    mobileNumber,
+    setMobileNumber,
+    paymentId,
+    setPaymentId,
+    secretKey,
+    setSecretKey,
+  } = useBookingContext();
 
   const doorCount = parseInt(searchParams.doorCount, 10);
 
@@ -51,10 +59,15 @@ const PaymentPage = ({ searchParams }) => {
 
       setIsLoading(false);
       if (response.status === 200) {
-        if (paymentMethod === "booking_invoice") {
+        if (paymentMethod === "add_to_invoice") {
+          setBookingNumber("");
+          setMobileNumber("");
+          setPaymentId("");
+          setSecretKey("");
+
           const url = `/lockers/new/success`;
           router.push(url);
-        } else if (paymentMethod === "qr_payment") {
+        } else if (paymentMethod === "qr_wallet") {
           const {
             data: {
               data: { paymentId },
@@ -119,7 +132,7 @@ const PaymentPage = ({ searchParams }) => {
                     /> */}
                     <button
                       onClick={() =>
-                        handleSelectPaymentMethod("booking_invoice")
+                        handleSelectPaymentMethod("add_to_invoice")
                       }
                       className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
                     >
@@ -144,7 +157,7 @@ const PaymentPage = ({ searchParams }) => {
                     /> */}
                     <button
                       className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
-                      onClick={() => handleSelectPaymentMethod("qr_payment")}
+                      onClick={() => handleSelectPaymentMethod("qr_wallet")}
                     >
                       <label>Pay with Maya/GCash</label>
                       <span>

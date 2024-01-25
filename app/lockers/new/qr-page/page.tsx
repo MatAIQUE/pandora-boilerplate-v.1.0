@@ -19,7 +19,16 @@ const QRPage = ({ searchParams }) => {
   const qrCodeBody = searchParams.qrCodeBody;
   const { price } = useBookingContext();
 
-  const { paymentId } = useBookingContext();
+  const {
+    bookingNumber,
+    setBookingNumber,
+    mobileNumber,
+    setMobileNumber,
+    paymentId,
+    setPaymentId,
+    secretKey,
+    setSecretKey,
+  } = useBookingContext();
 
   const sockets = useWebSocket();
   const targetRoute = "payments";
@@ -68,6 +77,10 @@ const QRPage = ({ searchParams }) => {
                   )}`;
 
             router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
+            setBookingNumber("");
+            setMobileNumber("");
+            setPaymentId("");
+            setSecretKey("");
           case "door-status":
           // TODO: Handle door statu update
         }
