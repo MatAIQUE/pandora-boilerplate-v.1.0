@@ -15,10 +15,10 @@ import { useBookingContext } from "@context/BookingContext";
 
 const LockerQTY = () => {
   const router = useRouter();
-  const [doorCount, setDoorCount] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { bookingNumber, mobileNumber, price } = useBookingContext();
+  const { bookingNumber, mobileNumber, price, doorCount, setDoorCount } =
+    useBookingContext();
 
   const availableDoorsCount = 10;
 

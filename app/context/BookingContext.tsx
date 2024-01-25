@@ -15,6 +15,8 @@ interface BookingContextProps {
   setMobileNumber: Dispatch<SetStateAction<string | null>>;
   secretKey: string | null;
   setSecretKey: Dispatch<SetStateAction<string | null>>;
+  doorCount: number | null;
+  setDoorCount: Dispatch<SetStateAction<number | null>>;
   paymentId: string | null;
   setPaymentId: Dispatch<SetStateAction<string | null>>;
   price: string | null;
@@ -51,6 +53,7 @@ export const BookingProvider = ({
   const [bookingNumber, setBookingNumber] = useState<string | null>("KMC-");
   const [mobileNumber, setMobileNumber] = useState<string | null>("+63");
   const [secretKey, setSecretKey] = useState<string | null>(null);
+  const [doorCount, setDoorCount] = useState<number | null>(1);
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [price, setPrice] = useState<string | null>("700");
   const [availableDoors, setAvailableDoors] = useState<number[]>([]);
@@ -65,6 +68,8 @@ export const BookingProvider = ({
     setMobileNumber,
     secretKey,
     setSecretKey,
+    doorCount,
+    setDoorCount,
     paymentId,
     setPaymentId,
     price,
