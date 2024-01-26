@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
@@ -12,15 +12,52 @@ import Menu from "@components/Menu";
 import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
+import { apiHeaders } from "@utils/apiHeaders";
 
 const LockerQTY = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { bookingNumber, mobileNumber, price, doorCount, setDoorCount } =
-    useBookingContext();
+  const [isLoadingDoor, setIsLoadingDoor] = useState(false);
+  const [errorDoor, setErrorDoor] = useState("");
+  const {
+    bookingNumber,
+    mobileNumber,
+    price,
+    doorCount,
+    setDoorCount,
+    availableDoors,
+    setAvailableDoors,
+  } = useBookingContext();
 
-  const availableDoorsCount = 10;
+  const availableDoorsCount = async () => {
+    try {
+      setIsLoadingDoor(true);
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      if (response.status === 200) {
+        setAvailableDoors(response.data.data.locker.available);
+      }
+      setIsLoadingDoor(false);
+    } catch (error) {
+      setIsLoadingDoor(true);
+      if (axios.isAxiosError(error) && error.response) {
+        if (error.response.status === 416) {
+          setErrorDoor("No available doors");
+        }
+      }
+      setIsLoadingDoor(false);
+    }
+  };
+
+  useEffect(() => {
+    availableDoorsCount();
+  }, []);
 
   const onNavigate = async () => {
     try {
@@ -33,11 +70,7 @@ const LockerQTY = () => {
           doorCount: doorCount,
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
@@ -48,7 +81,7 @@ const LockerQTY = () => {
       }
     } catch (error) {
       setIsLoading(true);
-      console.error(error);
+
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data.message;
         setError(responseData);
@@ -62,7 +95,7 @@ const LockerQTY = () => {
   };
 
   const addCart = () => {
-    if (doorCount < availableDoorsCount) setDoorCount((prev) => prev + 1);
+    if (doorCount < availableDoors) setDoorCount((prev) => prev + 1);
   };
 
   const subtractCart = () => {
@@ -102,7 +135,7 @@ const LockerQTY = () => {
                       <button
                         onClick={addCart}
                         className={
-                          doorCount >= availableDoorsCount
+                          doorCount >= availableDoors
                             ? `btn btn-circle btn-outline btn-sm`
                             : `btn btn-circle btn-primary btn-sm`
                         }
@@ -137,9 +170,16 @@ const LockerQTY = () => {
             </div>
 
             <div className="w-full pb-5">
-              <p className="text-white text-xl">
-                [10] <span className="opacity-60">Available lockers</span>
-              </p>
+              {errorDoor ? (
+                <div className={`font-medium my-2 flex justify-start`}>
+                  <span className={`text-left text-primary`}>{errorDoor}</span>
+                </div>
+              ) : (
+                <p className="text-white text-xl">
+                  [{availableDoors}]{" "}
+                  <span className="opacity-60">Available lockers</span>
+                </p>
+              )}
             </div>
 
             <div className="card-actions justify-center mt-3">

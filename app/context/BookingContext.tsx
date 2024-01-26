@@ -21,12 +21,10 @@ interface BookingContextProps {
   setPaymentId: Dispatch<SetStateAction<string | null>>;
   price: string | null;
   setPrice: Dispatch<SetStateAction<string | null>>;
-  availableDoors: number[];
-  setAvailableDoors: Dispatch<SetStateAction<number[]>>;
   lockerId: string | null;
   setLockerId: Dispatch<SetStateAction<string | null>>;
-  available: Record<string, any> | null;
-  setAvailable: Dispatch<SetStateAction<Record<string, any> | null>>;
+  availableDoors: number | null;
+  setAvailableDoors: Dispatch<SetStateAction<number | null>>;
   reserve: Record<string, any> | null;
   setReserve: Dispatch<SetStateAction<Record<string, any> | null>>;
 }
@@ -56,9 +54,8 @@ export const BookingProvider = ({
   const [doorCount, setDoorCount] = useState<number | null>(1);
   const [paymentId, setPaymentId] = useState<string | null>(null);
   const [price, setPrice] = useState<string | null>("700");
-  const [availableDoors, setAvailableDoors] = useState<number[]>([]);
+  const [availableDoors, setAvailableDoors] = useState<number>(null);
   const [lockerId, setLockerId] = useState<string | null>(null);
-  const [available, setAvailable] = useState<Record<string, any> | null>(null);
   const [reserve, setReserve] = useState<Record<string, any> | null>(null);
 
   const contextValue: BookingContextProps = {
@@ -78,8 +75,6 @@ export const BookingProvider = ({
     setAvailableDoors,
     lockerId,
     setLockerId,
-    available,
-    setAvailable,
     reserve,
     setReserve,
   };

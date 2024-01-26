@@ -32,9 +32,12 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentId,
     secretKey,
     setSecretKey,
+    doorCount,
+    setDoorCount,
+    setAvailableDoors,
   } = useBookingContext();
 
-  const doorCount = parseInt(searchParams.doorCount, 10);
+  const doorCountInt = parseInt(searchParams.doorCount, 10);
 
   const paymentAction = async () => {
     try {
@@ -42,7 +45,7 @@ const PaymentPage = ({ searchParams }) => {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_ADD_TO_INVOICE as string,
         {
-          doorCount: doorCount,
+          doorCount: doorCountInt,
           mobileNumber: mobileNumber,
           bookingNumber: bookingNumber,
           paymentMethod: paymentMethod,
@@ -64,6 +67,8 @@ const PaymentPage = ({ searchParams }) => {
           setMobileNumber("+63");
           setPaymentId("");
           setSecretKey("");
+          setDoorCount(1);
+          setAvailableDoors(null);
 
           const url = `/lockers/new/success`;
           router.push(url);

@@ -1,16 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@components";
+import { useEffect, useState } from "react";
+
 import Keyboard from "@components/Keyboard";
 import Label from "@components/Label";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
-import axios from "axios";
-import Image from "next/image";
-import Spinner from "../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
+import Spinner from "../../assets/images/spinner.svg";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -32,6 +32,12 @@ const GetLockers = () => {
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
 
+  useEffect(() => {
+    setIsContinueDisabled(
+      !(bookingNumber.length === 8 && mobileNumber.length === 13)
+    );
+  }, [bookingNumber, mobileNumber]);
+
   const onNavigate = async () => {
     try {
       setIsLoading(true);
@@ -51,13 +57,13 @@ const GetLockers = () => {
         }
       );
 
-      setIsLoading(false);
       if (response.status === 201) {
         const getKey = response.data.data.secret;
         setSecretKey(getKey);
         const url = `/lockers/new/verify-otp?lockerId=4000`;
         router.push(url);
       }
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(true);
       console.error(error);
@@ -68,12 +74,6 @@ const GetLockers = () => {
   const onNavigateBack = () => {
     router.back();
   };
-
-  useEffect(() => {
-    setIsContinueDisabled(
-      !(bookingNumber.length === 8 && mobileNumber.length === 13)
-    );
-  }, [bookingNumber, mobileNumber]);
 
   const handleKeyClick = (value: string) => {
     const maxLength = focusedInput === "booking" ? 8 : 13;
@@ -158,21 +158,24 @@ const GetLockers = () => {
                 </div>
               </div>
             </div>
+
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
-                  <Button
-                    label="Back"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-70 pointer-events-none"
+                    }`}
                     onClick={onNavigateBack}
-                  />
+                  >
+                    Back
+                  </button>
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-70 pointer-events-none"
+                    }`}
                     onClick={onNavigate}
                     disabled={isContinueDisabled}
                   >
