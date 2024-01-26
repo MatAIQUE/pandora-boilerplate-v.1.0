@@ -1,16 +1,16 @@
 "use client";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Button } from "@components";
 import Label from "@components/Label";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
-import qrIcon from "../../../assets/images/QR.svg";
-import { useWebSocket } from "@context/websocket/Websocket";
 import { useBookingContext } from "@context/BookingContext";
+import { useWebSocket } from "@context/websocket/Websocket";
+import axios from "axios";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import qrIcon from "../../../assets/images/QR.svg";
+import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
 
 interface Props {
   searchParams: { doorCount: string };
@@ -60,8 +60,8 @@ const PaymentPage = ({ searchParams }) => {
       setIsLoading(false);
       if (response.status === 200) {
         if (paymentMethod === "add_to_invoice") {
-          setBookingNumber("");
-          setMobileNumber("");
+          setBookingNumber("KMC-");
+          setMobileNumber("+63");
           setPaymentId("");
           setSecretKey("");
 

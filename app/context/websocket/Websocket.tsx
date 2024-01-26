@@ -23,7 +23,9 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
     const routes = ["payments", "notifications", "door-status/:lockerId"];
 
     const newSockets = routes.reduce((acc, route) => {
-      acc[route] = new WebSocket(`ws://localhost:3000/websocket/${route}`);
+      acc[route] = new WebSocket(
+        `${process.env.NEXT_PUBLIC_WS_BASE_URL}${route}`
+      );
       return acc;
     }, {});
 
