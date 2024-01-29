@@ -12,6 +12,7 @@ import Logo from "@components/Logo";
 import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
+import { apiHeaders } from "@utils/apiHeaders";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -48,11 +49,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
           doorNumber: doorNumber,
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
       setIsLoading(false);

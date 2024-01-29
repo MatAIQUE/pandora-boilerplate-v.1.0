@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import qrIcon from "../../../assets/images/QR.svg";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
+import { apiHeaders } from "@utils/apiHeaders";
 
 interface Props {
   searchParams: { doorCount: string };
@@ -52,11 +53,7 @@ const PaymentPage = ({ searchParams }) => {
           lockerId: "4000",
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
