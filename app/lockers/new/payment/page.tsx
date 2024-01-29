@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import qrIcon from "../../../assets/images/QR.svg";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
 import { apiHeaders } from "@utils/apiHeaders";
+import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
   searchParams: { doorCount: string };
@@ -188,14 +189,22 @@ const PaymentPage = ({ searchParams }) => {
                   />
                 </div>
                 <div className="w-full">
-                  <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
+                  <button
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
                     onClick={paymentAction}
-                  />
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
