@@ -1,16 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
+import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "@components";
+import { useEffect, useState } from "react";
+
 import Keyboard from "@components/Keyboard";
 import Label from "@components/Label";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
-import axios from "axios";
-import Image from "next/image";
-import Spinner from "../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
+import Spinner from "../../assets/images/spinner.svg";
+import { apiHeaders } from "@utils/apiHeaders";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -32,6 +33,12 @@ const GetLockers = () => {
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
 
+  useEffect(() => {
+    setIsContinueDisabled(
+      !(bookingNumber.length === 8 && mobileNumber.length === 13)
+    );
+  }, [bookingNumber, mobileNumber]);
+
   const onNavigate = async () => {
     try {
       setIsLoading(true);
@@ -43,24 +50,23 @@ const GetLockers = () => {
           lockerId: "4000",
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
-      setIsLoading(false);
       if (response.status === 201) {
-        const getKey = response.data.data.secret;
+        const getKey = response.data.data.pinSecret;
+
         setSecretKey(getKey);
+
         const url = `/lockers/new/verify-otp?lockerId=4000`;
         router.push(url);
       }
+
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(true);
-      console.error(error);
+      setError(error);
       setIsLoading(false);
     }
   };
@@ -68,12 +74,6 @@ const GetLockers = () => {
   const onNavigateBack = () => {
     router.back();
   };
-
-  useEffect(() => {
-    setIsContinueDisabled(
-      !(bookingNumber.length === 8 && mobileNumber.length === 13)
-    );
-  }, [bookingNumber, mobileNumber]);
 
   const handleKeyClick = (value: string) => {
     const maxLength = focusedInput === "booking" ? 8 : 13;
@@ -123,7 +123,7 @@ const GetLockers = () => {
                     maxLength={4}
                     type="text"
                     placeholder=""
-                    className={`input text-xl w-full bg-white text-black text-start mb-2
+                    className={`input text-xl w-full bg-white text-black text-start
                     
                     ${
                       focusedInput === "booking"
@@ -136,6 +136,14 @@ const GetLockers = () => {
                     onFocus={() => setFocusedInput("booking")}
                     readOnly
                   />
+
+                  {error && (
+                    <div className={`font-medium mb-2 flex justify-start`}>
+                      <span className={`text-left text-primary`}>
+                        Booking number/Contact number didn&apos;t match
+                      </span>
+                    </div>
+                  )}
 
                   <Label label="Contact Number*" />
                   <input
@@ -156,23 +164,33 @@ const GetLockers = () => {
                     readOnly
                   />
                 </div>
+                {error && (
+                  <div className={`font-medium  flex justify-start`}>
+                    <span className={`text-left text-primary`}>
+                      Booking number/Contact number didn&apos;t match
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
+
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
-                  <Button
-                    label="Back"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-70 pointer-events-none"
+                    }`}
                     onClick={onNavigateBack}
-                  />
+                  >
+                    Back
+                  </button>
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-70 pointer-events-none"
+                    }`}
                     onClick={onNavigate}
                     disabled={isContinueDisabled}
                   >

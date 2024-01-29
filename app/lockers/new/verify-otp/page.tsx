@@ -14,6 +14,7 @@ import Menu from "@components/Menu";
 import Spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
 import { formatPhoneNumber } from "@utils/maskMobileNumber";
+import { apiHeaders } from "@utils/apiHeaders";
 
 const VerifyOTP = () => {
   const router = useRouter();
@@ -49,11 +50,7 @@ const VerifyOTP = () => {
           mobileNumber: mobileNumber,
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 

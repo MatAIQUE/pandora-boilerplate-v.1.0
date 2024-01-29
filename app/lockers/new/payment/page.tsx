@@ -1,16 +1,17 @@
 "use client";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Button } from "@components";
 import Label from "@components/Label";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
-import qrIcon from "../../../assets/images/QR.svg";
-import { useWebSocket } from "@context/websocket/Websocket";
 import { useBookingContext } from "@context/BookingContext";
+import { useWebSocket } from "@context/websocket/Websocket";
+import axios from "axios";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import qrIcon from "../../../assets/images/QR.svg";
+import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
+import { apiHeaders } from "@utils/apiHeaders";
 
 interface Props {
   searchParams: { doorCount: string };
@@ -32,9 +33,12 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentId,
     secretKey,
     setSecretKey,
+    doorCount,
+    setDoorCount,
+    setAvailableDoors,
   } = useBookingContext();
 
-  const doorCount = parseInt(searchParams.doorCount, 10);
+  const doorCountInt = parseInt(searchParams.doorCount, 10);
 
   const paymentAction = async () => {
     try {
@@ -42,28 +46,26 @@ const PaymentPage = ({ searchParams }) => {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_ADD_TO_INVOICE as string,
         {
-          doorCount: doorCount,
+          doorCount: doorCountInt,
           mobileNumber: mobileNumber,
           bookingNumber: bookingNumber,
           paymentMethod: paymentMethod,
           lockerId: "4000",
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
       setIsLoading(false);
       if (response.status === 200) {
         if (paymentMethod === "add_to_invoice") {
-          setBookingNumber("");
-          setMobileNumber("");
+          setBookingNumber("KMC-");
+          setMobileNumber("+63");
           setPaymentId("");
           setSecretKey("");
+          setDoorCount(1);
+          setAvailableDoors(null);
 
           const url = `/lockers/new/success`;
           router.push(url);
