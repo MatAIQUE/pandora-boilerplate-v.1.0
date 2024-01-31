@@ -37,6 +37,7 @@ const QRPage = ({ searchParams }) => {
     const establishConnection = () => {
       socket.addEventListener("open", onOpen);
       socket.addEventListener("error", onError);
+      socket.addEventListener("close", onClose);
       socket.addEventListener("message", onMessage);
       const messageToSend = {
         endpoint: "payment",
@@ -51,6 +52,11 @@ const QRPage = ({ searchParams }) => {
 
     const onError = (event) => {
       console.log("WebSocket error:", event);
+    };
+
+    const onClose = (event) => {
+      console.log("WebSocket closed:", event);
+      establishConnection();
     };
 
     const onMessage = (event) => {
@@ -70,6 +76,12 @@ const QRPage = ({ searchParams }) => {
                 : `${data.doors.slice(0, -1).join(", ")} and ${data.doors.slice(
                     -1
                   )}`;
+
+            setBookingNumber("KMC-");
+            setMobileNumber("+63");
+            setPaymentId("");
+            setSecretKey(null);
+            setDoorCount(1);
 
             router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
 

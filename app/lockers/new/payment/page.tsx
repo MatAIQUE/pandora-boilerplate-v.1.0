@@ -77,7 +77,6 @@ const PaymentPage = ({ searchParams }) => {
             router.push(
               `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}`
             );
-            // console.log("Response:", response.data.data.qrCodeBody);
           }
         }
       }
