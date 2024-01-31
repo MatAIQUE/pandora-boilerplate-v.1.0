@@ -50,7 +50,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setIsLoading(true);
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data;
-
+        setPinCode("");
         const numAttempt = responseData.errors[0];
         const timeLeft = responseData.errors[1];
 
