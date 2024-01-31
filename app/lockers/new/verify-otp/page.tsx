@@ -102,7 +102,7 @@ const VerifyOTP = () => {
 
       if (response.status === 201) {
         setTimer(59);
-        const getKey = response.data.data.secret;
+        const getKey = response.data.data.pinSecret;
         setSecretKey(getKey);
       }
       setIsLoadingOTP(false);

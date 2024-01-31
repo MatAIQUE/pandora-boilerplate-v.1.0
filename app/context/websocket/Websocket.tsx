@@ -22,10 +22,29 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
   useEffect(() => {
     const routes = ["payments", "notifications", "door-status/:lockerId"];
 
-    const newSockets = routes.reduce((acc, route) => {
-      acc[route] = new WebSocket(
+    const createSocket = (route: string): WebSocket => {
+      const socket = new WebSocket(
         `${process.env.NEXT_PUBLIC_WS_BASE_URL}${route}`
       );
+
+      socket.addEventListener("close", (event) => {
+        // Implement reconnection logic here
+        console.log(`WebSocket closed. Reconnecting in 5 seconds...`);
+
+        // Attempt reconnection after 5 seconds
+        setTimeout(() => {
+          setSockets((prevSockets) => ({
+            ...prevSockets,
+            [route]: createSocket(route), // Recreate the socket
+          }));
+        }, 5000);
+      });
+
+      return socket;
+    };
+
+    const newSockets = routes.reduce((acc, route) => {
+      acc[route] = createSocket(route);
       return acc;
     }, {});
 
