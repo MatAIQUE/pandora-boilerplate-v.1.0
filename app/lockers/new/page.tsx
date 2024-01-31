@@ -56,7 +56,6 @@ const GetLockers = () => {
 
       if (response.status === 201) {
         const getKey = response.data.data.pinSecret;
-
         setSecretKey(getKey);
 
         const url = `/lockers/new/verify-otp?lockerId=4000`;
