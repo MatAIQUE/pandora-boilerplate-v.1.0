@@ -72,11 +72,7 @@ const QRPage = ({ searchParams }) => {
                   )}`;
 
             router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
-            setBookingNumber("KMC-");
-            setMobileNumber("+63");
-            setPaymentId("");
-            setSecretKey("");
-            setDoorCount(1);
+
           case "door-status":
           // TODO: Handle door statu update
         }

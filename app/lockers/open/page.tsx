@@ -7,14 +7,52 @@ import Keyboard from "@components/Keyboard";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
+import axios, { all } from "axios";
+import { useBookingContext } from "@context/BookingContext";
 
 const OpenLockers = () => {
   const router = useRouter();
   const [doorNumber, setDoorNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const { allDoors, setAllDoors } = useBookingContext();
 
-  const onNavigate = () => {
-    const url = `/lockers/open/verify-pin?doorNumber=${doorNumber}`;
-    router.push(url);
+  const onNavigate = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_GET_ALL_DOORS as string,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
+            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const allDoorsCount = response.data.data.count;
+        setAllDoors(response.data.data.count);
+
+        // Check if doorNumber is within the available door count range
+        if (
+          doorNumber &&
+          parseInt(doorNumber) > 0 &&
+          parseInt(doorNumber) <= allDoorsCount
+        ) {
+          const url = `/lockers/open/verify-pin?doorNumber=${doorNumber}`;
+          router.push(url);
+        } else {
+          setError(true);
+        }
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(true);
+      console.error(error);
+      setIsLoading(false);
+    }
   };
 
   const onNavigateBack = () => {
@@ -53,6 +91,14 @@ const OpenLockers = () => {
                       value={doorNumber}
                       readOnly
                     />
+
+                    {error && (
+                      <div className={`font-medium  flex justify-center mt-2`}>
+                        <span className={`text-left text-primary`}>
+                          Invalid Locker Number
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
