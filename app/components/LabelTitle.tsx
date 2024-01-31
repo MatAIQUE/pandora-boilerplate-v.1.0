@@ -3,7 +3,7 @@ interface Props {
 }
 const LabelTitle = ({ label }: Props) => {
   return (
-    <div className="text-white font-medium mb-5 flex justify-start">
+    <div className="text-white text-center font-medium mb-5">
       <span className="text-2xl">{label}</span>
     </div>
   );
