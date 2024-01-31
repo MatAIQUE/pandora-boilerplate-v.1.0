@@ -61,13 +61,6 @@ const PaymentPage = ({ searchParams }) => {
       setIsLoading(false);
       if (response.status === 200) {
         if (paymentMethod === "add_to_invoice") {
-          setBookingNumber("KMC-");
-          setMobileNumber("+63");
-          setPaymentId("");
-          setSecretKey("");
-          setDoorCount(1);
-          setAvailableDoors(null);
-
           const url = `/lockers/new/success`;
           router.push(url);
         } else if (paymentMethod === "qr_wallet") {

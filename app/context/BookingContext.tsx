@@ -1,4 +1,5 @@
 "use client";
+import { usePathname } from "next/navigation";
 import {
   createContext,
   useContext,
@@ -6,6 +7,7 @@ import {
   ReactNode,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 
 interface BookingContextProps {
@@ -58,6 +60,8 @@ export const BookingProvider = ({
   const [lockerId, setLockerId] = useState<string | null>(null);
   const [reserve, setReserve] = useState<Record<string, any> | null>(null);
 
+  const pathname = usePathname();
+
   const contextValue: BookingContextProps = {
     bookingNumber,
     setBookingNumber,
@@ -78,6 +82,21 @@ export const BookingProvider = ({
     reserve,
     setReserve,
   };
+
+  // reset all state on in homepage
+  useEffect(() => {
+    if (pathname === "/") {
+      setBookingNumber("KMC-");
+      setMobileNumber("+63");
+      setSecretKey(null);
+      setDoorCount(1);
+      setPaymentId(null);
+      setPrice("700");
+      setAvailableDoors(null);
+      setLockerId(null);
+      setReserve(null);
+    }
+  }, [pathname]);
 
   return (
     <BookingContext.Provider value={contextValue}>
