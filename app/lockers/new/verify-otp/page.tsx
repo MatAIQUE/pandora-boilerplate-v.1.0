@@ -64,6 +64,7 @@ const VerifyOTP = () => {
       console.error(error);
       if (axios.isAxiosError(error) && error.response) {
         const responseData = error.response.data.message;
+        setPinCode("");
         setError(responseData);
         setIsLoading(false);
       }
