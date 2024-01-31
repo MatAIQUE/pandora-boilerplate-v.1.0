@@ -1,14 +1,16 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { Button } from "@components";
 import Keyboard from "@components/Keyboard";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import Menu from "@components/Menu";
-import axios, { all } from "axios";
 import { useBookingContext } from "@context/BookingContext";
+import { apiHeaders } from "@utils/apiHeaders";
+import axios from "axios";
+import Image from "next/image";
+import Spinner from "../../assets/images/spinner.svg";
 
 const OpenLockers = () => {
   const router = useRouter();
@@ -16,6 +18,15 @@ const OpenLockers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const { allDoors, setAllDoors } = useBookingContext();
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!doorNumber) {
+      setIsContinueDisabled(true);
+    } else {
+      setIsContinueDisabled(false);
+    }
+  }, [doorNumber]);
 
   const onNavigate = async () => {
     try {
@@ -23,11 +34,7 @@ const OpenLockers = () => {
       const response = await axios.get(
         process.env.NEXT_PUBLIC_GET_ALL_DOORS as string,
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
@@ -107,25 +114,36 @@ const OpenLockers = () => {
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
-                  <Button
-                    label="Back"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-70 pointer-events-none"
+                    }`}
                     onClick={onNavigateBack}
-                  />
+                  >
+                    Back
+                  </button>
                 </div>
                 <div className="w-full">
-                  <Button
-                    label="Continue"
-                    bgColor="btn-primary"
-                    color="white"
-                    weight="500"
-                    outline=""
+                  <button
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading || isContinueDisabled
+                        ? "opacity-70 pointer-events-none"
+                        : ""
+                    }`}
                     onClick={onNavigate}
-                    disabled={!doorNumber}
-                  />
+                  >
+                    Continue
+                    {isLoading && (
+                      <span className="animate-spin text-white">
+                        <Image
+                          src={Spinner}
+                          height={30}
+                          width={30}
+                          alt="spinner loading"
+                        />
+                      </span>
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
