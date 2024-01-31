@@ -24,6 +24,7 @@ const PaymentPage = ({ searchParams }) => {
   const [error, setError] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const sockets = useWebSocket();
   const {
     bookingNumber,
@@ -97,6 +98,12 @@ const PaymentPage = ({ searchParams }) => {
   };
 
   useEffect(() => {
+    if (!paymentMethod) {
+      setIsContinueDisabled(true);
+    } else {
+      setIsContinueDisabled(false);
+    }
+
     setIsMounted(true);
     return () => {
       setIsMounted(false);
@@ -182,7 +189,11 @@ const PaymentPage = ({ searchParams }) => {
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading || isContinueDisabled
+                        ? "opacity-70 pointer-events-none"
+                        : ""
+                    }`}
                     onClick={paymentAction}
                   >
                     Continue

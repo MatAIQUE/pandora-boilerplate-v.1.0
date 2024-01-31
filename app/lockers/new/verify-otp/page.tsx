@@ -179,9 +179,12 @@ const VerifyOTP = () => {
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading || isContinueDisabled
+                        ? "opacity-70 pointer-events-none"
+                        : ""
+                    }`}
                     onClick={onNavigate}
-                    disabled={isContinueDisabled}
                   >
                     Continue
                     {isLoading && (
