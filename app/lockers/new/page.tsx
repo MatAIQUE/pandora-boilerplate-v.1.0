@@ -115,15 +115,15 @@ const GetLockers = () => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full grid gap-y-3 text-center items-center">
-                  <LabelTitle label="Enter your membership details" />
-                  <Label label="Booking Number *" />
+                <div className="w-full text-center items-center">
+                  <LabelTitle label="" />
+                  <Label label="Booking Number*" />
 
                   <input
                     maxLength={4}
                     type="text"
                     placeholder=""
-                    className={`input text-xl w-full mb-4 bg-white text-black text-start
+                    className={`input text-xl w-full bg-white text-black text-start
                     
                     ${
                       focusedInput === "booking"
@@ -145,12 +145,12 @@ const GetLockers = () => {
                     </div>
                   )}
 
-                  <Label label="Contact Number *" />
+                  <Label label="Contact Number*" />
                   <input
                     maxLength={12}
                     type="text"
                     placeholder=""
-                    className={`input text-xl w-full mb-4 bg-white text-black text-start mb-2
+                    className={`input text-xl w-full bg-white text-black text-start mb-2
                     
                     ${
                       focusedInput === "contact"

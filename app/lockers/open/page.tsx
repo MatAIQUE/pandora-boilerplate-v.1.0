@@ -67,7 +67,7 @@ const OpenLockers = () => {
   };
 
   const handleKeyClick = (value: string) => {
-    if (doorNumber.length < 2) {
+    if (/^\d*$/.test(value) && doorNumber.length < 2) {
       setDoorNumber((prevPin) => prevPin + value);
     }
   };
