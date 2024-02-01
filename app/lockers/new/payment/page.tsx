@@ -97,6 +97,8 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentMethod(paymentMethod);
   };
 
+  console.log("payment", paymentMethod);
+
   useEffect(() => {
     if (!paymentMethod) {
       setIsContinueDisabled(true);
@@ -108,7 +110,7 @@ const PaymentPage = ({ searchParams }) => {
     return () => {
       setIsMounted(false);
     };
-  }, [sockets, paymentId]);
+  }, [sockets, paymentId, paymentMethod]);
 
   const onNavigateBack = () => {
     router.back();
