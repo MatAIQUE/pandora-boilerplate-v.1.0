@@ -65,7 +65,7 @@ const PaymentPage = ({ searchParams }) => {
           const {
             data: { data: data },
           } = response;
-          const arrayLength = response.data.length;
+          const arrayLength = data.length;
           const stringifiedDoors =
             arrayLength === 1
               ? data[0]
