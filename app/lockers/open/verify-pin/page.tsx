@@ -122,7 +122,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                         className="btn btn-ghost pl-0"
                       >
                         <span className="text-primary text-lg">
-                          Forgot PIN Code?
+                          Forgot PIN Code?s
                         </span>
                       </button>
                     </div>
