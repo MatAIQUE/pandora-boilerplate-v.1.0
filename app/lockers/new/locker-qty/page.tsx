@@ -13,6 +13,7 @@ import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
 import { apiHeaders } from "@utils/apiHeaders";
+import { useWebSocket } from "@context/websocket/Websocket";
 
 const LockerQTY = () => {
   const router = useRouter();
@@ -29,6 +30,11 @@ const LockerQTY = () => {
     availableDoors,
     setAvailableDoors,
   } = useBookingContext();
+
+  const sockets = useWebSocket();
+  const lockerId = "4000";
+  const targetRoute = `door-status/${lockerId}`;
+  const socket = sockets[targetRoute];
 
   const availableDoorsCount = async () => {
     try {
@@ -57,7 +63,66 @@ const LockerQTY = () => {
 
   useEffect(() => {
     availableDoorsCount();
-  }, []);
+
+    const establishConnection = () => {
+      socket.addEventListener("open", onOpen);
+      socket.addEventListener("error", onError);
+      socket.addEventListener("close", onClose);
+      socket.addEventListener("message", onMessage);
+      const messageToSend = {
+        endpoint: "door-status",
+      };
+      socket.send(JSON.stringify(messageToSend));
+    };
+
+    const onOpen = (event) => {
+      console.log("Door status - WebSocket opened:", event);
+    };
+
+    const onError = (event) => {
+      console.log("Door status - WebSocket error:", event);
+    };
+
+    const onClose = (event) => {
+      console.log("Door status - WebSocket closed:", event);
+      establishConnection();
+    };
+
+    const onMessage = (event) => {
+      console.log(
+        `Received message on route ${event.currentTarget.url}:`,
+        event.data
+      );
+      if (event.data) {
+        const data = JSON.parse(event.data);
+
+        if (data.status === 200) {
+          availableDoorsCount(); // TODO: Optimization
+        }
+      }
+    };
+
+    if (socket) {
+      if (socket.readyState === WebSocket.OPEN) {
+        establishConnection();
+      } else {
+        socket.addEventListener("open", establishConnection);
+      }
+    }
+
+    return () => {
+      // Cleanup: Remove event listeners on component unmount
+      if (socket) {
+        socket.removeEventListener("open", onOpen);
+        socket.removeEventListener("message", onMessage);
+        socket.removeEventListener("error", onError);
+      }
+    };
+  }, [socket]);
+
+  // useEffect(() => {
+  //   availableDoorsCount();
+  // }, []);
 
   const onNavigate = async () => {
     try {
