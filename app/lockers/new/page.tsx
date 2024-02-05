@@ -12,6 +12,7 @@ import Menu from "@components/Menu";
 import { useBookingContext } from "@context/BookingContext";
 import Spinner from "../../assets/images/spinner.svg";
 import { apiHeaders } from "@utils/apiHeaders";
+import { FaExclamationCircle } from "react-icons/fa";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -118,23 +119,30 @@ const GetLockers = () => {
                   <LabelTitle label="" />
                   <Label label="Booking Number*" />
 
-                  <input
-                    maxLength={4}
-                    type="text"
-                    placeholder=""
-                    className={`input text-xl w-full bg-white text-black text-start
-                    
-                    ${
-                      focusedInput === "booking"
-                        ? "input-bordered input-primary"
-                        : "input-bordered input-neutral"
-                    }
-                    
-                    `}
-                    value={bookingNumber}
-                    onFocus={() => setFocusedInput("booking")}
-                    readOnly
-                  />
+                  <div className="relative">
+                    <input
+                      maxLength={4}
+                      type="text"
+                      placeholder=""
+                      className={`input text-xl w-full bg-white text-black text-start
+                      
+                      ${
+                        focusedInput === "booking"
+                          ? "input-bordered input-primary"
+                          : "input-bordered input-neutral"
+                      }
+                      
+                      `}
+                      value={bookingNumber}
+                      onFocus={() => setFocusedInput("booking")}
+                      readOnly
+                    />
+                    {error && (
+                      <div className="absolute right-[10px] top-[10px] text-primary">
+                        <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                      </div>
+                    )}
+                  </div>
 
                   {error && (
                     <div className={`font-medium mb-2 flex justify-start`}>
@@ -145,23 +153,30 @@ const GetLockers = () => {
                   )}
 
                   <Label label="Contact Number*" />
-                  <input
-                    maxLength={12}
-                    type="text"
-                    placeholder=""
-                    className={`input text-xl w-full bg-white text-black text-start mb-2
-                    
-                    ${
-                      focusedInput === "contact"
-                        ? "input-bordered input-primary"
-                        : "input-bordered input-neutral"
-                    }
-                    
-                    `}
-                    value={mobileNumber}
-                    onFocus={() => setFocusedInput("contact")}
-                    readOnly
-                  />
+                  <div className="relative">
+                    <input
+                      maxLength={12}
+                      type="text"
+                      placeholder=""
+                      className={`input text-xl w-full bg-white text-black text-start mb-2
+                      
+                      ${
+                        focusedInput === "contact"
+                          ? "input-bordered input-primary"
+                          : "input-bordered input-neutral"
+                      }
+                      
+                      `}
+                      value={mobileNumber}
+                      onFocus={() => setFocusedInput("contact")}
+                      readOnly
+                    />
+                    {error && (
+                      <div className="absolute right-[10px] top-[10px] text-primary">
+                        <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {error && (
                   <div className={`font-medium  flex justify-start`}>
