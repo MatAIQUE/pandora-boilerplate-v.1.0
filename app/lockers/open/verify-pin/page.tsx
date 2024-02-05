@@ -107,7 +107,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
-                          Incorrect PIN code ({error})
+                          Incorrect PIN code ({error} Attempts Left)
                         </span>
                       </div>
                     )}
@@ -122,7 +122,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                         className="btn btn-ghost pl-0"
                       >
                         <span className="text-primary text-lg">
-                          Forgot PIN Code?s
+                          Forgot PIN Code?
                         </span>
                       </button>
                     </div>
