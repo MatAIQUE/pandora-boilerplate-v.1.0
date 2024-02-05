@@ -1,19 +1,20 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 
 import { Button } from "@components";
+import ButtonBack from "@components/ButtonBack";
+import ButtonHome from "@components/ButtonHome";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
-import Menu from "@components/Menu";
+import { useBookingContext } from "@context/BookingContext";
+import { useWebSocket } from "@context/websocket/Websocket";
+import { apiHeaders } from "@utils/apiHeaders";
 import Image from "next/image";
 import Spinner from "../../../assets/images/spinner.svg";
-import { useBookingContext } from "@context/BookingContext";
-import { apiHeaders } from "@utils/apiHeaders";
-import { useWebSocket } from "@context/websocket/Websocket";
 
 const LockerQTY = () => {
   const router = useRouter();
@@ -29,6 +30,8 @@ const LockerQTY = () => {
     setDoorCount,
     availableDoors,
     setAvailableDoors,
+    lockerQtySession,
+    setLockerQtySession,
   } = useBookingContext();
 
   const sockets = useWebSocket();
@@ -38,7 +41,7 @@ const LockerQTY = () => {
 
   const availableDoorsCount = async () => {
     try {
-      setIsLoadingDoor(true);
+      setLockerQtySession(true);
       const response = await axios.get(
         process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
         {
@@ -127,6 +130,7 @@ const LockerQTY = () => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
+      setIsLoadingDoor(true);
       const response = await axios.post(
         process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
         {
@@ -171,7 +175,12 @@ const LockerQTY = () => {
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      <Menu />
+      <div className="px-5 my-4 absolute w-full">
+        <div className="flex justify-between">
+          <ButtonBack />
+          <ButtonHome />
+        </div>
+      </div>
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">

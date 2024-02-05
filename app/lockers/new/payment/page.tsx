@@ -1,17 +1,18 @@
 "use client";
 import { Button } from "@components";
+import ButtonBack from "@components/ButtonBack";
+import ButtonHome from "@components/ButtonHome";
 import Label from "@components/Label";
 import Logo from "@components/Logo";
-import Menu from "@components/Menu";
 import { useBookingContext } from "@context/BookingContext";
 import { useWebSocket } from "@context/websocket/Websocket";
+import { apiHeaders } from "@utils/apiHeaders";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import qrIcon from "../../../assets/images/QR.svg";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
-import { apiHeaders } from "@utils/apiHeaders";
 import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
@@ -118,12 +119,40 @@ const PaymentPage = ({ searchParams }) => {
     };
   }, [sockets, paymentId, paymentMethod]);
 
-  const onNavigateBack = () => {
-    router.back();
+  const onNavigateBack = async () => {
+    try {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_UNRESERVE_DOOR as string,
+        {
+          doorCount: doorCount,
+          lockerId: "4000",
+          bookingNumber: bookingNumber,
+          unreserve: true,
+        },
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      if (response.status === 201) {
+        router.back();
+      }
+    } catch (err) {
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data.message;
+        setError(responseData);
+        setIsLoading(false);
+      }
+    }
   };
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      <Menu />
+      <div className="px-5 my-4 absolute w-full">
+        <div className="flex justify-between">
+          <ButtonBack />
+          <ButtonHome />
+        </div>
+      </div>
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">

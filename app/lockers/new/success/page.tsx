@@ -1,4 +1,5 @@
 "use client";
+import ButtonHome from "@components/ButtonHome";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
@@ -29,7 +30,11 @@ const SuccessPaymentPage = ({ searchParams }) => {
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      {/* <Menu /> */}
+      <div className="px-5 my-4 absolute w-full">
+        <div className="flex justify-end">
+          <ButtonHome />
+        </div>
+      </div>
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">

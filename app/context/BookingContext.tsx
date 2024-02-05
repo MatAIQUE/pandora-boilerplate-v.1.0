@@ -31,6 +31,8 @@ interface BookingContextProps {
   setAvailableDoors: Dispatch<SetStateAction<number | null>>;
   reserve: Record<string, any> | null;
   setReserve: Dispatch<SetStateAction<Record<string, any> | null>>;
+  lockerQtySession: boolean | null;
+  setLockerQtySession: Dispatch<SetStateAction<boolean | null>>;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -62,6 +64,9 @@ export const BookingProvider = ({
   const [availableDoors, setAvailableDoors] = useState<number>(null);
   const [lockerId, setLockerId] = useState<string | null>(null);
   const [reserve, setReserve] = useState<Record<string, any> | null>(null);
+  const [lockerQtySession, setLockerQtySession] = useState<boolean | null>(
+    false
+  );
 
   const pathname = usePathname();
 
@@ -86,6 +91,8 @@ export const BookingProvider = ({
     setLockerId,
     reserve,
     setReserve,
+    lockerQtySession,
+    setLockerQtySession,
   };
 
   // reset all state on in homepage
@@ -100,6 +107,7 @@ export const BookingProvider = ({
       setAvailableDoors(null);
       setLockerId(null);
       setReserve(null);
+      setLockerQtySession(false);
     }
   }, [pathname]);
 
