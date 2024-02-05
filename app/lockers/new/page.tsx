@@ -117,40 +117,41 @@ const GetLockers = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full text-center items-center">
                   <LabelTitle label="" />
-                  <Label label="Booking Number*" />
+                  <div className="mb-4">
+                    <Label label="Booking Number*" />
+                    <div className="relative">
+                      <input
+                        maxLength={4}
+                        type="text"
+                        placeholder=""
+                        className={`input text-xl w-full bg-white text-black text-start
+                        
+                        ${
+                          focusedInput === "booking"
+                            ? "input-bordered input-primary"
+                            : "input-bordered input-neutral"
+                        }
+                        
+                        `}
+                        value={bookingNumber}
+                        onFocus={() => setFocusedInput("booking")}
+                        readOnly
+                      />
+                      {error && (
+                        <div className="absolute right-[10px] top-[10px] text-primary">
+                          <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="relative">
-                    <input
-                      maxLength={4}
-                      type="text"
-                      placeholder=""
-                      className={`input text-xl w-full bg-white text-black text-start
-                      
-                      ${
-                        focusedInput === "booking"
-                          ? "input-bordered input-primary"
-                          : "input-bordered input-neutral"
-                      }
-                      
-                      `}
-                      value={bookingNumber}
-                      onFocus={() => setFocusedInput("booking")}
-                      readOnly
-                    />
                     {error && (
-                      <div className="absolute right-[10px] top-[10px] text-primary">
-                        <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                      <div className={`font-medium my-2 flex justify-start`}>
+                        <span className={`text-left text-primary`}>
+                          Booking number/Contact number didn&apos;t match
+                        </span>
                       </div>
                     )}
                   </div>
-
-                  {error && (
-                    <div className={`font-medium mb-2 flex justify-start`}>
-                      <span className={`text-left text-primary`}>
-                        Booking number/Contact number didn&apos;t match
-                      </span>
-                    </div>
-                  )}
 
                   <Label label="Contact Number*" />
                   <div className="relative">
@@ -179,7 +180,7 @@ const GetLockers = () => {
                   </div>
                 </div>
                 {error && (
-                  <div className={`font-medium  flex justify-start`}>
+                  <div className={`font-medium my-2 flex justify-start`}>
                     <span className={`text-left text-primary`}>
                       Booking number/Contact number didn&apos;t match
                     </span>
