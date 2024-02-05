@@ -105,8 +105,6 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentMethod(paymentMethod);
   };
 
-  console.log("payment", paymentMethod);
-
   useEffect(() => {
     if (!paymentMethod) {
       setIsContinueDisabled(true);
