@@ -29,6 +29,8 @@ const LockerQTY = () => {
     setDoorCount,
     availableDoors,
     setAvailableDoors,
+    lockerQtySession,
+    setLockerQtySession,
   } = useBookingContext();
 
   const sockets = useWebSocket();
@@ -38,7 +40,7 @@ const LockerQTY = () => {
 
   const availableDoorsCount = async () => {
     try {
-      setIsLoadingDoor(true);
+      setLockerQtySession(true);
       const response = await axios.get(
         process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
         {
@@ -127,6 +129,7 @@ const LockerQTY = () => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
+      setIsLoadingDoor(true);
       const response = await axios.post(
         process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
         {
