@@ -5,14 +5,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Button } from "@components";
+import ButtonBack from "@components/ButtonBack";
+import ButtonHome from "@components/ButtonHome";
 import Keypad from "@components/Keypad";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
-import Menu from "@components/Menu";
-import Spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
 import { apiHeaders } from "@utils/apiHeaders";
+import Spinner from "../../../assets/images/spinner.svg";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -83,7 +84,12 @@ const ForgotPIN = ({ searchParams }: Props) => {
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      <Menu />
+      <div className="px-5 my-4 absolute w-full">
+        <div className="flex justify-between">
+          <ButtonBack />
+          <ButtonHome />
+        </div>
+      </div>
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">

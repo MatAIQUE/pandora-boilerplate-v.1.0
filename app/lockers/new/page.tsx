@@ -4,15 +4,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import ButtonBack from "@components/ButtonBack";
+import ButtonHome from "@components/ButtonHome";
 import Keyboard from "@components/Keyboard";
 import Label from "@components/Label";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
-import Menu from "@components/Menu";
 import { useBookingContext } from "@context/BookingContext";
-import Spinner from "../../assets/images/spinner.svg";
 import { apiHeaders } from "@utils/apiHeaders";
 import { FaExclamationCircle } from "react-icons/fa";
+import Spinner from "../../assets/images/spinner.svg";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -108,7 +109,12 @@ const GetLockers = () => {
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
-      <Menu />
+      <div className="px-5 my-4 absolute w-full">
+        <div className="flex justify-between">
+          <ButtonBack />
+          <ButtonHome />
+        </div>
+      </div>
       <div className="basis-2/4 flex flex-auto justify-center items-center mb-96">
         <div className="card w-1/2 bg-secondary text-secondary-content drop-shadow-lg p-5">
           <div className="card-body text-left">
@@ -139,7 +145,7 @@ const GetLockers = () => {
                       />
                       {error && (
                         <div className="absolute right-[10px] top-[10px] text-primary">
-                          <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                          <FaExclamationCircle className="w-[25px] h-[25px]" />
                         </div>
                       )}
                     </div>
@@ -174,7 +180,7 @@ const GetLockers = () => {
                     />
                     {error && (
                       <div className="absolute right-[10px] top-[10px] text-primary">
-                        <FaExclamationCircle className="w-[25px] h-[25px]"/>
+                        <FaExclamationCircle className="w-[25px] h-[25px]" />
                       </div>
                     )}
                   </div>

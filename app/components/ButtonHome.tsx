@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaAngleLeft, FaHome } from "react-icons/fa";
 
-const Menu = () => {
+const ButtonHome = () => {
   const router = useRouter();
 
   const { lockerQtySession, setLockerQtySession } = useBookingContext();
@@ -53,4 +53,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default ButtonHome;
