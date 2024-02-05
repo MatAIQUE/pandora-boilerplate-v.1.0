@@ -118,8 +118,31 @@ const PaymentPage = ({ searchParams }) => {
     };
   }, [sockets, paymentId, paymentMethod]);
 
-  const onNavigateBack = () => {
-    router.back();
+  const onNavigateBack = async () => {
+    try {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_UNRESERVE_DOOR as string,
+        {
+          doorCount: doorCount,
+          lockerId: "4000",
+          bookingNumber: bookingNumber,
+          unreserve: true,
+        },
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      if (response.status === 201) {
+        router.back();
+      }
+    } catch (err) {
+      if (axios.isAxiosError(error) && error.response) {
+        const responseData = error.response.data.message;
+        setError(responseData);
+        setIsLoading(false);
+      }
+    }
   };
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
