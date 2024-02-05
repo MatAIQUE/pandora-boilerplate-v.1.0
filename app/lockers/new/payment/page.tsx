@@ -62,8 +62,16 @@ const PaymentPage = ({ searchParams }) => {
       setIsLoading(false);
       if (response.status === 200) {
         if (paymentMethod === "add_to_invoice") {
-          const url = `/lockers/new/success`;
-          router.push(url);
+          const {
+            data: { data: data },
+          } = response;
+          const arrayLength = data.length;
+          const stringifiedDoors =
+            arrayLength === 1
+              ? data[0]
+              : `${data.slice(0, -1).join(", ")} and ${data.slice(-1)}`;
+
+          router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
         } else if (paymentMethod === "qr_wallet") {
           const {
             data: {
@@ -96,8 +104,6 @@ const PaymentPage = ({ searchParams }) => {
     // other shenanigans here ...
     setPaymentMethod(paymentMethod);
   };
-
-  console.log("payment", paymentMethod);
 
   useEffect(() => {
     if (!paymentMethod) {
