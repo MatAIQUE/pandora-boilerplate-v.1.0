@@ -39,6 +39,7 @@ const PaymentPage = ({ searchParams }) => {
     doorCount,
     setDoorCount,
     setAvailableDoors,
+    hasRecurringInvoice,
   } = useBookingContext();
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
@@ -101,7 +102,7 @@ const PaymentPage = ({ searchParams }) => {
     }
   };
 
-  console.log("paymerasd", paymentMethod)
+  console.log("paymerasd", paymentMethod);
 
   const handleSelectPaymentMethod = (paymentMethod) => {
     // other shenanigans here ...
@@ -165,11 +166,16 @@ const PaymentPage = ({ searchParams }) => {
                   <Label label="How do you want to pay" />
                   <div className="mb-5 mt-5">
                     <button
+                      disabled={!hasRecurringInvoice}
                       onClick={() =>
                         handleSelectPaymentMethod("add_to_invoice")
                       }
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
-                      ${paymentMethod === "add_to_invoice" ? "text-primary btn-primary btn-outline btn" : ""}
+                      ${
+                        paymentMethod === "add_to_invoice"
+                          ? "text-primary btn-primary btn-outline btn"
+                          : ""
+                      }
                       `}
                     >
                       <label>Add to Booking Invoice</label>
@@ -186,7 +192,11 @@ const PaymentPage = ({ searchParams }) => {
                   <div className="mb-5 mt-5">
                     <button
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
-                      ${paymentMethod === "qr_wallet" ? "text-primary btn-primary btn-outline btn" : ""}
+                      ${
+                        paymentMethod === "qr_wallet"
+                          ? "text-primary btn-primary btn-outline btn"
+                          : ""
+                      }
                       `}
                       onClick={() => handleSelectPaymentMethod("qr_wallet")}
                     >

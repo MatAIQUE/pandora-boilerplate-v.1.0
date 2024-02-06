@@ -96,7 +96,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
+                <div className="w-full items-center">
                   <LabelTitle label="Enter your registered number" />
                   <LabelDesc
                     label="To verify enter your registered number"

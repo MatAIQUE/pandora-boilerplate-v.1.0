@@ -30,7 +30,7 @@ const GetLockers = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { setSecretKey } = useBookingContext();
+  const { setSecretKey, setHasRecurringInvoice } = useBookingContext();
 
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
@@ -57,8 +57,9 @@ const GetLockers = () => {
       );
 
       if (response.status === 201) {
-        const getKey = response.data.data.pinSecret;
-        setSecretKey(getKey);
+        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        setSecretKey(pinSecret);
+        setHasRecurringInvoice(hasRecurringInvoice);
 
         const url = `/lockers/new/verify-otp?lockerId=4000`;
         router.push(url);
@@ -71,6 +72,7 @@ const GetLockers = () => {
       setIsLoading(false);
     }
   };
+  console.log("asd", error)
 
   const onNavigateBack = () => {
     router.back();
@@ -131,7 +133,7 @@ const GetLockers = () => {
                         type="text"
                         placeholder=""
                         className={`input text-xl w-full bg-white text-black text-start
-                        
+                        ${error ? "text-error border-error border-2" : ""}
                         ${
                           focusedInput === "booking"
                             ? "input-bordered input-primary"
@@ -144,7 +146,7 @@ const GetLockers = () => {
                         readOnly
                       />
                       {error && (
-                        <div className="absolute right-[10px] top-[10px] text-primary">
+                        <div className="absolute right-[10px] top-[10px] text-error">
                           <FaExclamationCircle className="w-[25px] h-[25px]" />
                         </div>
                       )}
@@ -152,7 +154,7 @@ const GetLockers = () => {
 
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
-                        <span className={`text-left text-primary`}>
+                        <span className={`text-left text-error`}>
                           Booking number/Contact number didn&apos;t match
                         </span>
                       </div>
@@ -166,7 +168,7 @@ const GetLockers = () => {
                       type="text"
                       placeholder=""
                       className={`input text-xl w-full bg-white text-black text-start mb-2
-                      
+                      ${error ? "text-error border-error border-2" : ""}
                       ${
                         focusedInput === "contact"
                           ? "input-bordered input-primary"
@@ -179,7 +181,7 @@ const GetLockers = () => {
                       readOnly
                     />
                     {error && (
-                      <div className="absolute right-[10px] top-[10px] text-primary">
+                      <div className="absolute right-[10px] top-[10px] text-error">
                         <FaExclamationCircle className="w-[25px] h-[25px]" />
                       </div>
                     )}
@@ -187,7 +189,7 @@ const GetLockers = () => {
                 </div>
                 {error && (
                   <div className={`font-medium my-2 flex justify-start`}>
-                    <span className={`text-left text-primary`}>
+                    <span className={`text-left text-error`}>
                       Booking number/Contact number didn&apos;t match
                     </span>
                   </div>
