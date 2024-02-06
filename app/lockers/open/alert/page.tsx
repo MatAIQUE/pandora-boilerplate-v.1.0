@@ -77,6 +77,14 @@ const AlertPage = ({ searchParams }: Props) => {
                     </div>
                   </div>
                 </div>
+                <div className="w-full">
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500`}
+                    onClick={() => router.push("/")}
+                  >
+                    Try again later
+                  </button>
+                </div>
               </div>
             </div>
           </div>
