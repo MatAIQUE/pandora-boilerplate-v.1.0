@@ -234,11 +234,13 @@ const LockerQTY = () => {
                         <p className="ms-2">/mo</p>
                       </span>
                     </div>
-                    {doorCount > 1 && (
-                      <span>
-                        <p>P 700 each</p>
-                      </span>
-                    )}
+                    <div className="h-[50px]">
+                      {doorCount > 1 && (
+                        <span>
+                          <p>P 700 each</p>
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
