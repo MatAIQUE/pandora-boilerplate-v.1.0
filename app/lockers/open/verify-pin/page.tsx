@@ -23,6 +23,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
   const router = useRouter();
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
+  const [errorDoor, setErrorDoor] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const doorNumber = searchParams.doorNumber;
@@ -55,7 +56,9 @@ const VerifyPIN = ({ searchParams }: Props) => {
         const numAttempt = responseData.errors[0];
         const timeLeft = responseData.errors[1];
 
-        // console.log("Attempt Time left", attemptTimeLeft);
+        if (error.response.status === 500) {
+          setErrorDoor(true);
+        }
 
         if (numAttempt === "0") {
           // Only include timeLeft parameter if it's a valid number
@@ -114,6 +117,14 @@ const VerifyPIN = ({ searchParams }: Props) => {
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
                           Incorrect PIN code ({error} Attempts Left)
+                        </span>
+                      </div>
+                    )}
+
+                    {errorDoor && (
+                      <div className={`font-medium my-2 flex justify-start`}>
+                        <span className={`text-left text-primary`}>
+                          Unauthorized
                         </span>
                       </div>
                     )}
