@@ -137,7 +137,7 @@ const VerifyOTP = () => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
+                <div className="w-full items-center">
                   <LabelTitle label="We've sent you an OTP" />
                   <LabelDesc
                     label="Enter the 6-digit OTP sent to your number"
@@ -159,10 +159,19 @@ const VerifyOTP = () => {
                     </button>
                   </div>
                   <div className="w-full text-center items-center mt-10">
-                    <DoorInputOTP pinCode={pinCode} />
+                  <div className="">
+                    <input
+                      maxLength={6}
+                      type="password"
+                      placeholder="0 0 0 0 0 0"
+                      className={`input input-bordered text-2xl input-secondary w-full text-center bg-white text-black ${error ? "border-error" : ""}`}
+                      value={pinCode}
+                      readOnly
+                    />
+                  </div>
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
-                        <span className={`text-left text-primary`}>
+                        <span className={`text-left text-error mt-2`}>
                           Verification code didn&apos;t match
                         </span>
                       </div>

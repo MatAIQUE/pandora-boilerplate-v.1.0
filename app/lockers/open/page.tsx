@@ -92,11 +92,11 @@ const OpenLockers = () => {
             <Logo />
             <div className="">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
+                <div className="w-full items-center">
                   <div className="mb-10">
                     <LabelTitle label="Locker Number" />
                   </div>
-                  <div className="">
+                  <div className="text-center">
                     <input
                       maxLength={2}
                       type="text"

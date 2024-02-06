@@ -100,7 +100,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
+                <div className="w-full items-center">
                   <LabelTitle label="Enter your Locker PIN code" />
                   <LabelDesc
                     label="Enter the 6-digit credential code sent to your"
