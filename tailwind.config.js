@@ -21,10 +21,11 @@ module.exports = {
         kmc: {
           primary: "#FF7200",
           secondary: "#111622",
+          danger: "#C5280C",
           green: "#16A679",
           warning: "#16A679",
           accent: "#1a1f2b",
-          error: "F24122",
+          error: "#C5280C",
           info: "FFFFFF",
           "base-100": "#1a1f2b",
         },
