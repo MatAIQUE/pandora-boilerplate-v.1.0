@@ -62,7 +62,6 @@ const OpenLockers = () => {
       setIsLoading(false);
     }
   };
-  console.log("asdd", error)
 
   const onNavigateBack = () => {
     router.back();
