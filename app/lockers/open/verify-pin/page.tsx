@@ -81,7 +81,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setPinCode((prevPin) => prevPin + value);
     }
   };
-
+  console.log(error);
   const handleDeleteClick = () => {
     setPinCode((prevPin) => prevPin.slice(0, -1));
   };

@@ -121,8 +121,8 @@ const GetLockers = () => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center">
-                  <LabelTitle label="" />
+                <div className="w-full items-center">
+                  <LabelTitle label="Enter your membership details" />
                   <div className="mb-4">
                     <Label label="Booking Number*" />
                     <div className="relative">

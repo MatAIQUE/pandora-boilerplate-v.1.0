@@ -41,7 +41,6 @@ const LockerQTY = () => {
 
   const availableDoorsCount = async () => {
     try {
-      setLockerQtySession(true);
       const response = await axios.get(
         process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
         {
@@ -129,6 +128,7 @@ const LockerQTY = () => {
 
   const onNavigate = async () => {
     try {
+      setLockerQtySession(true);
       setIsLoading(true);
       setIsLoadingDoor(true);
       const response = await axios.post(
@@ -205,7 +205,8 @@ const LockerQTY = () => {
                       >
                         <FaMinus />
                       </button>
-                      <div className="font-medium text-3xl mx-2">{doorCount}
+                      <div className="font-medium text-3xl mx-2">
+                        {doorCount}
                       </div>
                       <button
                         onClick={addCart}
