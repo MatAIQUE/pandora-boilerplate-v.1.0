@@ -32,24 +32,23 @@ const OpenLockers = () => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
+      const doorQ = `doorNumber=${doorNumber}`;
       const response = await axios.get(
-        process.env.NEXT_PUBLIC_GET_ALL_DOORS as string,
+        `${process.env.NEXT_PUBLIC_VALIDATE_DOOR}${doorQ}` as string,
         {
           headers: apiHeaders(),
         }
       );
 
       if (response.status === 200) {
-        const allDoorsCount = response.data.data.count;
-        setAllDoors(response.data.data.count);
-
+        const {
+          data: {
+            data: { door },
+          },
+        } = response;
         // Check if doorNumber is within the available door count range
-        if (
-          doorNumber &&
-          parseInt(doorNumber) > 0 &&
-          parseInt(doorNumber) <= allDoorsCount
-        ) {
-          const url = `/lockers/open/verify-pin?doorNumber=${doorNumber}`;
+        if (door) {
+          const url = `/lockers/open/verify-pin?${doorQ}`;
           router.push(url);
         } else {
           setError(true);

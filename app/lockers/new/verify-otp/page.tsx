@@ -25,8 +25,13 @@ const VerifyOTP = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [timer, setTimer] = useState(0);
   const [isLoadingOTP, setIsLoadingOTP] = useState(false);
-  const { bookingNumber, secretKey, setSecretKey, mobileNumber } =
-    useBookingContext();
+  const {
+    bookingNumber,
+    secretKey,
+    setSecretKey,
+    mobileNumber,
+    setHasRecurringInvoice,
+  } = useBookingContext();
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -57,6 +62,7 @@ const VerifyOTP = () => {
 
       setIsLoading(false);
       if (response.status === 200) {
+        setSecretKey(null);
         const url = `/lockers/new/locker-qty?&lockerId=4000}`;
         router.push(url);
       }
@@ -104,8 +110,9 @@ const VerifyOTP = () => {
 
       if (response.status === 201) {
         setTimer(59);
-        const getKey = response.data.data.pinSecret;
-        setSecretKey(getKey);
+        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        setSecretKey(pinSecret);
+        setHasRecurringInvoice(hasRecurringInvoice);
       }
       setIsLoadingOTP(false);
     } catch (error) {

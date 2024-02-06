@@ -30,7 +30,7 @@ const GetLockers = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { setSecretKey } = useBookingContext();
+  const { setSecretKey, setHasRecurringInvoice } = useBookingContext();
 
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
@@ -57,8 +57,9 @@ const GetLockers = () => {
       );
 
       if (response.status === 201) {
-        const getKey = response.data.data.pinSecret;
-        setSecretKey(getKey);
+        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        setSecretKey(pinSecret);
+        setHasRecurringInvoice(hasRecurringInvoice);
 
         const url = `/lockers/new/verify-otp?lockerId=4000`;
         router.push(url);
