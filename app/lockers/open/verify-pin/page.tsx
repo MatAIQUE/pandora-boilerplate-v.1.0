@@ -81,7 +81,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setPinCode((prevPin) => prevPin + value);
     }
   };
-  console.log(error)
+  console.log(error);
   const handleDeleteClick = () => {
     setPinCode((prevPin) => prevPin.slice(0, -1));
   };
@@ -113,7 +113,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
-                          Incorrect PIN code {error}
+                          Incorrect PIN code ({error} Attempts Left)
                         </span>
                       </div>
                     )}
