@@ -2,7 +2,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@components";
 import ButtonBack from "@components/ButtonBack";
@@ -25,11 +25,21 @@ const VerifyPIN = ({ searchParams }: Props) => {
   const [error, setError] = useState(null);
   const [errorDoor, setErrorDoor] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const doorNumber = searchParams.doorNumber;
 
+  useEffect(() => {
+    if (pinCode.length < 6) {
+      setIsContinueDisabled(true);
+    } else {
+      setIsContinueDisabled(false);
+    }
+  }, [pinCode]);
+
   const onNavigate = async () => {
     try {
+      setErrorDoor(false);
       setIsLoading(true);
       const response = await axios.post(
         process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "4000",
@@ -84,7 +94,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setPinCode((prevPin) => prevPin + value);
     }
   };
-  console.log(error);
+
   const handleDeleteClick = () => {
     setPinCode((prevPin) => prevPin.slice(0, -1));
   };
@@ -166,7 +176,11 @@ const VerifyPIN = ({ searchParams }: Props) => {
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading || isContinueDisabled
+                        ? "opacity-30 pointer-events-none"
+                        : ""
+                    }`}
                     onClick={onNavigate}
                   >
                     Continue
