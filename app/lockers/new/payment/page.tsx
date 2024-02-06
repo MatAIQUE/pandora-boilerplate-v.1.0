@@ -101,6 +101,8 @@ const PaymentPage = ({ searchParams }) => {
     }
   };
 
+  console.log("paymerasd", paymentMethod)
+
   const handleSelectPaymentMethod = (paymentMethod) => {
     // other shenanigans here ...
     setPaymentMethod(paymentMethod);
@@ -162,18 +164,13 @@ const PaymentPage = ({ searchParams }) => {
                 <div className="w-full text-center items-center">
                   <Label label="How do you want to pay" />
                   <div className="mb-5 mt-5">
-                    {/* <Button
-                      label="Add to Booking Invoice"
-                      bgColor="btn-outline"
-                      color="gray-800"
-                      weight="500"
-                      outline="btn-outline"
-                    /> */}
                     <button
                       onClick={() =>
                         handleSelectPaymentMethod("add_to_invoice")
                       }
-                      className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
+                      className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
+                      ${paymentMethod === "add_to_invoice" ? "text-primary btn-primary btn-outline btn" : ""}
+                      `}
                     >
                       <label>Add to Booking Invoice</label>
                       <span>
@@ -187,15 +184,10 @@ const PaymentPage = ({ searchParams }) => {
                     </button>
                   </div>
                   <div className="mb-5 mt-5">
-                    {/* <Button
-                      label="Pay with Maya/Gcash"
-                      bgColor="btn-outline"
-                      color="gray-800"
-                      weight="500"
-                      outline="btn-outline"
-                    /> */}
                     <button
-                      className="btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-evenly"
+                      className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
+                      ${paymentMethod === "qr_wallet" ? "text-primary btn-primary btn-outline btn" : ""}
+                      `}
                       onClick={() => handleSelectPaymentMethod("qr_wallet")}
                     >
                       <label>Pay with Maya/GCash</label>
