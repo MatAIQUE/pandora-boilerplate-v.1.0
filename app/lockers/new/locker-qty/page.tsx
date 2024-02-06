@@ -194,7 +194,7 @@ const LockerQTY = () => {
               <div className="w-1/2">
                 <div className="h-full w-full">
                   <div className="w-full text-center items-center">
-                    <div className="flex items-start gap-5">
+                    <div className="flex items-start justify-between w-[160px]">
                       <button
                         onClick={subtractCart}
                         className={
@@ -205,7 +205,8 @@ const LockerQTY = () => {
                       >
                         <FaMinus />
                       </button>
-                      <div className="font-medium text-3xl">{doorCount}</div>
+                      <div className="font-medium text-3xl mx-2">{doorCount}
+                      </div>
                       <button
                         onClick={addCart}
                         className={
