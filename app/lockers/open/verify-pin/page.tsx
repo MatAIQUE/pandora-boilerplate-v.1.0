@@ -128,7 +128,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
                       placeholder="0 0 0 0 0 0"
                       className={`
                       input input-bordered text-2xl input-secondary w-full text-center bg-white text-black
-                      ${error ? "border-error" : ""}
+                      ${error ? "border-error border-2" : ""}
                       `}
                       value={pinCode}
                       readOnly

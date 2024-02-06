@@ -132,7 +132,7 @@ const GetLockers = () => {
                         type="text"
                         placeholder=""
                         className={`input text-xl w-full bg-white text-black text-start
-                        ${error ? "text-error border-error" : ""}
+                        ${error ? "text-error border-error border-2" : ""}
                         ${
                           focusedInput === "booking"
                             ? "input-bordered input-primary"
@@ -167,7 +167,7 @@ const GetLockers = () => {
                       type="text"
                       placeholder=""
                       className={`input text-xl w-full bg-white text-black text-start mb-2
-                      ${error ? "text-error border-error" : ""}
+                      ${error ? "text-error border-error border-2" : ""}
                       ${
                         focusedInput === "contact"
                           ? "input-bordered input-primary"
