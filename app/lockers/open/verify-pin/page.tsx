@@ -121,11 +121,23 @@ const VerifyPIN = ({ searchParams }: Props) => {
                   />
                   <LabelDesc label="mobile number." position="justify-start" />
                   <div className="w-full text-center items-center mt-10">
-                    <DoorInputOTP pinCode={pinCode} />
+                  <div className="">
+                    <input
+                      maxLength={6}
+                      type="password"
+                      placeholder="0 0 0 0 0 0"
+                      className={`
+                      input input-bordered text-2xl input-secondary w-full text-center bg-white text-black
+                      ${error ? "border-error" : ""}
+                      `}
+                      value={pinCode}
+                      readOnly
+                    />
+                  </div>
 
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
-                        <span className={`text-left text-primary`}>
+                        <span className={`text-left text-error`}>
                           Incorrect PIN code ({error} Attempts Left)
                         </span>
                       </div>
