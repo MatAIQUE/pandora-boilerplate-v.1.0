@@ -64,7 +64,7 @@ const SuccessPaymentPage = ({ searchParams }) => {
 
                   <div className="w-full text-center justify-center items-center">
                     <LabelDesc
-                      label={`Returning to homepage in ${timer}`}
+                      label={`Returning to homepage in ${timer}.`}
                       position="justify-center"
                     />
                   </div>
