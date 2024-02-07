@@ -4,10 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Button } from "@components";
 import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
-import Keypad from "@components/Keypad";
+import Keyboard from "@components/Keyboard";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
@@ -69,7 +68,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const handleKeyClick = (value: string) => {
     const maxLength = 13;
 
-    if (mobileNumber.length < maxLength) {
+    if (/^\d*$/.test(value) && mobileNumber.length < maxLength) {
       setMobileNumber((prevPin) => `${prevPin}${value}`);
     }
   };
@@ -123,11 +122,6 @@ const ForgotPIN = ({ searchParams }: Props) => {
                         </span>
                       </div>
                     )}
-
-                    <Keypad
-                      handleDeleteClick={handleDeleteClick}
-                      handleKeyClick={handleKeyClick}
-                    />
                   </div>
                 </div>
               </div>
@@ -135,20 +129,23 @@ const ForgotPIN = ({ searchParams }: Props) => {
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
-                  <Button
-                    label="Back"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-30 pointer-events-none"
+                    }`}
                     onClick={onNavigateBack}
-                  />
+                  >
+                    Back
+                  </button>
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading || isContinueDisabled
+                        ? "opacity-30 pointer-events-none"
+                        : ""
+                    }`}
                     onClick={onNavigate}
-                    disabled={isContinueDisabled}
                   >
                     Continue
                     {isLoading && (
@@ -168,6 +165,10 @@ const ForgotPIN = ({ searchParams }: Props) => {
           </div>
         </div>
       </div>
+      <Keyboard
+        handleDeleteClick={handleDeleteClick}
+        handleKeyClick={handleKeyClick}
+      />
     </div>
   );
 };
