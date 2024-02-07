@@ -27,17 +27,17 @@ const SuccessForgotPinPage = () => {
             <Logo />
             <div className="py-10">
               <div className="py-10 h-full w-full">
-                <div className="w-full text-center items-center mb-10">
-                  <div className="flex gap-4">
+                <div className="w-full items-center">
+                  <div className="flex gap-4 mb-10">
                     <FaCheckCircle className="text-warning" size={35} />
                     <LabelTitle label="Verified!" />
                   </div>
 
-                  <div className="w-full text-center justify-center items-center">
+                  <div className="w-full justify-center items-center mb-10">
                     <LabelTitle label="Credential Code has been sent!" />
                     <LabelDesc
                       label="We've sent your new PIN code to your mobile number"
-                      position="justify-center"
+                      position="justify-left"
                     />
                   </div>
                 </div>
