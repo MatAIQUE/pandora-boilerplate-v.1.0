@@ -194,7 +194,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
-                          ? "focus:btn-primary focus:text-white focus:bg-transparent focus:btn-outline btn"
+                          ? "focus:border-primary focus:text-primary focus:bg-transparent btn"
                           : ""
                       }
                       `}
