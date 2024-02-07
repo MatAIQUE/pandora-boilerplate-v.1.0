@@ -173,7 +173,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                          ? "text-primary btn-primary btn-outline btn"
+                          ? "btn-primary text-white bg-transparent btn-outline btn"
                           : ""
                       }
                       `}
@@ -194,7 +194,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
-                          ? "text-primary btn-primary btn-outline btn"
+                          ? "btn-primary text-white bg-transparent btn-outline btn"
                           : ""
                       }
                       `}
