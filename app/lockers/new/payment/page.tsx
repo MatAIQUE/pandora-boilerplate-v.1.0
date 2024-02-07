@@ -170,10 +170,10 @@ const PaymentPage = ({ searchParams }) => {
                       onClick={() =>
                         handleSelectPaymentMethod("add_to_invoice")
                       }
-                      className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
+                      className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                          ? "btn-primary text-white bg-transparent btn-outline btn"
+                        ? "focus:btn-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
                           : ""
                       }
                       `}
@@ -191,10 +191,10 @@ const PaymentPage = ({ searchParams }) => {
                   </div>
                   <div className="mb-5 mt-5">
                     <button
-                      className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
+                      className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
-                          ? "btn-primary text-white bg-transparent btn-outline btn"
+                          ? "focus:border-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
                           : ""
                       }
                       `}
