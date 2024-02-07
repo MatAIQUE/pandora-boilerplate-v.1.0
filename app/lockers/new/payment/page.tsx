@@ -173,7 +173,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                          ? "btn-primary text-white bg-transparent btn-outline btn active:bg-transparent active:btn-outline active:btn-primary"
+                        ? "focus:btn-primary focus:text-white focus:bg-transparent focus:btn-outline btn"
                           : ""
                       }
                       `}
@@ -194,7 +194,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn gray-800 font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
-                          ? "btn-primary text-white bg-transparent btn-outline btn active:bg-transparent active:btn-outline active:btn-primary"
+                          ? "focus:btn-primary focus:text-white focus:bg-transparent focus:btn-outline btn"
                           : ""
                       }
                       `}
