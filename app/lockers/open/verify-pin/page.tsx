@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@components";
 import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
-import DoorInputOTP from "@components/DoorInputOTP";
-import Keypad from "@components/Keypad";
+import Keyboard from "@components/Keyboard";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
@@ -90,7 +89,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
   };
 
   const handleKeyClick = (value: string) => {
-    if (pinCode.length < 6) {
+    if (/^\d*$/.test(value) && pinCode.length < 6) {
       setPinCode((prevPin) => prevPin + value);
     }
   };
@@ -121,19 +120,19 @@ const VerifyPIN = ({ searchParams }: Props) => {
                   />
                   <LabelDesc label="mobile number." position="justify-start" />
                   <div className="w-full text-center items-center mt-10">
-                  <div className="">
-                    <input
-                      maxLength={6}
-                      type="password"
-                      placeholder="0 0 0 0 0 0"
-                      className={`
+                    <div className="">
+                      <input
+                        maxLength={6}
+                        type="password"
+                        placeholder="0 0 0 0 0 0"
+                        className={`
                       input input-bordered text-2xl input-secondary w-full text-center bg-white text-black
                       ${error ? "border-error border-2" : ""}
                       `}
-                      value={pinCode}
-                      readOnly
-                    />
-                  </div>
+                        value={pinCode}
+                        readOnly
+                      />
+                    </div>
 
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
@@ -165,11 +164,6 @@ const VerifyPIN = ({ searchParams }: Props) => {
                         </span>
                       </button>
                     </div>
-
-                    <Keypad
-                      handleDeleteClick={handleDeleteClick}
-                      handleKeyClick={handleKeyClick}
-                    />
                   </div>
                 </div>
               </div>
@@ -213,6 +207,10 @@ const VerifyPIN = ({ searchParams }: Props) => {
           </div>
         </div>
       </div>
+      <Keyboard
+        handleDeleteClick={handleDeleteClick}
+        handleKeyClick={handleKeyClick}
+      />
     </div>
   );
 };

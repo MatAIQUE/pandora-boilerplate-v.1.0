@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
-import Keypad from "@components/Keypad";
+import Keyboard from "@components/Keyboard";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
@@ -68,7 +68,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const handleKeyClick = (value: string) => {
     const maxLength = 13;
 
-    if (mobileNumber.length < maxLength) {
+    if (/^\d*$/.test(value) && mobileNumber.length < maxLength) {
       setMobileNumber((prevPin) => `${prevPin}${value}`);
     }
   };
@@ -122,11 +122,6 @@ const ForgotPIN = ({ searchParams }: Props) => {
                         </span>
                       </div>
                     )}
-
-                    <Keypad
-                      handleDeleteClick={handleDeleteClick}
-                      handleKeyClick={handleKeyClick}
-                    />
                   </div>
                 </div>
               </div>
@@ -170,6 +165,10 @@ const ForgotPIN = ({ searchParams }: Props) => {
           </div>
         </div>
       </div>
+      <Keyboard
+        handleDeleteClick={handleDeleteClick}
+        handleKeyClick={handleKeyClick}
+      />
     </div>
   );
 };

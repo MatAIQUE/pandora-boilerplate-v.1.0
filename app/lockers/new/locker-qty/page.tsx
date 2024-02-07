@@ -255,7 +255,7 @@ const LockerQTY = () => {
               ) : (
                 <p className="text-white text-xl">
                   [{availableDoors}]{" "}
-                  <span className="opacity-60">Available lockers</span>
+                  <span className="opacity-60">Available Lockers</span>
                 </p>
               )}
             </div>
