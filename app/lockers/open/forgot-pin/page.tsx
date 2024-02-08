@@ -58,7 +58,16 @@ const ForgotPIN = ({ searchParams }: Props) => {
         router.push(url);
         // console.log("Successful the pin code sent to your" + mobileNumber);
       }
+      console.log(response);
     } catch (error) {
+      console.log({ error });
+      const {
+        response: {
+          data: { message: message },
+        },
+      } = error;
+      console.log({ message });
+      setError(message);
       setIsLoading(true);
       console.error(error);
       setIsLoading(false);
@@ -118,7 +127,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-primary`}>
-                          Incorrect PIN code ({error} Attempts Left)
+                          {error}
                         </span>
                       </div>
                     )}

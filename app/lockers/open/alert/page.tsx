@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 import { FaBellSlash } from "react-icons/fa";
 
 interface Props {
-  searchParams: { timeLeft?: number };
+  searchParams: { timeLeft?: number; doorNumber: string };
 }
 
 const AlertPage = ({ searchParams }: Props) => {
   const initialTimeLeft =
     searchParams.timeLeft !== undefined ? searchParams.timeLeft : 299;
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
-
+  const doorNumber = searchParams.doorNumber;
   const router = useRouter();
 
   const formatTime = (seconds: number): string => {
@@ -73,7 +73,19 @@ const AlertPage = ({ searchParams }: Props) => {
                           you can reset it below or talk to our Admin on Site.
                         </p>
                       </div>
-                      <p className="text-primary mt-10">Forgot PIN Code?</p>
+                      <button
+                        onClick={() =>
+                          router.push(
+                            `/lockers/open/forgot-pin?doorNumber=${doorNumber}`
+                          )
+                        }
+                        className="btn btn-ghost pl-0"
+                      >
+                        <span className="text-primary text-lg">
+                          Forgot PIN Code?
+                        </span>
+                      </button>
+                      {/* <p className="text-primary mt-10">Forgot PIN Code?</p> */}
                     </div>
                   </div>
                 </div>

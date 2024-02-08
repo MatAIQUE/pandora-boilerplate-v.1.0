@@ -70,14 +70,16 @@ const QRPage = ({ searchParams }) => {
         const data = JSON.parse(event.data);
         switch (data.type) {
           case "payment":
-            const arrayLength = data.doors.length;
+            const sortedDoors = data.doors;
+            sortedDoors.sort((a, b) => parseInt(a) - parseInt(b));
+            const arrayLength = sortedDoors.length;
             // TODO: handle this on BE
             const stringifiedDoors =
               arrayLength === 1
-                ? data.doors[0]
-                : `${data.doors.slice(0, -1).join(", ")} and ${data.doors.slice(
-                    -1
-                  )}`;
+                ? sortedDoors[0]
+                : `${sortedDoors
+                    .slice(0, -1)
+                    .join(", ")} and ${sortedDoors.slice(-1)}`;
 
             setBookingNumber("KMC-");
             setMobileNumber("+63");
