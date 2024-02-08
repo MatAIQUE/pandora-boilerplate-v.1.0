@@ -18,6 +18,7 @@ const OpenLockers = () => {
   const [doorNumber, setDoorNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { allDoors, setAllDoors } = useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
@@ -52,10 +53,13 @@ const OpenLockers = () => {
           router.push(url);
         } else {
           setError(true);
+          setErrorMessage("No Transaction");
         }
       }
       setIsLoading(false);
     } catch (error) {
+      setError(true);
+      setErrorMessage(error.response.data.message);
       setIsLoading(true);
       console.error(error);
       setIsLoading(false);
@@ -100,7 +104,11 @@ const OpenLockers = () => {
                       type="text"
                       placeholder="0 1"
                       className={`input input-bordered text-2xl input-secondary w-20 text-center bg-white text-black
-                      ${error === true ? "text-error border-erro border-2r" : ""}
+                      ${
+                        error === true
+                          ? "text-error border-error border-2r"
+                          : ""
+                      }
                       `}
                       value={doorNumber}
                       readOnly
@@ -109,7 +117,7 @@ const OpenLockers = () => {
                     {error && (
                       <div className={`font-medium  flex justify-center mt-2`}>
                         <span className={`text-left text-error`}>
-                          Invalid Locker Number
+                          {errorMessage}
                         </span>
                       </div>
                     )}

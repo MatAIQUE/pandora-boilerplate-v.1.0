@@ -73,7 +73,9 @@ const VerifyPIN = ({ searchParams }: Props) => {
           // Only include timeLeft parameter if it's a valid number
           const queryParams =
             timeLeft !== undefined ? `?timeLeft=${timeLeft}` : "";
-          router.push(`/lockers/open/alert${queryParams}`);
+          router.push(
+            `/lockers/open/alert${queryParams}?doorNumber=${doorNumber}`
+          );
         } else {
           setError(numAttempt);
         }
