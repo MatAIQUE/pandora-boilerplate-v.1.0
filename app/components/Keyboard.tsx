@@ -235,7 +235,7 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
           </kbd>
           <kbd
             onClick={() => handleDeleteClick()}
-            className="kbd-lg scale-150 m-4 btn btn-outline btn-error"
+            className="kbd-lg scale-150 m-4 btn focus:bg-outline"
           >
             <FaArrowLeft className="text-error" />
           </kbd>

@@ -67,10 +67,12 @@ const PaymentPage = ({ searchParams }) => {
           const {
             data: { data: data },
           } = response;
+          const sortedDoors = data;
+          sortedDoors.sort((a, b) => parseInt(a) - parseInt(b));
           const arrayLength = data.length;
           const stringifiedDoors =
             arrayLength === 1
-              ? data[0]
+              ? sortedDoors[0]
               : `${data.slice(0, -1).join(", ")} and ${data.slice(-1)}`;
 
           router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
@@ -173,7 +175,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                        ? "focus:btn-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
+                        ? "focus:border-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
                           : ""
                       }
                       `}
