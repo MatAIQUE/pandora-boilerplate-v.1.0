@@ -33,8 +33,7 @@ const SuccessPaymentPage = () => {
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <div className="px-5 my-4 absolute w-full">
-        <div className="flex justify-between">
-          <ButtonBack />
+        <div className="flex justify-end">
           <ButtonHome />
         </div>
       </div>

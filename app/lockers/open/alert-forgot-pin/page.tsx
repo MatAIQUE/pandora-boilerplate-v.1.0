@@ -16,19 +16,19 @@ const ForgotPinAlertPage = () => {
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
 
-  // useEffect(() => {
-  //   const countdownInterval = setInterval(() => {
-  //     if (count > 0 && timer > 0) {
-  //       setCount(count - 20);
-  //       setTimer(timer - 1);
-  //     } else {
-  //       clearInterval(countdownInterval);
-  //       router.push("/");
-  //     }
-  //   }, 1000);
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      if (count > 0 && timer > 0) {
+        setCount(count - 20);
+        setTimer(timer - 1);
+      } else {
+        clearInterval(countdownInterval);
+        router.push("/");
+      }
+    }, 1000);
 
-  //   return () => clearInterval(countdownInterval); // Cleanup on component unmount
-  // }, [count, timer]);
+    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+  }, [count, timer]);
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
