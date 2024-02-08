@@ -58,19 +58,30 @@ const ForgotPIN = ({ searchParams }: Props) => {
         router.push(url);
         // console.log("Successful the pin code sent to your" + mobileNumber);
       }
-      console.log(response);
     } catch (error) {
-      console.log({ error });
+      setMobileNumber("+63");
       const {
         response: {
-          data: { message: message },
+          data: { message: message, errors: errors },
         },
       } = error;
-      console.log({ message });
-      setError(message);
+      const timeLeft = errors[1];
+      const numAttempt = errors[0];
+      if (message.includes("0") || numAttempt === "0") {
+        // Only include timeLeft parameter if it's a valid number
+        const queryParams =
+          timeLeft !== undefined ? `?timeLeft=${timeLeft}` : "";
+        router.push(
+          `/lockers/open/alert-forgot-pin${queryParams}?doorNumber=${doorNumber}`
+        );
+      } else {
+        setError(message);
+        setMobileNumber("+63");
+      }
+      // setError(message);
       setIsLoading(true);
-      console.error(error);
       setIsLoading(false);
+      // setMobileNumber("+63");
     }
   };
 
@@ -93,8 +104,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <div className="px-5 my-4 absolute w-full">
-        <div className="flex justify-between">
-          <ButtonBack />
+        <div className="flex justify-end">
           <ButtonHome />
         </div>
       </div>
@@ -119,16 +129,16 @@ const ForgotPIN = ({ searchParams }: Props) => {
                       maxLength={12}
                       type="text"
                       placeholder=""
-                      className={`input text-xl w-full bg-white text-black text-start mb-2`}
+                      className={`input text-xl w-full bg-white text-black text-start mb-2 ${
+                        error ? "border-error border-2" : ""
+                      }`}
                       value={mobileNumber}
                       readOnly
                     />
 
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
-                        <span className={`text-left text-primary`}>
-                          {error}
-                        </span>
+                        <span className={`text-left text-error`}>{error}</span>
                       </div>
                     )}
                   </div>
