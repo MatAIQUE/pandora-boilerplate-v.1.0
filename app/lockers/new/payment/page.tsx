@@ -175,7 +175,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                        ? "focus:btn-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
+                        ? "focus:border-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
                           : ""
                       }
                       `}
