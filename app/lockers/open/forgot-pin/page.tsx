@@ -105,7 +105,6 @@ const ForgotPIN = ({ searchParams }: Props) => {
     <div className="h-screen relative flex flex-col w-full text-center">
       <div className="px-5 my-4 absolute w-full">
         <div className="flex justify-between">
-          <ButtonBack />
           <ButtonHome />
         </div>
       </div>
