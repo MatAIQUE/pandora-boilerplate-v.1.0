@@ -33,7 +33,11 @@ const OpenLockers = () => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
-      const doorQ = `doorNumber=${doorNumber}`;
+      const doorNumberValue = Number(doorNumber).toString();
+      const doorQ = `doorNumber=${doorNumberValue}`;
+
+      console.log("DoorNumber", doorNumber);
+
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_VALIDATE_DOOR}${doorQ}` as string,
         {
