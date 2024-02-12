@@ -23,7 +23,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { mobileNumber, setMobileNumber } = useBookingContext();
+  const { mobileNumber, setMobileNumber, location } = useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   const doorNumber = searchParams.doorNumber;
@@ -43,7 +43,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
     try {
       setIsLoading(true);
       const response = await axios.patch(
-        process.env.NEXT_PUBLIC_FORGOT_PIN + "4000",
+        process.env.NEXT_PUBLIC_FORGOT_PIN + location,
         {
           mobileNumber: tranMobileNumber,
           doorNumber: doorNumber,

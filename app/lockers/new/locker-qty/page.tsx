@@ -32,10 +32,11 @@ const LockerQTY = () => {
     setAvailableDoors,
     lockerQtySession,
     setLockerQtySession,
+    location,
   } = useBookingContext();
 
   const sockets = useWebSocket();
-  const lockerId = "4000";
+  const lockerId = location;
   const targetRoute = `door-status/${lockerId}`;
   const socket = sockets[targetRoute];
 
@@ -135,7 +136,7 @@ const LockerQTY = () => {
         process.env.NEXT_PUBLIC_RESERVE_DOOR as string,
         {
           bookingNumber: bookingNumber,
-          lockerId: "4000",
+          lockerId: location,
           doorCount: doorCount,
         },
         {

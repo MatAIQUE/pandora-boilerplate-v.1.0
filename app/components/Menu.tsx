@@ -8,7 +8,8 @@ import { FaAngleLeft, FaHome } from "react-icons/fa";
 const Menu = () => {
   const router = useRouter();
 
-  const { lockerQtySession, setLockerQtySession } = useBookingContext();
+  const { lockerQtySession, setLockerQtySession, location } =
+    useBookingContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -22,7 +23,7 @@ const Menu = () => {
           process.env.NEXT_PUBLIC_UNRESERVE_DOOR as string,
           {
             doorCount: doorCount,
-            lockerId: "4000",
+            lockerId: location,
             bookingNumber: bookingNumber,
             unreserve: true,
           },

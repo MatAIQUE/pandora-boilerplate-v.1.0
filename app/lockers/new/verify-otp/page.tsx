@@ -31,6 +31,7 @@ const VerifyOTP = () => {
     setSecretKey,
     mobileNumber,
     setHasRecurringInvoice,
+    location,
   } = useBookingContext();
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const VerifyOTP = () => {
       setIsLoading(false);
       if (response.status === 200) {
         setSecretKey(null);
-        const url = `/lockers/new/locker-qty?&lockerId=4000}`;
+        const url = `/lockers/new/locker-qty?&lockerId=${location}}`;
         router.push(url);
       }
     } catch (error) {
@@ -97,7 +98,7 @@ const VerifyOTP = () => {
         {
           bookingNumber: bookingNumber,
           mobileNumber: mobileNumber,
-          lockerId: "4000",
+          lockerId: location,
         },
         {
           headers: {
@@ -166,16 +167,18 @@ const VerifyOTP = () => {
                     </button>
                   </div>
                   <div className="w-full text-center items-center mt-10">
-                  <div className="">
-                    <input
-                      maxLength={6}
-                      type="password"
-                      placeholder="0 0 0 0 0 0"
-                      className={`input input-bordered text-2xl input-secondary w-full text-center bg-white text-black ${error ? "border-error border-2" : ""}`}
-                      value={pinCode}
-                      readOnly
-                    />
-                  </div>
+                    <div className="">
+                      <input
+                        maxLength={6}
+                        type="password"
+                        placeholder="0 0 0 0 0 0"
+                        className={`input input-bordered text-2xl input-secondary w-full text-center bg-white text-black ${
+                          error ? "border-error border-2" : ""
+                        }`}
+                        value={pinCode}
+                        readOnly
+                      />
+                    </div>
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-error mt-2`}>

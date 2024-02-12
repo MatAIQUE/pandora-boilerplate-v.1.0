@@ -35,6 +35,8 @@ interface BookingContextProps {
   setLockerQtySession: Dispatch<SetStateAction<boolean | null>>;
   hasRecurringInvoice: boolean | null;
   setHasRecurringInvoice: Dispatch<SetStateAction<boolean | null>>;
+  setLocation: Dispatch<SetStateAction<number | null>>;
+  location: number | null;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -73,6 +75,8 @@ export const BookingProvider = ({
     boolean | null
   >(false);
 
+  const [location, setLocation] = useState<number | null>(4001);
+
   const pathname = usePathname();
 
   const contextValue: BookingContextProps = {
@@ -100,6 +104,8 @@ export const BookingProvider = ({
     setLockerQtySession,
     hasRecurringInvoice,
     setHasRecurringInvoice,
+    location,
+    setLocation,
   };
 
   // reset all state on in homepage

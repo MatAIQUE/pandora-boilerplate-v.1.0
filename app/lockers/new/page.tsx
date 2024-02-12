@@ -30,7 +30,8 @@ const GetLockers = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { setSecretKey, setHasRecurringInvoice } = useBookingContext();
+  const { setSecretKey, setHasRecurringInvoice, location } =
+    useBookingContext();
 
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
@@ -49,7 +50,7 @@ const GetLockers = () => {
         {
           bookingNumber: bookingNumber,
           mobileNumber: tranMobileNum,
-          lockerId: "4000",
+          lockerId: location,
         },
         {
           headers: apiHeaders(),
@@ -61,7 +62,7 @@ const GetLockers = () => {
         setSecretKey(pinSecret);
         setHasRecurringInvoice(hasRecurringInvoice);
 
-        const url = `/lockers/new/verify-otp?lockerId=4000`;
+        const url = `/lockers/new/verify-otp?lockerId=${location}`;
         router.push(url);
       }
 
