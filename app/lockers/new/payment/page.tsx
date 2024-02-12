@@ -80,16 +80,16 @@ const PaymentPage = ({ searchParams }) => {
         } else if (paymentMethod === "qr_wallet") {
           const {
             data: {
-              data: { paymentId },
+              data: { paymentId, qrCodeBody, totalAmount },
             },
           } = response;
 
-          const qrCodeBody = response.data.data.qrCodeBody;
+          // const qrCodeBody = response.data.data.qrCodeBody;
           setPaymentId(paymentId);
 
           if (paymentId) {
             router.push(
-              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}`
+              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}&totalAmount=${totalAmount}`
             );
           }
         }
