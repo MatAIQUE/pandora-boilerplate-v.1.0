@@ -13,7 +13,7 @@ const ButtonHome = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const { bookingNumber, doorCount } = useBookingContext();
+  const { bookingNumber, doorCount, location } = useBookingContext();
 
   const onNavigateHome = async () => {
     if (lockerQtySession && bookingNumber && doorCount) {
@@ -22,7 +22,7 @@ const ButtonHome = () => {
           process.env.NEXT_PUBLIC_UNRESERVE_DOOR as string,
           {
             doorCount: doorCount,
-            lockerId: "4000",
+            lockerId: location,
             bookingNumber: bookingNumber,
             unreserve: true,
           },

@@ -40,6 +40,7 @@ const PaymentPage = ({ searchParams }) => {
     setDoorCount,
     setAvailableDoors,
     hasRecurringInvoice,
+    location,
   } = useBookingContext();
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
@@ -54,7 +55,7 @@ const PaymentPage = ({ searchParams }) => {
           mobileNumber: mobileNumber,
           bookingNumber: bookingNumber,
           paymentMethod: paymentMethod,
-          lockerId: "4000",
+          lockerId: location,
         },
         {
           headers: apiHeaders(),
@@ -130,7 +131,7 @@ const PaymentPage = ({ searchParams }) => {
         process.env.NEXT_PUBLIC_UNRESERVE_DOOR as string,
         {
           doorCount: doorCount,
-          lockerId: "4000",
+          lockerId: location,
           bookingNumber: bookingNumber,
           unreserve: true,
         },
@@ -175,7 +176,7 @@ const PaymentPage = ({ searchParams }) => {
                       className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "add_to_invoice"
-                        ? "focus:border-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
+                          ? "focus:border-primary focus:text-primary focus:bg-transparent focus:border-2 btn"
                           : ""
                       }
                       `}

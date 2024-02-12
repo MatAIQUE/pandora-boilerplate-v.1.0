@@ -13,6 +13,7 @@ import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
 import { apiHeaders } from "@utils/apiHeaders";
 import Spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -25,6 +26,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
   const [errorDoor, setErrorDoor] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  const { location } = useBookingContext();
 
   const doorNumber = searchParams.doorNumber;
 
@@ -41,7 +43,7 @@ const VerifyPIN = ({ searchParams }: Props) => {
       setErrorDoor(false);
       setIsLoading(true);
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + "4000",
+        process.env.NEXT_PUBLIC_VERIFY_DOOR_API + location,
         {
           pin: pinCode,
           doorNumber: doorNumber,
