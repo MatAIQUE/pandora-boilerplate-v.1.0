@@ -34,7 +34,7 @@ const OpenLockers = () => {
     try {
       setIsLoading(true);
       const doorNumberValue = Number(doorNumber).toString();
-      const doorQ = `doorNumber=${doorNumberValue}`;
+      const doorQ = `doorNumber=${doorNumberValue}&lockerId=4000`;
 
       console.log("DoorNumber", doorNumber);
 
@@ -57,7 +57,7 @@ const OpenLockers = () => {
           router.push(url);
         } else {
           setError(true);
-          setErrorMessage("No Transaction");
+          setErrorMessage("Unauthorized");
         }
       }
       setIsLoading(false);

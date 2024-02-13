@@ -8,11 +8,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import spinner from "../../../assets/images/spinner.svg";
+import { useBookingContext } from "@context/BookingContext";
 
 const SuccessPaymentPage = ({ searchParams }) => {
   const router = useRouter();
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
+  const {paymentMethod} = useBookingContext();
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -27,6 +29,7 @@ const SuccessPaymentPage = ({ searchParams }) => {
 
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
   }, [count, timer]);
+  console.log("param", paymentMethod)
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
@@ -48,7 +51,10 @@ const SuccessPaymentPage = ({ searchParams }) => {
                   </div>
                   <LabelTitle label={`Locker ${searchParams.doors}`} />
                   <LabelDesc
-                    label={`Locker ${searchParams.doors} has been successfully booked to your account! The billing will reflect in your next invoice`}
+                    label={`Locker ${searchParams.doors} has been successfully booked to your account! 
+                    ${paymentMethod === "qr_wallet" ? "" : "The billing will reflect in your next invoice"}
+                    
+                    `}
                     position="justify-start"
                   />
 

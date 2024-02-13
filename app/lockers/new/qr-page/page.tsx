@@ -10,12 +10,12 @@ import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
 
 interface Props {
-  searchParams: { qrCodeBody: string };
+  searchParams: { qrCodeBody: string; totalAmount: string };
 }
 
-const QRPage = ({ searchParams }) => {
+const QRPage = ({ searchParams }: Props) => {
   const router = useRouter();
-  const qrCodeBody = searchParams.qrCodeBody;
+  const { totalAmount, qrCodeBody } = searchParams;
   const { price } = useBookingContext();
 
   const {
@@ -165,7 +165,7 @@ const QRPage = ({ searchParams }) => {
                   </div>
                   <div className="items-end text-black">
                     <div className="w-full text-4xl font-semibold mb-4">
-                      ₱{(Number(doorCount) * Number(price)).toLocaleString()}
+                      ₱{totalAmount}
                       {/* Display amout here */}
                     </div>
                     <div className="w-full text-xl opacity-70">

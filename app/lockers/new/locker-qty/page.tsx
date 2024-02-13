@@ -41,9 +41,15 @@ const LockerQTY = () => {
   const socket = sockets[targetRoute];
 
   const availableDoorsCount = async () => {
+    const requestBody: Record<any, string> = {
+      location: "one ayala",
+      lockerId,
+    };
+
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
+        requestBody,
         {
           headers: apiHeaders(),
         }

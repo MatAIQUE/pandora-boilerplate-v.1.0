@@ -23,7 +23,6 @@ const PaymentPage = ({ searchParams }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const sockets = useWebSocket();
@@ -41,6 +40,8 @@ const PaymentPage = ({ searchParams }) => {
     setAvailableDoors,
     hasRecurringInvoice,
     location,
+    paymentMethod,
+    setPaymentMethod
   } = useBookingContext();
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
@@ -80,17 +81,18 @@ const PaymentPage = ({ searchParams }) => {
         } else if (paymentMethod === "qr_wallet") {
           const {
             data: {
-              data: { paymentId },
+              data: { paymentId, qrCodeBody, totalAmount },
             },
           } = response;
 
-          const qrCodeBody = response.data.data.qrCodeBody;
+          // const qrCodeBody = response.data.data.qrCodeBody;
           setPaymentId(paymentId);
 
           if (paymentId) {
             router.push(
-              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}`
+              `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}&totalAmount=${totalAmount}`
             );
+            console.log("param", paymentMethod)
           }
         }
       }
