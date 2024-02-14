@@ -51,10 +51,20 @@ const SuccessPaymentPage = ({ searchParams }) => {
                   </div>
                   <LabelTitle label={`Locker ${searchParams.doors}`} />
                   <LabelDesc
+<<<<<<< Updated upstream
                     label={`Locker ${searchParams.doors} has been successfully booked to your account! 
                     ${paymentMethod === "qr_wallet" ? "" : "The billing will reflect in your next invoice"}
                     
                     `}
+=======
+                    label={`Locker ${
+                      searchParams.doors
+                    } has been successfully booked to your account!${
+                      searchParams.addingToInvoice
+                        ? " The billing will reflect in your next invoice"
+                        : ""
+                    }`}
+>>>>>>> Stashed changes
                     position="justify-start"
                   />
 

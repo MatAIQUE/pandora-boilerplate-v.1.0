@@ -63,10 +63,12 @@ const ForgotPIN = ({ searchParams }: Props) => {
       const {
         response: {
           data: { message: message, errors: errors },
+          status,
         },
       } = error;
       const timeLeft = errors[1];
       const numAttempt = errors[0];
+
       if (message.includes("0") || numAttempt === "0") {
         // Only include timeLeft parameter if it's a valid number
         const queryParams =
@@ -76,12 +78,14 @@ const ForgotPIN = ({ searchParams }: Props) => {
         );
       } else {
         setError(message);
-        setMobileNumber("+63");
       }
-      // setError(message);
+
+      if (status === 400) {
+        setError("Invalid mobile number");
+      }
       setIsLoading(true);
       setIsLoading(false);
-      // setMobileNumber("+63");
+      setMobileNumber("+63");
     }
   };
 

@@ -30,7 +30,7 @@ const GetLockers = () => {
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { setSecretKey, setHasRecurringInvoice, location } =
+  const { setSecretKey, setHasRecurringInvoice, location, setOtpCreationTime } =
     useBookingContext();
 
   // Separate variable for display without prefix
@@ -58,10 +58,11 @@ const GetLockers = () => {
       );
 
       if (response.status === 201) {
-        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        const { pinSecret, hasRecurringInvoice, creationTime } =
+          response.data.data;
         setSecretKey(pinSecret);
         setHasRecurringInvoice(hasRecurringInvoice);
-
+        setOtpCreationTime(creationTime);
         const url = `/lockers/new/verify-otp?lockerId=${location}`;
         router.push(url);
       }

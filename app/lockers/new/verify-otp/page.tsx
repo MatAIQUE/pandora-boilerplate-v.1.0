@@ -32,6 +32,8 @@ const VerifyOTP = () => {
     mobileNumber,
     setHasRecurringInvoice,
     location,
+    setOtpCreationTime,
+    otpCreationTime,
   } = useBookingContext();
 
   useEffect(() => {
@@ -55,6 +57,7 @@ const VerifyOTP = () => {
           bookingNumber: bookingNumber,
           otp: pinCode,
           mobileNumber: mobileNumber,
+          creationTime: otpCreationTime,
         },
         {
           headers: apiHeaders(),
@@ -64,6 +67,7 @@ const VerifyOTP = () => {
       setIsLoading(false);
       if (response.status === 200) {
         setSecretKey(null);
+        setOtpCreationTime(null);
         const url = `/lockers/new/locker-qty?&lockerId=${location}}`;
         router.push(url);
       }
