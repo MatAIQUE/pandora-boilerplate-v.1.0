@@ -37,14 +37,11 @@ interface BookingContextProps {
   setHasRecurringInvoice: Dispatch<SetStateAction<boolean | null>>;
   setLocation: Dispatch<SetStateAction<string | null>>;
   location: string | null;
-<<<<<<< Updated upstream
   paymentMethod: string | null;
   setPaymentMethod: Dispatch<SetStateAction<string | null>>;
 
-=======
   setOtpCreationTime: Dispatch<SetStateAction<string | null>>;
   otpCreationTime: string | null;
->>>>>>> Stashed changes
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -84,13 +81,8 @@ export const BookingProvider = ({
   >(false);
   const [otpCreationTime, setOtpCreationTime] = useState<string | null>(null);
 
-<<<<<<< Updated upstream
   const [location, setLocation] = useState<string | null>("4000");
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
-
-=======
-  const [location, setLocation] = useState<string | null>("4001");
->>>>>>> Stashed changes
 
   const pathname = usePathname();
 
@@ -121,13 +113,10 @@ export const BookingProvider = ({
     setHasRecurringInvoice,
     location,
     setLocation,
-<<<<<<< Updated upstream
     paymentMethod,
-    setPaymentMethod
-=======
+    setPaymentMethod,
     otpCreationTime,
     setOtpCreationTime,
->>>>>>> Stashed changes
   };
 
   // reset all state on in homepage

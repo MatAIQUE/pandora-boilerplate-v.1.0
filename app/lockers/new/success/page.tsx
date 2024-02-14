@@ -14,7 +14,7 @@ const SuccessPaymentPage = ({ searchParams }) => {
   const router = useRouter();
   const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(5);
-  const {paymentMethod} = useBookingContext();
+  const { paymentMethod } = useBookingContext();
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
@@ -29,7 +29,7 @@ const SuccessPaymentPage = ({ searchParams }) => {
 
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
   }, [count, timer]);
-  console.log("param", paymentMethod)
+  console.log("param", paymentMethod);
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
@@ -51,12 +51,6 @@ const SuccessPaymentPage = ({ searchParams }) => {
                   </div>
                   <LabelTitle label={`Locker ${searchParams.doors}`} />
                   <LabelDesc
-<<<<<<< Updated upstream
-                    label={`Locker ${searchParams.doors} has been successfully booked to your account! 
-                    ${paymentMethod === "qr_wallet" ? "" : "The billing will reflect in your next invoice"}
-                    
-                    `}
-=======
                     label={`Locker ${
                       searchParams.doors
                     } has been successfully booked to your account!${
@@ -64,7 +58,6 @@ const SuccessPaymentPage = ({ searchParams }) => {
                         ? " The billing will reflect in your next invoice"
                         : ""
                     }`}
->>>>>>> Stashed changes
                     position="justify-start"
                   />
 
