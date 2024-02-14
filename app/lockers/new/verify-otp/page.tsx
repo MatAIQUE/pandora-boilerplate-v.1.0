@@ -21,6 +21,7 @@ const VerifyOTP = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [pinCode, setPinCode] = useState("");
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [timer, setTimer] = useState(0);
@@ -74,12 +75,18 @@ const VerifyOTP = () => {
     } catch (error) {
       setIsLoading(true);
       console.error(error);
+      const {
+        response: {
+          data: { message: message },
+        },
+      } = error;
+
       if (axios.isAxiosError(error) && error.response) {
-        const responseData = error.response.data.message;
         setPinCode("");
-        setError(responseData);
         setIsLoading(false);
+        setError(true);
       }
+      setErrorMessage(message);
     }
   };
 
@@ -186,7 +193,7 @@ const VerifyOTP = () => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-error mt-2`}>
-                          Verification code didn&apos;t match
+                          {errorMessage}
                         </span>
                       </div>
                     )}
