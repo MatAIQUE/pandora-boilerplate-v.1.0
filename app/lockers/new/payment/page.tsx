@@ -77,7 +77,9 @@ const PaymentPage = ({ searchParams }) => {
               ? sortedDoors[0]
               : `${data.slice(0, -1).join(", ")} and ${data.slice(-1)}`;
 
-          router.push(`/lockers/new/success?doors=${stringifiedDoors}`);
+          router.push(
+            `/lockers/new/success?doors=${stringifiedDoors}&addingToInvoice=true`
+          );
         } else if (paymentMethod === "qr_wallet") {
           const {
             data: {

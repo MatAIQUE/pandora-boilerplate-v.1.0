@@ -19,7 +19,7 @@ const OpenLockers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const { allDoors, setAllDoors } = useBookingContext();
+  const { allDoors, setAllDoors, location } = useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const OpenLockers = () => {
     try {
       setIsLoading(true);
       const doorNumberValue = Number(doorNumber).toString();
-      const doorQ = `doorNumber=${doorNumberValue}&lockerId=4000`;
+      const doorQ = `doorNumber=${doorNumberValue}&lockerId=${location}`;
 
       console.log("DoorNumber", doorNumber);
 

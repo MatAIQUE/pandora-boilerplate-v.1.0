@@ -21,6 +21,7 @@ const VerifyOTP = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [pinCode, setPinCode] = useState("");
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [timer, setTimer] = useState(0);
@@ -32,6 +33,8 @@ const VerifyOTP = () => {
     mobileNumber,
     setHasRecurringInvoice,
     location,
+    setOtpCreationTime,
+    otpCreationTime,
   } = useBookingContext();
 
   useEffect(() => {
@@ -55,6 +58,7 @@ const VerifyOTP = () => {
           bookingNumber: bookingNumber,
           otp: pinCode,
           mobileNumber: mobileNumber,
+          creationTime: otpCreationTime,
         },
         {
           headers: apiHeaders(),
@@ -64,18 +68,27 @@ const VerifyOTP = () => {
       setIsLoading(false);
       if (response.status === 200) {
         setSecretKey(null);
+        setOtpCreationTime(null);
         const url = `/lockers/new/locker-qty?&lockerId=${location}}`;
         router.push(url);
       }
     } catch (error) {
       setIsLoading(true);
       console.error(error);
+      const {
+        response: {
+          data: { message: message },
+        },
+      } = error;
+
       if (axios.isAxiosError(error) && error.response) {
-        const responseData = error.response.data.message;
         setPinCode("");
-        setError(responseData);
         setIsLoading(false);
+        setError(true);
       }
+      setErrorMessage(
+        message === "Bad request" ? "OTP already used." : message
+      );
     }
   };
 
@@ -111,9 +124,11 @@ const VerifyOTP = () => {
 
       if (response.status === 201) {
         setTimer(59);
-        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        const { pinSecret, hasRecurringInvoice, creationTime } =
+          response.data.data;
         setSecretKey(pinSecret);
         setHasRecurringInvoice(hasRecurringInvoice);
+        setOtpCreationTime(creationTime);
       }
       setIsLoadingOTP(false);
     } catch (error) {
@@ -182,7 +197,7 @@ const VerifyOTP = () => {
                     {error && (
                       <div className={`font-medium my-2 flex justify-start`}>
                         <span className={`text-left text-error mt-2`}>
-                          Verification code didn&apos;t match
+                          {errorMessage}
                         </span>
                       </div>
                     )}

@@ -144,6 +144,7 @@ const LockerQTY = () => {
           bookingNumber: bookingNumber,
           lockerId: location,
           doorCount: doorCount,
+          mobileNumber,
         },
         {
           headers: apiHeaders(),
