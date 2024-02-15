@@ -246,61 +246,61 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
         <div className="flex justify-center gap-2 my-2">
           <button
             onClick={() => handleKeyClick("1")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">1</p>
           </button>
           <button
             onClick={() => handleKeyClick("2")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">2</p>
           </button>
           <button
             onClick={() => handleKeyClick("3")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">3</p>
           </button>
           <button
             onClick={() => handleKeyClick("4")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">4</p>
           </button>
           <button
             onClick={() => handleKeyClick("5")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">5</p>
           </button>
           <button
             onClick={() => handleKeyClick("6")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">6</p>
           </button>
           <button
             onClick={() => handleKeyClick("7")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">7</p>
           </button>
           <button
             onClick={() => handleKeyClick("8")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">8</p>
           </button>
           <button
             onClick={() => handleKeyClick("9")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">9</p>
           </button>
           <button
             onClick={() => handleKeyClick("0")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">0</p>
           </button>
@@ -308,61 +308,61 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
         <div className="flex justify-center gap-2 my-2">
           <button
             onClick={() => handleKeyClick("Q")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">Q</p>
           </button>
           <button
             onClick={() => handleKeyClick("W")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">W</p>
           </button>
           <button
             onClick={() => handleKeyClick("E")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">E</p>
           </button>
           <button
             onClick={() => handleKeyClick("R")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">R</p>
           </button>
           <button
             onClick={() => handleKeyClick("T")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">T</p>
           </button>
           <button
             onClick={() => handleKeyClick("Y")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">Y</p>
           </button>
           <button
             onClick={() => handleKeyClick("U")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">U</p>
           </button>
           <button
             onClick={() => handleKeyClick("I")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">I</p>
           </button>
           <button
             onClick={() => handleKeyClick("O")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">O</p>
           </button>
           <button
             onClick={() => handleKeyClick("P")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">P</p>
           </button>
@@ -370,55 +370,55 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
         <div className="flex justify-center gap-2 my-2">
           <button
             onClick={() => handleKeyClick("A")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">A</p>
           </button>
           <button
             onClick={() => handleKeyClick("S")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">S</p>
           </button>
           <button
             onClick={() => handleKeyClick("D")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">D</p>
           </button>
           <button
             onClick={() => handleKeyClick("F")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">F</p>
           </button>
           <button
             onClick={() => handleKeyClick("G")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">G</p>
           </button>
           <button
             onClick={() => handleKeyClick("H")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">H</p>
           </button>
           <button
             onClick={() => handleKeyClick("J")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">J</p>
           </button>
           <button
             onClick={() => handleKeyClick("K")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">K</p>
           </button>
           <button
             onClick={() => handleKeyClick("L")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">L</p>
           </button>
@@ -426,43 +426,43 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
         <div className="flex justify-center gap-2 my-2">
           <button
             onClick={() => handleKeyClick("Z")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">Z</p>
           </button>
           <button
             onClick={() => handleKeyClick("X")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">X</p>
           </button>
           <button
             onClick={() => handleKeyClick("C")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">C</p>
           </button>
           <button
             onClick={() => handleKeyClick("V")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">V</p>
           </button>
           <button
             onClick={() => handleKeyClick("B")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">B</p>
           </button>
           <button
             onClick={() => handleKeyClick("N")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">N</p>
           </button>
           <button
             onClick={() => handleKeyClick("M")}
-            className="btn border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
+            className="btn btn-info border-none flex items-center justify-center w-[85px] h-[85px] active:btn-primary"
           >
             <p className="text-2xl font-bold pe-none">M</p>
           </button>
