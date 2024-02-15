@@ -40,6 +40,8 @@ interface BookingContextProps {
   paymentMethod: string | null;
   setPaymentMethod: Dispatch<SetStateAction<string | null>>;
 
+  setOtpCreationTime: Dispatch<SetStateAction<string | null>>;
+  otpCreationTime: string | null;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -77,10 +79,10 @@ export const BookingProvider = ({
   const [hasRecurringInvoice, setHasRecurringInvoice] = useState<
     boolean | null
   >(false);
+  const [otpCreationTime, setOtpCreationTime] = useState<string | null>(null);
 
   const [location, setLocation] = useState<string | null>("4000");
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
-
 
   const pathname = usePathname();
 
@@ -112,7 +114,9 @@ export const BookingProvider = ({
     location,
     setLocation,
     paymentMethod,
-    setPaymentMethod
+    setPaymentMethod,
+    otpCreationTime,
+    setOtpCreationTime,
   };
 
   // reset all state on in homepage
