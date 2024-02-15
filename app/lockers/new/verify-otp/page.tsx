@@ -87,7 +87,7 @@ const VerifyOTP = () => {
         setError(true);
       }
       setErrorMessage(
-        message === "Bad request" ? "OTP already expired." : message
+        message === "Bad request" ? "OTP already used." : message
       );
     }
   };
@@ -124,9 +124,11 @@ const VerifyOTP = () => {
 
       if (response.status === 201) {
         setTimer(59);
-        const { pinSecret, hasRecurringInvoice } = response.data.data;
+        const { pinSecret, hasRecurringInvoice, creationTime } =
+          response.data.data;
         setSecretKey(pinSecret);
         setHasRecurringInvoice(hasRecurringInvoice);
+        setOtpCreationTime(creationTime);
       }
       setIsLoadingOTP(false);
     } catch (error) {
