@@ -86,7 +86,9 @@ const VerifyOTP = () => {
         setIsLoading(false);
         setError(true);
       }
-      setErrorMessage(message);
+      setErrorMessage(
+        message === "Bad request" ? "Verification code didn't match" : message
+      );
     }
   };
 
