@@ -87,7 +87,7 @@ const VerifyOTP = () => {
         setError(true);
       }
       setErrorMessage(
-        message === "Bad request" ? "Verification code didn't match" : message
+        message === "Bad request" ? "OTP already expired." : message
       );
     }
   };
