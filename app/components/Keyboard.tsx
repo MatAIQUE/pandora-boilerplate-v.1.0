@@ -468,7 +468,7 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
           </button>
           <button
             onClick={() => handleDeleteClick()}
-            className="btn btn-outline border-error border-4 flex items-center bg-transparent text-error justify-center w-[85px] h-[85px] focus:bg-transparent focus:bg-outline focus:bg-error active:text-white duration-75 active:bg-outline active:bg-error active:text-error"
+            className="btn bg-transparent border-error text-error border-4 flex items-center justify-center w-[85px] h-[85px]"
           >
             <FaArrowLeft className="text-2xl" />
           </button>
