@@ -81,7 +81,7 @@ export const BookingProvider = ({
   >(false);
   const [otpCreationTime, setOtpCreationTime] = useState<string | null>(null);
 
-  const [location, setLocation] = useState<string | null>("4000");
+  const [location, setLocation] = useState<string | null>("4001");
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
 
   const pathname = usePathname();

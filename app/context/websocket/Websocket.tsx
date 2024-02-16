@@ -20,7 +20,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({
   const [sockets, setSockets] = useState<Record<string, WebSocket>>({});
 
   useEffect(() => {
-    const routes = ["payments", "notifications", "door-status/4000"];
+    const routes = ["payments", "notifications", "door-status/4001"];
 
     const createSocket = (route: string): WebSocket => {
       const socket = new WebSocket(
