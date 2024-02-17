@@ -41,7 +41,7 @@ const PaymentPage = ({ searchParams }) => {
     hasRecurringInvoice,
     location,
     paymentMethod,
-    setPaymentMethod
+    setPaymentMethod,
   } = useBookingContext();
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
@@ -94,7 +94,6 @@ const PaymentPage = ({ searchParams }) => {
             router.push(
               `/lockers/new/qr-page?paymentId=${paymentId}&qrCodeBody=${qrCodeBody}&totalAmount=${totalAmount}`
             );
-            console.log("param", paymentMethod)
           }
         }
       }
@@ -108,8 +107,6 @@ const PaymentPage = ({ searchParams }) => {
       }
     }
   };
-
-  console.log("paymerasd", paymentMethod);
 
   const handleSelectPaymentMethod = (paymentMethod) => {
     // other shenanigans here ...
@@ -138,6 +135,7 @@ const PaymentPage = ({ searchParams }) => {
           lockerId: location,
           bookingNumber: bookingNumber,
           unreserve: true,
+          mobileNumber,
         },
         {
           headers: apiHeaders(),
