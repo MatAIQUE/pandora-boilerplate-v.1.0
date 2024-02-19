@@ -15,11 +15,11 @@ import Spinner from "../../assets/images/spinner.svg";
 
 const OpenLockers = () => {
   const router = useRouter();
-  const [doorNumber, setDoorNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const { allDoors, setAllDoors, location } = useBookingContext();
+  const { allDoors, setAllDoors, location, doorNumber, setDoorNumber } =
+    useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ const OpenLockers = () => {
   const onNavigate = async () => {
     try {
       setIsLoading(true);
-      const doorNumberValue = Number(doorNumber).toString();
-      const doorQ = `doorNumber=${doorNumberValue}&lockerId=${location}`;
+      // const doorNumberValue = Number(doorNumber).toString();
+      const doorQ = `doorNumber=${doorNumber}&lockerId=${location}`;
 
       console.log("DoorNumber", doorNumber);
 
