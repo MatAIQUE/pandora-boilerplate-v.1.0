@@ -14,7 +14,7 @@ const Menu = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const { bookingNumber, doorCount } = useBookingContext();
+  const { bookingNumber, doorCount, mobileNumber } = useBookingContext();
 
   const onNavigateHome = async () => {
     if (lockerQtySession && bookingNumber && doorCount) {
@@ -26,6 +26,7 @@ const Menu = () => {
             lockerId: location,
             bookingNumber: bookingNumber,
             unreserve: true,
+            mobileNumber,
           },
           {
             headers: apiHeaders(),
