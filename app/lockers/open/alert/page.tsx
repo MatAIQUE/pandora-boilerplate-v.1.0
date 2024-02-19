@@ -2,19 +2,21 @@
 import ButtonHome from "@components/ButtonHome";
 import LabelTitle from "@components/LabelTitle";
 import Logo from "@components/Logo";
+import { useBookingContext } from "@context/BookingContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaBellSlash } from "react-icons/fa";
 
 interface Props {
-  searchParams: { timeLeft?: number; doorNumber: string };
+  searchParams: { timeLeft?: number };
 }
 
 const AlertPage = ({ searchParams }: Props) => {
+  const { doorNumber, setDoorNumber } = useBookingContext();
+
   const initialTimeLeft =
     searchParams.timeLeft !== undefined ? searchParams.timeLeft : 299;
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
-  const doorNumber = searchParams.doorNumber;
   const router = useRouter();
 
   const formatTime = (seconds: number): string => {
@@ -85,7 +87,6 @@ const AlertPage = ({ searchParams }: Props) => {
                           Forgot PIN Code?
                         </span>
                       </button>
-                      {/* <p className="text-primary mt-10">Forgot PIN Code?</p> */}
                     </div>
                   </div>
                 </div>

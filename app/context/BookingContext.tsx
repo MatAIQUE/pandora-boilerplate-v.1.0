@@ -42,6 +42,8 @@ interface BookingContextProps {
 
   setOtpCreationTime: Dispatch<SetStateAction<string | null>>;
   otpCreationTime: string | null;
+  doorNumber: number | null;
+  setDoorNumber: Dispatch<SetStateAction<number | null>>;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -85,6 +87,7 @@ export const BookingProvider = ({
     process.env.NEXT_PUBLIC_LOCATION
   );
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
+  const [doorNumber, setDoorNumber] = useState<number>(null);
 
   const pathname = usePathname();
 
@@ -119,6 +122,8 @@ export const BookingProvider = ({
     setPaymentMethod,
     otpCreationTime,
     setOtpCreationTime,
+    doorNumber,
+    setDoorNumber,
   };
 
   // reset all state on in homepage
