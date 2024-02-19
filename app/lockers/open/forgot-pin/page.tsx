@@ -23,10 +23,9 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const [pinCode, setPinCode] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { mobileNumber, setMobileNumber, location } = useBookingContext();
+  const { mobileNumber, setMobileNumber, location, doorNumber } =
+    useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
-
-  const { doorNumber } = useBookingContext();
 
   useEffect(() => {
     setIsContinueDisabled(!(mobileNumber.length === 13));
