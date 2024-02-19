@@ -13,7 +13,8 @@ const ButtonHome = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const { bookingNumber, doorCount, location } = useBookingContext();
+  const { bookingNumber, doorCount, location, mobileNumber } =
+    useBookingContext();
 
   const onNavigateHome = async () => {
     if (lockerQtySession && bookingNumber && doorCount) {
@@ -25,6 +26,7 @@ const ButtonHome = () => {
             lockerId: location,
             bookingNumber: bookingNumber,
             unreserve: true,
+            mobileNumber,
           },
           {
             headers: apiHeaders(),
