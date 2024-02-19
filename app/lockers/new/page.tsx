@@ -74,7 +74,6 @@ const GetLockers = () => {
       setIsLoading(false);
     }
   };
-  console.log("asd", error);
 
   const onNavigateBack = () => {
     router.back();
