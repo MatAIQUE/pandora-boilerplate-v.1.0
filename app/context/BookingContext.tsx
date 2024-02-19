@@ -42,8 +42,8 @@ interface BookingContextProps {
 
   setOtpCreationTime: Dispatch<SetStateAction<string | null>>;
   otpCreationTime: string | null;
-  doorNumber: number | null;
-  setDoorNumber: Dispatch<SetStateAction<number | null>>;
+  doorNumber: string | null;
+  setDoorNumber: Dispatch<SetStateAction<string | null>>;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(
@@ -87,7 +87,7 @@ export const BookingProvider = ({
     process.env.NEXT_PUBLIC_LOCATION
   );
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
-  const [doorNumber, setDoorNumber] = useState<number>(null);
+  const [doorNumber, setDoorNumber] = useState<string>("");
 
   const pathname = usePathname();
 
@@ -141,6 +141,7 @@ export const BookingProvider = ({
       setLockerQtySession(false);
       setHasRecurringInvoice(false);
       setPaymentMethod(null);
+      setDoorNumber("");
     }
   }, [pathname]);
 
