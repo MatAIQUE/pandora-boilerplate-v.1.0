@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@components";
 import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
-import DoorInputOTP from "@components/DoorInputOTP";
 import Keyboard from "@components/Keyboard";
 import LabelDesc from "@components/LabelDesc";
 import LabelTitle from "@components/LabelTitle";
@@ -46,7 +45,7 @@ const VerifyOTP = () => {
       }
     }, 1000);
 
-    return () => clearInterval(countdownInterval); // Cleanup on component unmount
+    return () => clearInterval(countdownInterval);
   }, [timer]);
 
   const onNavigate = async () => {
@@ -103,9 +102,9 @@ const VerifyOTP = () => {
   };
 
   const resendCode = async () => {
-    try {
-      setIsLoadingOTP(true);
+    setIsLoadingOTP(true);
 
+    try {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_OTP as string,
         {
@@ -114,11 +113,7 @@ const VerifyOTP = () => {
           lockerId: location,
         },
         {
-          headers: {
-            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY,
-            "x-api-secret": process.env.NEXT_PUBLIC_X_API_SECRET,
-            "Content-Type": "application/json",
-          },
+          headers: apiHeaders(),
         }
       );
 
@@ -130,12 +125,10 @@ const VerifyOTP = () => {
         setHasRecurringInvoice(hasRecurringInvoice);
         setOtpCreationTime(creationTime);
       }
-      setIsLoadingOTP(false);
     } catch (error) {
-      setIsLoadingOTP(true);
       console.error(error);
-      setIsLoadingOTP(false);
     }
+    setIsLoadingOTP(false);
   };
 
   useEffect(() => {
@@ -174,7 +167,7 @@ const VerifyOTP = () => {
                     <button
                       onClick={() => resendCode()}
                       className="btn btn-ghost pl-0"
-                      disabled={timer > 0 ? true : false}
+                      disabled={isLoadingOTP || timer > 0}
                     >
                       <span className="text-primary text-lg">
                         Resend Code {timer > 0 && <span>({timer})</span>}
