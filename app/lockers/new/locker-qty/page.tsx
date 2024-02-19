@@ -33,6 +33,8 @@ const LockerQTY = () => {
     lockerQtySession,
     setLockerQtySession,
     location,
+    setBookingNumber,
+    setMobileNumber,
   } = useBookingContext();
 
   const sockets = useWebSocket();
@@ -168,7 +170,9 @@ const LockerQTY = () => {
   };
 
   const onNavigateBack = () => {
-    router.back();
+    setBookingNumber("KMC-");
+    setMobileNumber("+63");
+    router.push("/lockers/new");
   };
 
   const addCart = () => {

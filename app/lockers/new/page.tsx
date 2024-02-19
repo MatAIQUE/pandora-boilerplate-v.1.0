@@ -74,10 +74,9 @@ const GetLockers = () => {
       setIsLoading(false);
     }
   };
-  console.log("asd", error);
 
   const onNavigateBack = () => {
-    router.back();
+    router.push("/");
   };
 
   const handleKeyClick = (value: string) => {
@@ -99,10 +98,10 @@ const GetLockers = () => {
 
     if (focusedInput === "booking") {
       setBookingNumber((prevPin) => {
-        const numericPart = prevPin.slice(prefixLength); // Extract numeric part without the prefix
+        const numericPart = prevPin.slice(prefixLength);
         return numericPart.length > 0
-          ? `KMC-${numericPart.slice(0, -1)}` // Construct new booking number
-          : "KMC-"; // Return default prefix if no numeric part left
+          ? `KMC-${numericPart.slice(0, -1)}`
+          : "KMC-";
       });
     } else if (focusedInput === "contact") {
       setMobileNumber((prevPin) =>
