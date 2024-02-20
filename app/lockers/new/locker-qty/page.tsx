@@ -266,7 +266,7 @@ const LockerQTY = () => {
                 </div>
               ) : (
                 <p className="text-white text-xl">
-                  [{availableDoors}]{" "}
+                  [{availableDoors}]
                   <span className="opacity-60">Available Lockers</span>
                 </p>
               )}
@@ -275,18 +275,20 @@ const LockerQTY = () => {
             <div className="card-actions justify-center mt-3">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
-                  <Button
-                    label="Back"
-                    bgColor="btn-outline"
-                    color="gray-800"
-                    weight="500"
-                    outline="btn-outline"
+                  <button
+                    className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
+                      isLoading && "opacity-30 pointer-events-none"
+                    }`}
                     onClick={onNavigateBack}
-                  />
+                  >
+                    Back
+                  </button>
                 </div>
                 <div className="w-full">
                   <button
-                    className={`btn btn-primary  rounded-sm w-full text-white font-500`}
+                    className={`btn btn-primary rounded-sm w-full text-white font-500 ${
+                      isLoading ? "opacity-30 pointer-events-none" : ""
+                    }`}
                     onClick={onNavigate}
                   >
                     Continue

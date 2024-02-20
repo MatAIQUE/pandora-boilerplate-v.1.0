@@ -203,7 +203,7 @@ const GetLockers = () => {
                 <div className="w-full">
                   <button
                     className={`btn btn-outline  rounded-sm w-full text-white font-500 ${
-                      isLoading && "opacity-70 pointer-events-none"
+                      isLoading && "opacity-30 pointer-events-none"
                     }`}
                     onClick={onNavigateBack}
                   >
