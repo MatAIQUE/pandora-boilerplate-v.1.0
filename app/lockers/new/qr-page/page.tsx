@@ -19,16 +19,13 @@ const QRPage = ({ searchParams }: Props) => {
   const { price } = useBookingContext();
 
   const {
-    bookingNumber,
     setBookingNumber,
-    mobileNumber,
     setMobileNumber,
     paymentId,
     setPaymentId,
-    secretKey,
     setSecretKey,
-    doorCount,
     setDoorCount,
+    setPaymentMethod,
   } = useBookingContext();
 
   const sockets = useWebSocket();
@@ -112,8 +109,10 @@ const QRPage = ({ searchParams }: Props) => {
   }, [socket, paymentId]);
 
   const onNavigateBack = () => {
+    setPaymentMethod("");
     router.back();
   };
+
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
       <div className="px-5 my-4 absolute w-full">

@@ -28,16 +28,10 @@ const PaymentPage = ({ searchParams }) => {
   const sockets = useWebSocket();
   const {
     bookingNumber,
-    setBookingNumber,
     mobileNumber,
-    setMobileNumber,
     paymentId,
     setPaymentId,
-    secretKey,
-    setSecretKey,
     doorCount,
-    setDoorCount,
-    setAvailableDoors,
     hasRecurringInvoice,
     location,
     paymentMethod,
@@ -143,6 +137,7 @@ const PaymentPage = ({ searchParams }) => {
       );
 
       if (response.status === 201) {
+        setPaymentMethod("");
         router.back();
       }
     } catch (err) {
