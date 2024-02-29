@@ -262,7 +262,7 @@ const PaymentPage = ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white" onClick={PriceButtonController}>
+      <div className="absolute bottom-0 transition-transform px-[300px] overflow-hidden right-0 w-full bg-white" onClick={PriceButtonController}>
         <div className="relative py-5">
           <div className="flex justify-center items-center py-4">
             <Image
