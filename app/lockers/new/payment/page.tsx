@@ -40,11 +40,11 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentMethod,
   } = useBookingContext();
 
-  const [priceHidden, setPriceHidden] = useState(true)
+  const [priceHidden, setPriceHidden] = useState(true);
 
   const PriceButtonController = () => {
-    priceHidden ? setPriceHidden(false) : setPriceHidden(true)
-  }
+    priceHidden ? setPriceHidden(false) : setPriceHidden(true);
+  };
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
 
@@ -262,7 +262,10 @@ const PaymentPage = ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white" onClick={PriceButtonController}>
+      <div
+        className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white"
+        onClick={PriceButtonController}
+      >
         <div className="relative py-5">
           <div className="flex justify-center items-center py-4">
             <Image
@@ -276,9 +279,11 @@ const PaymentPage = ({ searchParams }) => {
               Price Breakdown
             </p>
           </div>
-          <div className={`transition-transform
-          ${priceHidden ? "translate-y-full h-0 ":""}
-          `}>
+          <div
+            className={`transition-transform
+          ${priceHidden ? "translate-y-full h-0 " : ""}
+          `}
+          >
             <div className="grid gap-y-4 text-black font-semibold py-4 text-lg">
               <div className="grid gap-y-2">
                 <div className="flex justify-between">
@@ -315,17 +320,20 @@ const PaymentPage = ({ searchParams }) => {
           </div>
         </div>
         <div className="absolute right-5 top-5 text-black">
-<<<<<<< HEAD
-          <div className="p-4 flex items-center justify-center rounded">
-=======
-          <div className="p-4 flex items-center justify-center rounded" onClick={PriceButtonController}>
->>>>>>> e306e6c (created price breakdown)
-            <FaAngleDown className={`text-[24px]
-            ${priceHidden ? "hidden":""}
-            `}/>
-            <FaAngleUp className={`text-[24px]
-            ${priceHidden ? "":"hidden"}
-            `}/>
+          <div
+            className="p-4 flex items-center justify-center rounded"
+            onClick={PriceButtonController}
+          >
+            <FaAngleDown
+              className={`text-[24px]
+            ${priceHidden ? "hidden" : ""}
+            `}
+            />
+            <FaAngleUp
+              className={`text-[24px]
+            ${priceHidden ? "" : "hidden"}
+            `}
+            />
           </div>
         </div>
       </div>
