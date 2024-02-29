@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import qrIcon from "../../../assets/images/QR.svg";
 import kmcLogoRound from "../../../assets/images/kmc-logo-circle.png";
 import Spinner from "../../../assets/images/spinner.svg";
+import PriceBreakdownIcon from "@assets/images/breakdown.svg";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 interface Props {
   searchParams: { doorCount: string };
@@ -37,6 +39,12 @@ const PaymentPage = ({ searchParams }) => {
     paymentMethod,
     setPaymentMethod,
   } = useBookingContext();
+
+  const [priceHidden, setPriceHidden] = useState(true)
+
+  const PriceButtonController = () => {
+    priceHidden ? setPriceHidden(false) : setPriceHidden(true)
+  }
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
 
@@ -250,6 +258,70 @@ const PaymentPage = ({ searchParams }) => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white">
+        <div className="relative py-5">
+          <div className="flex justify-center items-center py-4">
+            <Image
+              src={PriceBreakdownIcon}
+              height={24}
+              width={24}
+              alt=""
+              className="me-2"
+            />
+            <p className="font-bold text-center text-black text-2xl">
+              Price Breakdown
+            </p>
+          </div>
+          <div className={`transition-transform
+          ${priceHidden ? "translate-y-full h-0 ":""}
+          `}>
+            <div className="grid gap-y-4 text-black font-semibold py-4 text-lg">
+              <div className="grid gap-y-2">
+                <div className="flex justify-between">
+                  <p className="text-gray-500">Least Term</p>
+                  <p>
+                    {/* Map Months */}6<span className="mx-1">Mo. and</span>
+                    {/* Map Days */}
+                    10
+                    <span className="ms-1">Days</span>
+                  </p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-500">
+                    {/* Map doors */}
+                    <span className="font-bold text-black me-1">Doors</span>
+                    Lockers
+                  </p>
+                  {/* Map amount */}
+                  <p>
+                    7,000
+                    <span className="ms-1">/Mo.</span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between mt-2 text-black text-xl font-bold">
+                <p>Total</p>
+                {/* Map Total Amount */}
+                <p className="uppercase">
+                  <span className="me-1">php</span>
+                  42,000
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute right-5 top-5 text-black">
+          <div className="p-4 flex items-center justify-center rounded" onClick={PriceButtonController}>
+            <FaAngleDown className={`text-[24px]
+            ${priceHidden ? "hidden":""}
+            `}/>
+            <FaAngleUp className={`text-[24px]
+            ${priceHidden ? "":"hidden"}
+            `}/>
           </div>
         </div>
       </div>
