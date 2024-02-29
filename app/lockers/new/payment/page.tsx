@@ -18,7 +18,13 @@ import PriceBreakdownIcon from "@assets/images/breakdown.svg";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 interface Props {
-  searchParams: { doorCount: string };
+  searchParams: {
+    doorCount: string;
+    months: string;
+    days: string;
+    totalAmount: string;
+    monthly: string;
+  };
 }
 
 const PaymentPage = ({ searchParams }) => {
@@ -27,6 +33,7 @@ const PaymentPage = ({ searchParams }) => {
   const [error, setError] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  // const []
   const sockets = useWebSocket();
   const {
     bookingNumber,
@@ -40,13 +47,17 @@ const PaymentPage = ({ searchParams }) => {
     setPaymentMethod,
   } = useBookingContext();
 
-  const [priceHidden, setPriceHidden] = useState(true)
+  const [priceHidden, setPriceHidden] = useState(true);
 
   const PriceButtonController = () => {
-    priceHidden ? setPriceHidden(false) : setPriceHidden(true)
-  }
+    priceHidden ? setPriceHidden(false) : setPriceHidden(true);
+  };
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
+  const monthly = parseInt(searchParams.monthly, 10);
+  const months = searchParams.months;
+  const days = searchParams.days;
+  const totalAmount = parseInt(searchParams.totalAmount, 10);
 
   const paymentAction = async () => {
     try {
@@ -262,7 +273,10 @@ const PaymentPage = ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 transition-transform px-[300px] overflow-hidden right-0 w-full bg-white" onClick={PriceButtonController}>
+      <div
+        className="absolute bottom-0 transition-transform px-[300px] overflow-hidden right-0 w-full bg-white"
+        onClick={PriceButtonController}
+      >
         <div className="relative py-5">
           <div className="flex justify-center items-center py-4">
             <Image
@@ -276,29 +290,35 @@ const PaymentPage = ({ searchParams }) => {
               Price Breakdown
             </p>
           </div>
-          <div className={`transition-transform
-          ${priceHidden ? "translate-y-full h-0 ":""}
-          `}>
+          <div
+            className={`transition-transform
+          ${priceHidden ? "translate-y-full h-0 " : ""}
+          `}
+          >
             <div className="grid gap-y-4 text-black font-semibold py-4 text-lg">
               <div className="grid gap-y-2">
                 <div className="flex justify-between">
                   <p className="text-gray-500">Least Term</p>
                   <p>
-                    {/* Map Months */}6<span className="mx-1">Mo. and</span>
+                    {/* Map Months */}
+                    {months}
+                    <span className="mx-1">Mo. and</span>
                     {/* Map Days */}
-                    10
+                    {days}
                     <span className="ms-1">Days</span>
                   </p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500">
                     {/* Map doors */}
-                    <span className="font-bold text-black me-1">Doors</span>
+                    <span className="font-bold text-black me-1">
+                      {doorCount}
+                    </span>
                     Lockers
                   </p>
                   {/* Map amount */}
                   <p>
-                    7,000
+                    {monthly.toLocaleString()}
                     <span className="ms-1">/Mo.</span>
                   </p>
                 </div>
@@ -308,7 +328,7 @@ const PaymentPage = ({ searchParams }) => {
                 {/* Map Total Amount */}
                 <p className="uppercase">
                   <span className="me-1">php</span>
-                  42,000
+                  {totalAmount.toLocaleString()}
                 </p>
               </div>
             </div>
@@ -316,12 +336,16 @@ const PaymentPage = ({ searchParams }) => {
         </div>
         <div className="absolute right-5 top-5 text-black">
           <div className="p-4 flex items-center justify-center rounded">
-            <FaAngleDown className={`text-[24px]
-            ${priceHidden ? "hidden":""}
-            `}/>
-            <FaAngleUp className={`text-[24px]
-            ${priceHidden ? "":"hidden"}
-            `}/>
+            <FaAngleDown
+              className={`text-[24px]
+            ${priceHidden ? "hidden" : ""}
+            `}
+            />
+            <FaAngleUp
+              className={`text-[24px]
+            ${priceHidden ? "" : "hidden"}
+            `}
+            />
           </div>
         </div>
       </div>
