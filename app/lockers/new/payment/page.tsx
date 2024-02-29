@@ -315,7 +315,11 @@ const PaymentPage = ({ searchParams }) => {
           </div>
         </div>
         <div className="absolute right-5 top-5 text-black">
+<<<<<<< HEAD
           <div className="p-4 flex items-center justify-center rounded">
+=======
+          <div className="p-4 flex items-center justify-center rounded" onClick={PriceButtonController}>
+>>>>>>> e306e6c (created price breakdown)
             <FaAngleDown className={`text-[24px]
             ${priceHidden ? "hidden":""}
             `}/>
