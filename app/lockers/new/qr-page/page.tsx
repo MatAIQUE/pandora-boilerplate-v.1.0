@@ -162,7 +162,7 @@ const QRPage = ({ searchParams }: Props) => {
                   </div>
                   <div className="items-end text-black">
                     <div className="w-full text-4xl font-semibold mb-4">
-                      ₱{totalAmount}
+                      ₱{parseInt(totalAmount, 10).toLocaleString()}
                       {/* Display amout here */}
                     </div>
                     <div className="w-full text-xl opacity-70">

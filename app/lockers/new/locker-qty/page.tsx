@@ -155,7 +155,12 @@ const LockerQTY = () => {
 
       setIsLoading(false);
       if (response.status === 201) {
-        const url = `/lockers/new/payment?doorCount=${doorCount}`;
+        const {
+          data: {
+            data: { months, days, totalAmount, monthly },
+          },
+        } = response;
+        const url = `/lockers/new/payment?doorCount=${doorCount}&months=${months}&days=${days}&totalAmount=${totalAmount}&monthly=${monthly}`;
         router.push(url);
       }
     } catch (error) {
