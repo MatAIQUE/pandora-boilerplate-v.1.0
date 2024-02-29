@@ -18,7 +18,13 @@ import PriceBreakdownIcon from "@assets/images/breakdown.svg";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 interface Props {
-  searchParams: { doorCount: string };
+  searchParams: {
+    doorCount: string;
+    months: string;
+    days: string;
+    totalAmount: string;
+    monthly: string;
+  };
 }
 
 const PaymentPage = ({ searchParams }) => {
@@ -27,6 +33,7 @@ const PaymentPage = ({ searchParams }) => {
   const [error, setError] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  // const []
   const sockets = useWebSocket();
   const {
     bookingNumber,
@@ -47,6 +54,10 @@ const PaymentPage = ({ searchParams }) => {
   };
 
   const doorCountInt = parseInt(searchParams.doorCount, 10);
+  const monthly = parseInt(searchParams.monthly, 10);
+  const months = searchParams.months;
+  const days = searchParams.days;
+  const totalAmount = parseInt(searchParams.totalAmount, 10);
 
   const paymentAction = async () => {
     try {
@@ -289,21 +300,25 @@ const PaymentPage = ({ searchParams }) => {
                 <div className="flex justify-between">
                   <p className="text-gray-500">Least Term</p>
                   <p>
-                    {/* Map Months */}6<span className="mx-1">Mo. and</span>
+                    {/* Map Months */}
+                    {months}
+                    <span className="mx-1">Mo. and</span>
                     {/* Map Days */}
-                    10
+                    {days}
                     <span className="ms-1">Days</span>
                   </p>
                 </div>
                 <div className="flex justify-between">
                   <p className="text-gray-500">
                     {/* Map doors */}
-                    <span className="font-bold text-black me-1">Doors</span>
+                    <span className="font-bold text-black me-1">
+                      {doorCount}
+                    </span>
                     Lockers
                   </p>
                   {/* Map amount */}
                   <p>
-                    7,000
+                    {monthly.toLocaleString()}
                     <span className="ms-1">/Mo.</span>
                   </p>
                 </div>
@@ -313,7 +328,7 @@ const PaymentPage = ({ searchParams }) => {
                 {/* Map Total Amount */}
                 <p className="uppercase">
                   <span className="me-1">php</span>
-                  42,000
+                  {totalAmount.toLocaleString()}
                 </p>
               </div>
             </div>
