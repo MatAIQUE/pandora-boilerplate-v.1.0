@@ -262,7 +262,7 @@ const PaymentPage = ({ searchParams }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white">
+      <div className="absolute bottom-0 transition-transform px-[300px] right-0 w-full bg-white" onClick={PriceButtonController}>
         <div className="relative py-5">
           <div className="flex justify-center items-center py-4">
             <Image
@@ -315,7 +315,7 @@ const PaymentPage = ({ searchParams }) => {
           </div>
         </div>
         <div className="absolute right-5 top-5 text-black">
-          <div className="p-4 flex items-center justify-center rounded" onClick={PriceButtonController}>
+          <div className="p-4 flex items-center justify-center rounded">
             <FaAngleDown className={`text-[24px]
             ${priceHidden ? "hidden":""}
             `}/>
