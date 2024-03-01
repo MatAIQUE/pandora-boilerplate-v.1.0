@@ -177,6 +177,7 @@ const LockerQTY = () => {
   const onNavigateBack = () => {
     setBookingNumber("KMC-");
     setMobileNumber("+63");
+    setDoorCount(1);
     router.push("/lockers/new");
   };
 
