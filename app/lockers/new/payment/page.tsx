@@ -298,7 +298,7 @@ const PaymentPage = ({ searchParams }) => {
             <div className="grid gap-y-4 text-black font-semibold py-4 text-lg">
               <div className="grid gap-y-2">
                 <div className="flex justify-between">
-                  <p className="text-gray-500">Least Term</p>
+                  <p className="text-gray-500">Lease Term</p>
                   <p>
                     {/* Map Months */}
                     {months}
