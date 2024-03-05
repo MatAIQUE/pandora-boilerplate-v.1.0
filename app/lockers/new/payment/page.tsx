@@ -210,6 +210,7 @@ const PaymentPage = ({ searchParams }) => {
                   </div>
                   <div className="mb-5 mt-5">
                     <button
+                      disabled
                       className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
@@ -230,9 +231,18 @@ const PaymentPage = ({ searchParams }) => {
                       </span>
                     </button>
                   </div>
+                  {!hasRecurringInvoice && (
+                    <div className={`font-medium my-2 flex justify-start`}>
+                      <span className={`text-left text-error `}>
+                        Please approach the frontdesk and/or admin to book a
+                        locker
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
+
             <div className="card-actions justify-center">
               <div className="grid grid-cols-2 gap-4 w-full items-center text-center">
                 <div className="w-full">
