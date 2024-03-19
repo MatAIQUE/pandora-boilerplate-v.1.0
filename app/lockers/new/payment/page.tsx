@@ -210,7 +210,6 @@ const PaymentPage = ({ searchParams }) => {
                   </div>
                   <div className="mb-5 mt-5">
                     <button
-                      disabled
                       className={`btn-outline btn font-weight-500 rounded-sm w-full justify-between px-10
                       ${
                         paymentMethod === "qr_wallet"
