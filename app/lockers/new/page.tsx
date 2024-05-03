@@ -98,14 +98,15 @@ const GetLockers = () => {
 
     if (focusedInput === "booking") {
       setBookingNumber((prevPin) => {
-        return prevPin.length > prefixLength
-          ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
+        const numericPart = prevPin.slice(prefixLength);
+        return numericPart.length > 4
+          ? `KMC-${numericPart.slice(0, -1)}`
           : "KMC-";
       });
     } else if (focusedInput === "contact") {
       setMobileNumber((prevPin) => {
         return prevPin.length > prefixLength
-          ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
+          ? prevPin.slice(0, -(mobileNumber.length - prefixLength))
           : "+63";
       });
     }

@@ -13,6 +13,7 @@ import { Button } from "@components";
 
 const SuccessPaymentPage = ({ searchParams }) => {
   const router = useRouter();
+  const [count, setCount] = useState(100);
   const [timer, setTimer] = useState(10);
   const { paymentMethod } = useBookingContext();
 

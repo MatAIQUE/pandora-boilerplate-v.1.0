@@ -96,9 +96,8 @@ const VerifyPIN = ({ searchParams }: Props) => {
     }
   };
 
-  const handleDeleteClick = (clear: boolean) => {
-    const charLength = clear ? 6 : 1;
-    setPinCode((prevPin) => prevPin.slice(0, -charLength));
+  const handleDeleteClick = () => {
+    setPinCode((prevPin) => prevPin.slice(0, -6));
   };
 
   return (

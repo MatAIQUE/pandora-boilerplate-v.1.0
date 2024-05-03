@@ -143,9 +143,14 @@ const VerifyOTP = () => {
     setIsContinueDisabled(pinCode.length < 6);
   }, [pinCode]);
 
+<<<<<<< HEAD
   const handleDeleteClick = (clear: boolean) => {
     const charLength = clear ? 6 : 1;
     setPinCode((prevPin) => prevPin.slice(0, -charLength));
+=======
+  const handleDeleteClick = () => {
+    setPinCode((prevPin) => prevPin.slice(0, -6));
+>>>>>>> ef949af (feat: ph2 enhancements for KMC locker)
   };
 
   return (

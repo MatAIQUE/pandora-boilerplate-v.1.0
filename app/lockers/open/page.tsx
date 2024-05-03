@@ -67,6 +67,7 @@ const OpenLockers = () => {
       }
       setIsLoading(false);
     } catch (error) {
+      // setTimeLeft(null);
       setError(true);
       const responseData = error.response.data;
       setErrorMessage(error.response.data.message);
@@ -118,9 +119,8 @@ const OpenLockers = () => {
     }
   };
 
-  const handleDeleteClick = (clear: boolean) => {
-    const charLength = clear ? 2 : 1;
-    setDoorNumber((prevPin) => prevPin.slice(0, -charLength));
+  const handleDeleteClick = () => {
+    setDoorNumber((prevPin) => prevPin.slice(0, -2));
   };
 
   return (
