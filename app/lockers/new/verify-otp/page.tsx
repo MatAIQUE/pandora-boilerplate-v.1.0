@@ -98,10 +98,16 @@ const VerifyOTP = () => {
   };
 
   const handleKeyClick = (value: string) => {
-    if (pinCode.length < 6) {
+    if (/^\d*$/.test(value) && pinCode.length < 6) {
       setPinCode((prevPin) => prevPin + value);
     }
   };
+
+  // const handleKeyClick = (value: string) => {
+  //   if (pinCode.length < 6) {
+  //     setPinCode((prevPin) => prevPin + value);
+  //   }
+  // };
 
   const resendCode = async () => {
     setIsLoadingOTP(true);
