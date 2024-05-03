@@ -3,8 +3,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
 import Keyboard from "@components/Keyboard";
 import LabelDesc from "@components/LabelDesc";
@@ -99,9 +97,11 @@ const ForgotPIN = ({ searchParams }: Props) => {
   const handleDeleteClick = () => {
     const prefixLength = 3;
 
-    setMobileNumber((prevPin) =>
-      prevPin.length > prefixLength ? prevPin.slice(0, -1) : "+63"
-    );
+    setMobileNumber((prevPin) => {
+      return prevPin.length > prefixLength
+        ? prevPin.slice(0, -(prevPin.length - prefixLength))
+        : "+63";
+    });
   };
 
   return (

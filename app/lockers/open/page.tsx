@@ -21,6 +21,8 @@ const OpenLockers = () => {
   const { allDoors, setAllDoors, location, doorNumber, setDoorNumber } =
     useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(null);
+  const [isLockedout, setIslockedout] = useState(false);
 
   useEffect(() => {
     if (!doorNumber) {
@@ -30,13 +32,18 @@ const OpenLockers = () => {
     }
   }, [doorNumber]);
 
+  const formatTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${minutes} minutes ${remainingSeconds} seconds`;
+  };
+
   const onNavigate = async () => {
     try {
       setIsLoading(true);
       // const doorNumberValue = Number(doorNumber).toString();
       const doorQ = `doorNumber=${doorNumber}&lockerId=${location}`;
-
-      console.log("DoorNumber", doorNumber);
 
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_VALIDATE_DOOR}${doorQ}` as string,
@@ -47,12 +54,10 @@ const OpenLockers = () => {
 
       if (response.status === 200) {
         const {
-          data: {
-            data: { door },
-          },
+          data: { data },
         } = response;
         // Check if doorNumber is within the available door count range
-        if (door) {
+        if (data) {
           const url = `/lockers/open/verify-pin?${doorQ}`;
           router.push(url);
         } else {
@@ -62,13 +67,47 @@ const OpenLockers = () => {
       }
       setIsLoading(false);
     } catch (error) {
+      // setTimeLeft(null);
       setError(true);
+      const responseData = error.response.data;
       setErrorMessage(error.response.data.message);
+      console.log("error.response.status", error.response.status);
+      if (error.response.status === 403) {
+        setIslockedout(true);
+        const timeLeft = responseData.errors[1];
+        setTimeLeft(timeLeft);
+      } else {
+        setTimeLeft(null);
+        setIslockedout(false);
+      }
       setIsLoading(true);
-      console.error(error);
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // Decrease timeLeft by 1 every second
+      if (isLockedout) {
+        setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+
+        if (timeLeft === 0) {
+          setError(false);
+          setErrorMessage(null);
+        }
+      }
+    }, 1000);
+
+    // Cleanup the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [isLockedout]);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      setError(false);
+      setErrorMessage(null);
+    }
+  }, [timeLeft]);
 
   const onNavigateBack = () => {
     router.back();
@@ -81,7 +120,7 @@ const OpenLockers = () => {
   };
 
   const handleDeleteClick = () => {
-    setDoorNumber((prevPin) => prevPin.slice(0, -1));
+    setDoorNumber((prevPin) => prevPin.slice(0, -2));
   };
 
   return (
@@ -121,7 +160,8 @@ const OpenLockers = () => {
                     {error && (
                       <div className={`font-medium  flex justify-center mt-2`}>
                         <span className={`text-left text-error`}>
-                          {errorMessage}
+                          {errorMessage}{" "}
+                          {timeLeft > 0 ? `(${formatTime(timeLeft)})` : ""}
                         </span>
                       </div>
                     )}

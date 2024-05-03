@@ -1,10 +1,20 @@
+import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
 import RootLayout from "@layout";
-import HomePage from "./home/page";
 
-export default function Home() {
+const HomePageWithSuspense = dynamic(() => import("./home/page"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+const Home = () => {
   return (
     <RootLayout>
-      <HomePage />
+      {/* <Suspense fallback={<div>Loading HomePage...</div>}> */}
+      <HomePageWithSuspense />
+      {/* </Suspense> */}
     </RootLayout>
   );
-}
+};
+
+export default Home;
