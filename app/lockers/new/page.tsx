@@ -99,14 +99,16 @@ const GetLockers = () => {
     if (focusedInput === "booking") {
       setBookingNumber((prevPin) => {
         const numericPart = prevPin.slice(prefixLength);
-        return numericPart.length > 0
+        return numericPart.length > 4
           ? `KMC-${numericPart.slice(0, -1)}`
           : "KMC-";
       });
     } else if (focusedInput === "contact") {
-      setMobileNumber((prevPin) =>
-        prevPin.length > prefixLength ? prevPin.slice(0, -1) : "+63"
-      );
+      setMobileNumber((prevPin) => {
+        return prevPin.length > prefixLength
+          ? prevPin.slice(0, -(mobileNumber.length - prefixLength))
+          : "+63";
+      });
     }
   };
 
@@ -126,6 +128,13 @@ const GetLockers = () => {
               <div className="py-10 h-full w-full">
                 <div className="w-full items-center">
                   <LabelTitle label="Enter your membership details" />
+                  {error && (
+                    <div className={`font-medium my-2 flex justify-start`}>
+                      <span className={`text-left text-error`}>
+                        Booking number/Contact number did not match.
+                      </span>
+                    </div>
+                  )}
                   <div className="mb-4">
                     <Label label="Booking Number*" />
                     <div className="relative">
@@ -152,14 +161,6 @@ const GetLockers = () => {
                         </div>
                       )}
                     </div>
-
-                    {error && (
-                      <div className={`font-medium my-2 flex justify-start`}>
-                        <span className={`text-left text-error`}>
-                          Booking number/Contact number didn&apos;t match
-                        </span>
-                      </div>
-                    )}
                   </div>
 
                   <Label label="Contact Number*" />
@@ -188,13 +189,6 @@ const GetLockers = () => {
                     )}
                   </div>
                 </div>
-                {error && (
-                  <div className={`font-medium my-2 flex justify-start`}>
-                    <span className={`text-left text-error`}>
-                      Booking number/Contact number didn&apos;t match
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
 
