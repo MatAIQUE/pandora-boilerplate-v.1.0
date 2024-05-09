@@ -99,7 +99,7 @@ const ForgotPIN = ({ searchParams }: Props) => {
 
     setMobileNumber((prevPin) => {
       return prevPin.length > prefixLength
-        ? prevPin.slice(0, -(prevPin.length - prefixLength))
+        ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
         : "+63";
     });
   };
