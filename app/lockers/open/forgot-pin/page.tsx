@@ -94,12 +94,12 @@ const ForgotPIN = ({ searchParams }: Props) => {
     }
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (clear: boolean) => {
     const prefixLength = 3;
 
     setMobileNumber((prevPin) => {
       return prevPin.length > prefixLength
-        ? prevPin.slice(0, -(prevPin.length - prefixLength))
+        ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
         : "+63";
     });
   };
