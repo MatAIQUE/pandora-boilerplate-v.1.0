@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   handleKeyClick: (key: string) => void;
-  handleDeleteClick: () => void;
+  handleDeleteClick: (clear?: boolean) => void;
 }
 
 const Keypad = ({ handleKeyClick, handleDeleteClick }: Props) => {

@@ -143,8 +143,9 @@ const VerifyOTP = () => {
     setIsContinueDisabled(pinCode.length < 6);
   }, [pinCode]);
 
-  const handleDeleteClick = () => {
-    setPinCode((prevPin) => prevPin.slice(0, -6));
+  const handleDeleteClick = (clear: boolean) => {
+    const charLength = clear ? 6 : 1;
+    setPinCode((prevPin) => prevPin.slice(0, -charLength));
   };
 
   return (
