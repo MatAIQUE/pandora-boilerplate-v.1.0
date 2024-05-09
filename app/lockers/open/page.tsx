@@ -109,7 +109,7 @@ const OpenLockers = () => {
   }, [timeLeft]);
 
   const onNavigateBack = () => {
-    router.back();
+    router.push("/");
   };
 
   const handleKeyClick = (value: string) => {
