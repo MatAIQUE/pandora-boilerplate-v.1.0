@@ -100,7 +100,7 @@ const GetLockers = () => {
       setBookingNumber((prevPin) => {
         return prevPin.length > prefixLength
           ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
-          : "+KMC";
+          : "KMC";
       });
     } else if (focusedInput === "contact") {
       setMobileNumber((prevPin) => {
