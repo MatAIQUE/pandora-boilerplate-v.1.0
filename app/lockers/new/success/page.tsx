@@ -9,27 +9,25 @@ import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import spinner from "../../../assets/images/spinner.svg";
 import { useBookingContext } from "@context/BookingContext";
+import { Button } from "@components";
 
 const SuccessPaymentPage = ({ searchParams }) => {
   const router = useRouter();
-  const [count, setCount] = useState(100);
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(10);
   const { paymentMethod } = useBookingContext();
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
-      if (count > 0 && timer > 0) {
-        setCount(count - 20);
+      if (timer > 0) {
         setTimer(timer - 1);
       } else {
         clearInterval(countdownInterval);
         router.push("/");
       }
     }, 1000);
-
+    console.log({ timer });
     return () => clearInterval(countdownInterval); // Cleanup on component unmount
-  }, [count, timer]);
-  console.log("param", paymentMethod);
+  }, [timer]);
 
   return (
     <div className="h-screen relative flex flex-col w-full text-center">
@@ -75,6 +73,14 @@ const SuccessPaymentPage = ({ searchParams }) => {
                     <LabelDesc
                       label={`Returning to homepage in ${timer}.`}
                       position="justify-center"
+                    />
+                    <Button
+                      label="Open Locker"
+                      bgColor="btn-primary"
+                      color="white"
+                      weight="500"
+                      outline=""
+                      onClick={() => router.push("/lockers/open")}
                     />
                   </div>
                 </div>

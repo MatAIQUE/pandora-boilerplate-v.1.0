@@ -3,7 +3,7 @@ import { FaXmark } from "react-icons/fa6";
 
 interface Props {
   handleKeyClick: (key: string) => void;
-  handleDeleteClick: () => void;
+  handleDeleteClick: (clear?: boolean) => void;
 }
 
 const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
@@ -471,6 +471,12 @@ const Keyboard = ({ handleKeyClick, handleDeleteClick }: Props) => {
             className="btn bg-transparent border-error text-error border-4 flex items-center justify-center w-[85px] h-[85px] focus:bg-transparent focus:border-error"
           >
             <FaArrowLeft className="text-2xl" />
+          </button>
+          <button
+            onClick={() => handleDeleteClick(true)}
+            className="btn bg-transparent border-error text-error border-4 flex items-center justify-center w-[85px] h-[85px] focus:bg-transparent focus:border-error"
+          >
+            <p className="text-2xl font-bold pe-none">clear</p>
           </button>
         </div>
       </div>

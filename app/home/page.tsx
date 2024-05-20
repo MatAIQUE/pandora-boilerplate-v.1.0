@@ -2,16 +2,65 @@
 import { useRouter } from "next/navigation";
 import Carousel from "../components/Carousel";
 import Card from "./_components/Card";
+import { useBookingContext } from "@context/BookingContext";
+import axios from "axios";
+import { apiHeaders } from "@utils/apiHeaders";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
+  const {
+    location: lockerId,
+    setAvailableDoors,
+    availableDoors,
+  } = useBookingContext();
   const router = useRouter();
+  const [errorDoor, setErrorDoor] = useState(null);
+  const [isLoadingDoor, setIsLoadingDoor] = useState(false);
 
-  const onNavigate = () => {
-    router.push("/lockers/new");
+  const onNavigate = async () => {
+    const fullyBooked = await availableDoorsCount();
+    if (fullyBooked) {
+      router.push("/lockers/new");
+    }
   };
 
-  const onNavigateToOpenLocker = () => {
+  const onNavigateToOpenLocker = async () => {
     router.push("/lockers/open");
+  };
+
+  const availableDoorsCount = async () => {
+    const requestBody: Record<any, string> = {
+      location: "one ayala",
+      lockerId,
+    };
+
+    try {
+      setIsLoadingDoor(true);
+
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_GET_AVAILABLE_DOORS as string,
+        requestBody,
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      if (response.status === 200) {
+        setAvailableDoors(response.data.data.locker.available);
+      }
+
+      console.log({ response });
+
+      return true;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        if (error.response.status === 416) {
+          setErrorDoor("No available doors");
+        }
+      }
+    } finally {
+      setIsLoadingDoor(false);
+    }
   };
 
   // MOCK DATA ONLY
@@ -39,6 +88,8 @@ const HomePage = () => {
           onNavigateToOpenLocker={onNavigateToOpenLocker}
           title=""
           subtitle=""
+          errorDoor={errorDoor}
+          isLoadingDoor={isLoadingDoor}
         />
       </div>
     </div>

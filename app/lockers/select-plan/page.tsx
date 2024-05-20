@@ -14,6 +14,8 @@ import { useBookingContext } from "@context/BookingContext";
 import { apiHeaders } from "@utils/apiHeaders";
 import { FaExclamationCircle } from "react-icons/fa";
 import Spinner from "../../assets/images/spinner.svg";
+import whatshot from "./assets/whatshot.svg";
+import newReleases from "./assets/new-releases.svg";
 
 interface Props {
   searchParams: { doorNumber: string };
@@ -25,6 +27,12 @@ const GetLockers = () => {
   const [focusedInput, setFocusedInput] = useState<"booking" | "contact">(
     "booking"
   );
+  const [ showInput, setShowInput ] = useState(false);
+
+  const handleShowInput = () => {
+    setShowInput(true)
+  }
+
   const { bookingNumber, setBookingNumber, mobileNumber, setMobileNumber } =
     useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
@@ -100,7 +108,7 @@ const GetLockers = () => {
       setBookingNumber((prevPin) => {
         return prevPin.length > prefixLength
           ? prevPin.slice(0, -(clear ? prevPin.length - prefixLength : 1))
-          : "KMC-";
+          : "KMC";
       });
     } else if (focusedInput === "contact") {
       setMobileNumber((prevPin) => {
@@ -126,7 +134,43 @@ const GetLockers = () => {
             <div className="py-10">
               <div className="py-10 h-full w-full">
                 <div className="w-full items-center">
-                  <LabelTitle label="Enter your membership details" />
+                  <LabelTitle label="Select Plan" />
+                  <div className="pt-10 w-full gap-3 grid grid-cols-2">
+                    <div className={`rounded border  px-5 py-4 justify-center flex flex-col
+                    ${showInput ? "border-primary" : "border-white"}
+                    `} onClick={handleShowInput}>
+                      <div className="flex items-center gap-2 w-full text-xs">
+                        <Image
+                          src={whatshot}
+                          alt="whats hot"
+                          width={18}
+                          height={18}
+                        />
+                        <p className="text-primary">Popular!</p>
+                      </div>
+                      <div className="py-2 gap-2 flex justify-start items-end text-white">
+                        <p className="text-2xl font-medium ms-2">Daily</p>
+                        <p className=" text-xs w-full mb-1">P50/Day</p>
+                      </div>
+                    </div>
+                    <div className={`rounded border  px-5 py-4 justify-center flex flex-col
+                    ${showInput ? "border-primary" : "border-white"}
+                    `} onClick={handleShowInput}>
+                      <div className="flex items-center gap-2 w-full text-xs">
+                        <Image
+                          src={newReleases}
+                          alt="whats hot"
+                          width={18}
+                          height={18}
+                        />
+                        <p className="">Recommended</p>
+                      </div>
+                      <div className="py-2 gap-2 flex justify-start items-end text-white">
+                        <p className="text-2xl font-medium ms-2">Monthly</p>
+                        <p className=" text-xs w-full mb-1">P700/Day</p>
+                      </div>
+                    </div>
+                  </div>
                   {error && (
                     <div className={`font-medium my-2 flex justify-start`}>
                       <span className={`text-left text-error`}>
@@ -134,14 +178,17 @@ const GetLockers = () => {
                       </span>
                     </div>
                   )}
-                  <div className="mb-4">
-                    <Label label="Booking Number*" />
-                    <div className="relative">
-                      <input
-                        maxLength={4}
-                        type="text"
-                        placeholder=""
-                        className={`input text-xl w-full bg-white text-black text-start
+                  <div className={` gap-4 pt-10
+                  ${showInput? "grid":"hidden"}
+                  `}>
+                    <div>
+                      <Label label="Name*" />
+                      <div className="relative">
+                        <input
+                          maxLength={4}
+                          type="text"
+                          placeholder=""
+                          className={`input text-xl w-full bg-white text-black text-start
                         ${error ? "text-error border-error border-2" : ""}
                         ${
                           focusedInput === "booking"
@@ -150,25 +197,25 @@ const GetLockers = () => {
                         }
                         
                         `}
-                        value={bookingNumber}
-                        onFocus={() => setFocusedInput("booking")}
-                        readOnly
-                      />
-                      {error && (
-                        <div className="absolute right-[10px] top-[10px] text-error">
-                          <FaExclamationCircle className="w-[25px] h-[25px]" />
-                        </div>
-                      )}
+                          value={bookingNumber}
+                          onFocus={() => setFocusedInput("booking")}
+                          readOnly
+                        />
+                        {error && (
+                          <div className="absolute right-[10px] top-[10px] text-error">
+                            <FaExclamationCircle className="w-[25px] h-[25px]" />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-
-                  <Label label="Contact Number*" />
-                  <div className="relative">
-                    <input
-                      maxLength={12}
-                      type="text"
-                      placeholder=""
-                      className={`input text-xl w-full bg-white text-black text-start mb-2
+                    <div>
+                      <Label label="Contact Number*" />
+                      <div className="relative">
+                        <input
+                          maxLength={12}
+                          type="text"
+                          placeholder=""
+                          className={`input text-xl w-full bg-white text-black text-start mb-2
                       ${error ? "text-error border-error border-2" : ""}
                       ${
                         focusedInput === "contact"
@@ -177,15 +224,17 @@ const GetLockers = () => {
                       }
                       
                       `}
-                      value={mobileNumber}
-                      onFocus={() => setFocusedInput("contact")}
-                      readOnly
-                    />
-                    {error && (
-                      <div className="absolute right-[10px] top-[10px] text-error">
-                        <FaExclamationCircle className="w-[25px] h-[25px]" />
+                          value={mobileNumber}
+                          onFocus={() => setFocusedInput("contact")}
+                          readOnly
+                        />
+                        {error && (
+                          <div className="absolute right-[10px] top-[10px] text-error">
+                            <FaExclamationCircle className="w-[25px] h-[25px]" />
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>

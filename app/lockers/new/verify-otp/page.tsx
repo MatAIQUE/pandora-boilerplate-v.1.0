@@ -3,8 +3,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import { Button } from "@components";
 import ButtonBack from "@components/ButtonBack";
 import ButtonHome from "@components/ButtonHome";
 import Keyboard from "@components/Keyboard";
@@ -100,10 +98,16 @@ const VerifyOTP = () => {
   };
 
   const handleKeyClick = (value: string) => {
-    if (pinCode.length < 6) {
+    if (/^\d*$/.test(value) && pinCode.length < 6) {
       setPinCode((prevPin) => prevPin + value);
     }
   };
+
+  // const handleKeyClick = (value: string) => {
+  //   if (pinCode.length < 6) {
+  //     setPinCode((prevPin) => prevPin + value);
+  //   }
+  // };
 
   const resendCode = async () => {
     setIsLoadingOTP(true);
@@ -139,8 +143,9 @@ const VerifyOTP = () => {
     setIsContinueDisabled(pinCode.length < 6);
   }, [pinCode]);
 
-  const handleDeleteClick = () => {
-    setPinCode((prevPin) => prevPin.slice(0, -1));
+  const handleDeleteClick = (clear: boolean) => {
+    const charLength = clear ? 6 : 1;
+    setPinCode((prevPin) => prevPin.slice(0, -charLength));
   };
 
   return (
