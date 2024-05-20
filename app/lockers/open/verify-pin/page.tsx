@@ -56,7 +56,8 @@ const VerifyPIN = ({ searchParams }: Props) => {
       if (response.status === 200) {
         router.push("/lockers/open/success");
         axios.get(
-          process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR + `${doorNumber}/open`
+          process.env.NEXT_PUBLIC_LOCKER_OPEN_DOOR +
+            `${(Number(doorNumber) - 0).toString()}/open`
         );
       }
     } catch (error) {
