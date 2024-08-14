@@ -256,7 +256,7 @@ const LockerQTY = () => {
                     <div className="h-[50px]">
                       {doorCount > 1 && (
                         <span>
-                          <p>&#8369; 700 each</p>
+                          <p>&#8369; 300 each</p>
                         </span>
                       )}
                     </div>
