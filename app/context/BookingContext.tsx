@@ -70,7 +70,7 @@ export const BookingProvider = ({
   const [secretKey, setSecretKey] = useState<string | null>(null);
   const [doorCount, setDoorCount] = useState<number | null>(1);
   const [paymentId, setPaymentId] = useState<string | null>(null);
-  const [price, setPrice] = useState<string | null>("700");
+  const [price, setPrice] = useState<string | null>("300");
   const [allDoors, setAllDoors] = useState<number>(null);
   const [availableDoors, setAvailableDoors] = useState<number>(null);
   const [lockerId, setLockerId] = useState<string | null>(null);
@@ -134,7 +134,7 @@ export const BookingProvider = ({
       setSecretKey(null);
       setDoorCount(1);
       setPaymentId(null);
-      setPrice("700");
+      setPrice("300");
       setAvailableDoors(null);
       setLockerId(null);
       setReserve(null);

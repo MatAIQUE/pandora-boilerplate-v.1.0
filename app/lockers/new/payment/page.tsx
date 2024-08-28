@@ -327,7 +327,8 @@ const PaymentPage = ({ searchParams }) => {
                   </p>
                   {/* Map amount */}
                   <p>
-                    {monthly.toLocaleString()}
+                    {/* {monthly.toLocaleString()} */}
+                    300
                     <span className="ms-1">/Mo.</span>
                   </p>
                 </div>

@@ -167,7 +167,7 @@ const GetLockers = () => {
                       </div>
                       <div className="py-2 gap-2 flex justify-start items-end text-white">
                         <p className="text-2xl font-medium ms-2">Monthly</p>
-                        <p className=" text-xs w-full mb-1">P700/Day</p>
+                        <p className=" text-xs w-full mb-1">P300/Day</p>
                       </div>
                     </div>
                   </div>
