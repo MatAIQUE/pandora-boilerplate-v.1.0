@@ -27,19 +27,24 @@ const GetLockers = () => {
   const [focusedInput, setFocusedInput] = useState<"booking" | "contact">(
     "booking"
   );
-  const [ showInput, setShowInput ] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   const handleShowInput = () => {
-    setShowInput(true)
-  }
+    setShowInput(true);
+  };
 
   const { bookingNumber, setBookingNumber, mobileNumber, setMobileNumber } =
     useBookingContext();
   const [isContinueDisabled, setIsContinueDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { setSecretKey, setHasRecurringInvoice, location, setOtpCreationTime } =
-    useBookingContext();
+  const {
+    setSecretKey,
+    setHasRecurringInvoice,
+    location,
+    setOtpCreationTime,
+    price,
+  } = useBookingContext();
 
   // Separate variable for display without prefix
   const tranMobileNum = mobileNumber.replace("+63", "0");
@@ -136,9 +141,12 @@ const GetLockers = () => {
                 <div className="w-full items-center">
                   <LabelTitle label="Select Plan" />
                   <div className="pt-10 w-full gap-3 grid grid-cols-2">
-                    <div className={`rounded border  px-5 py-4 justify-center flex flex-col
+                    <div
+                      className={`rounded border  px-5 py-4 justify-center flex flex-col
                     ${showInput ? "border-primary" : "border-white"}
-                    `} onClick={handleShowInput}>
+                    `}
+                      onClick={handleShowInput}
+                    >
                       <div className="flex items-center gap-2 w-full text-xs">
                         <Image
                           src={whatshot}
@@ -153,9 +161,12 @@ const GetLockers = () => {
                         <p className=" text-xs w-full mb-1">P50/Day</p>
                       </div>
                     </div>
-                    <div className={`rounded border  px-5 py-4 justify-center flex flex-col
+                    <div
+                      className={`rounded border  px-5 py-4 justify-center flex flex-col
                     ${showInput ? "border-primary" : "border-white"}
-                    `} onClick={handleShowInput}>
+                    `}
+                      onClick={handleShowInput}
+                    >
                       <div className="flex items-center gap-2 w-full text-xs">
                         <Image
                           src={newReleases}
@@ -167,7 +178,7 @@ const GetLockers = () => {
                       </div>
                       <div className="py-2 gap-2 flex justify-start items-end text-white">
                         <p className="text-2xl font-medium ms-2">Monthly</p>
-                        <p className=" text-xs w-full mb-1">P300/Day</p>
+                        <p className=" text-xs w-full mb-1">P{}/Day</p>
                       </div>
                     </div>
                   </div>
@@ -178,9 +189,11 @@ const GetLockers = () => {
                       </span>
                     </div>
                   )}
-                  <div className={` gap-4 pt-10
-                  ${showInput? "grid":"hidden"}
-                  `}>
+                  <div
+                    className={` gap-4 pt-10
+                  ${showInput ? "grid" : "hidden"}
+                  `}
+                  >
                     <div>
                       <Label label="Name*" />
                       <div className="relative">

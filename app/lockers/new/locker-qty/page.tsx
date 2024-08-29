@@ -23,7 +23,7 @@ const LockerQTY = () => {
   const [error, setError] = useState(false);
   const [isLoadingDoor, setIsLoadingDoor] = useState(false);
   const [errorDoor, setErrorDoor] = useState("");
-  const [effectivePrice, setEffectivePrice] = useState(700);
+
   const {
     bookingNumber,
     mobileNumber,
@@ -74,36 +74,8 @@ const LockerQTY = () => {
     }
   };
 
-  const getEffectivePrice = async () => {
-    try {
-      setIsPriceLoading(true);
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_EFFECTIVE_PRICE as string,
-        {
-          headers: apiHeaders(),
-        }
-      );
-
-      console.log({ response });
-
-      if (response.status === 200) {
-        const priceWithoutComma = response.data.price.replace(/,/g, "");
-        console.log({ priceWithoutComma });
-        setEffectivePrice(Number(priceWithoutComma));
-      }
-      setIsPriceLoading(false);
-    } catch (error) {
-      setIsPriceLoading(true);
-      if (axios.isAxiosError(error) && error.response) {
-        // setErrorDoor('ERROR');
-      }
-      setIsPriceLoading(false);
-    }
-  };
-
   useEffect(() => {
     availableDoorsCount();
-    getEffectivePrice();
 
     const establishConnection = () => {
       socket.addEventListener("open", onOpen);
@@ -276,7 +248,7 @@ const LockerQTY = () => {
                 <div className="h-full w-full">
                   <div className="w-full text-right">
                     <div className="flex items-end justify-end text-end">
-                      {(isPriceLoading && (
+                      {/* {(isPriceLoading && (
                         <span className="animate-spin text-white">
                           <Image
                             src={Spinner}
@@ -285,14 +257,11 @@ const LockerQTY = () => {
                             alt="spinner loading"
                           />
                         </span>
-                      )) || (
-                        <div className="font-bold text-4xl">
-                          ₱
-                          {(
-                            Number(doorCount) * effectivePrice
-                          ).toLocaleString()}
-                        </div>
-                      )}
+                      )) || ( */}
+                      <div className="font-bold text-4xl">
+                        ₱{(Number(doorCount) * Number(price)).toLocaleString()}
+                      </div>
+                      {/* )} */}
                       <span>
                         <p className="ms-2">/mo</p>
                       </span>
@@ -300,7 +269,7 @@ const LockerQTY = () => {
                     <div className="h-[50px]">
                       {doorCount > 1 && (
                         <span>
-                          <p>&#8369; 300 each</p>
+                          <p>&#8369; {price} each</p>
                         </span>
                       )}
                     </div>

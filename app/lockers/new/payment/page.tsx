@@ -45,6 +45,7 @@ const PaymentPage = ({ searchParams }) => {
     location,
     paymentMethod,
     setPaymentMethod,
+    price,
   } = useBookingContext();
 
   const [priceHidden, setPriceHidden] = useState(true);
@@ -328,7 +329,7 @@ const PaymentPage = ({ searchParams }) => {
                   {/* Map amount */}
                   <p>
                     {/* {monthly.toLocaleString()} */}
-                    300
+                    {price}
                     <span className="ms-1">/Mo.</span>
                   </p>
                 </div>

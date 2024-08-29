@@ -12,6 +12,7 @@ const HomePage = () => {
     location: lockerId,
     setAvailableDoors,
     availableDoors,
+    setPrice,
   } = useBookingContext();
   const router = useRouter();
   const [errorDoor, setErrorDoor] = useState(null);
@@ -45,6 +46,8 @@ const HomePage = () => {
         }
       );
 
+      console.log({ response });
+
       if (response.status === 200) {
         setAvailableDoors(response.data.data.locker.available);
       }
@@ -62,6 +65,31 @@ const HomePage = () => {
       setIsLoadingDoor(false);
     }
   };
+
+  const getPricingData = async () => {
+    try {
+      // const response = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/query?page=${page}&limit=${limit}`
+      // );
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_GET_EFFECTIVE_PRICE as string,
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      console.log("response", response.statusText);
+
+      console.log({ response });
+      setPrice(response.data.price);
+    } catch (error) {
+      console.error("Error fetching pricing data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getPricingData();
+  }, []);
 
   // MOCK DATA ONLY
   const images = [
