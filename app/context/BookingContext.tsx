@@ -10,6 +10,9 @@ import {
   useEffect,
 } from "react";
 
+import axios from "axios";
+import { apiHeaders } from "@utils/apiHeaders";
+
 interface BookingContextProps {
   bookingNumber: string | null;
   setBookingNumber: Dispatch<SetStateAction<string | null>>;
@@ -91,6 +94,27 @@ export const BookingProvider = ({
 
   const pathname = usePathname();
 
+  const getPricingData = async () => {
+    try {
+      // const response = await fetch(
+      //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/query?page=${page}&limit=${limit}`
+      // );
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_GET_EFFECTIVE_PRICE as string,
+        {
+          headers: apiHeaders(),
+        }
+      );
+
+      console.log("response", response.statusText);
+
+      console.log({ response });
+      setPrice(response.data.price);
+    } catch (error) {
+      console.error("Error fetching pricing data:", error);
+    }
+  };
+
   const contextValue: BookingContextProps = {
     bookingNumber,
     setBookingNumber,
@@ -134,7 +158,7 @@ export const BookingProvider = ({
       setSecretKey(null);
       setDoorCount(1);
       setPaymentId(null);
-      setPrice("300");
+      // setPrice("300");
       setAvailableDoors(null);
       setLockerId(null);
       setReserve(null);
@@ -143,6 +167,7 @@ export const BookingProvider = ({
       setPaymentMethod(null);
       setDoorNumber("");
     }
+    getPricingData();
   }, [pathname]);
 
   return (
